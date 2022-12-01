@@ -12,14 +12,20 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    curl
-    htop
-    jq # needed for deploy_nixos
-    termite.terminfo
+    pkgs.curl
+    pkgs.dnsutils
+    pkgs.htop
+    pkgs.jq
+    pkgs.termite.terminfo
+    pkgs.tmux
+    pkgs.vim
   ];
 
   # Use vim as the default editor
   environment.variables.EDITOR = "vim";
+
+  # Print the URL instead on servers
+  environment.variables.BROWSER = "echo";
 
   # Use firewalls everywhere
   networking.firewall.enable = true;
@@ -42,16 +48,38 @@
   # If the user is in @wheel they are trusted by default.
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
-  # Only allow system-level authorized_keys to avoid injections.
-  services.openssh.authorizedKeysFiles = lib.mkForce [
-    "/etc/ssh/authorized_keys.d/%u"
-  ];
-
   # It's okay to use unfree packages, you know?
   nixpkgs.config.allowUnfree = true;
 
   # Allow sudo from the @wheel users
   security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = false;
+
+  # Nginx sends all the access logs to /var/log/nginx/access.log by default.
+  # instead of going to the journal!
+  services.nginx.commonHttpConfig = ''
+    access_log syslog:server=unix:/dev/log;
+  '';
+
+  # Enable SSH everywhere
+  services.openssh = {
+    enable = true;
+    forwardX11 = false;
+    kbdInteractiveAuthentication = false;
+    passwordAuthentication = false;
+    useDns = false;
+    # Only allow system-level authorized_keys to avoid injections.
+    authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
+  };
+
+  # Pretty heavy dependency for a VM
+  services.udisks2.enable = false;
+
+  # No need for sound on a server
+  sound.enable = false;
+
+  # UTC everywhere!
+  time.timeZone = lib.mkDefault "UTC";
 
   # No mutable users by default
   users.mutableUsers = false;
