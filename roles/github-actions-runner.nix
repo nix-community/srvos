@@ -61,6 +61,10 @@ in
       })
       (lib.range 1 cfg.count));
 
+    # Required to run unmodified binaries fetched via dotnet in a dev environment.
+    programs.nix-ld.enable = true;
+
+    # Automatically sync all the locally built artifacts to cachix.
     services.cachix-watch-store = {
       enable = true;
       cacheName = cfg.cachix.cacheName;
