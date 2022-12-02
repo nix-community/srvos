@@ -31,6 +31,9 @@
   networking.firewall.enable = true;
   networking.firewall.allowPing = true;
 
+  # Delegate the hostname setting to cloud-init by default
+  networking.hostName = lib.mkDefault null;
+
   # Configure all the machines with NumTide's binary cache
   nix.settings.trusted-public-keys = [
     "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
@@ -50,6 +53,12 @@
 
   # It's okay to use unfree packages, you know?
   nixpkgs.config.allowUnfree = true;
+
+  # Use cloud-init for setting the hostName in dynamic environments.
+  services.cloud-init.enable = true;
+
+  # Use systemd-networkd and let cloud-init control some of its config.
+  services.cloud-init.network.enable = true;
 
   # Allow sudo from the @wheel users
   security.sudo.enable = true;
