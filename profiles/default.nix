@@ -38,14 +38,22 @@
   nix.settings.trusted-public-keys = [
     "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
   ];
-  nix.settings.substituters = [
-    "https://numtide.cachix.org"
-  ];
+  nix.settings.substituters = [ "https://numtide.cachix.org" ];
 
-  # Enable a bunch of experimental features
+  # Fallback quickly if substituters are not available.
+  nix.settings.connect-timeout = 5;
+
+  # Enable flakes
   nix.settings.experimental-features = "nix-command flakes";
 
-  # Avoid copying unecessary stuff over SSH
+  # The default at 10 is rarely enough.
+  nix.settings.log-lines = 25;
+
+  # Avoid disk full issues
+  nix.settings.max-free = 1000 * 1000 * 1000;
+  nix.settings.min-free = 128 * 1000 * 1000;
+
+  # Avoid copying unnecessary stuff over SSH
   nix.settings.builders-use-substitutes = true;
 
   # If the user is in @wheel they are trusted by default.
