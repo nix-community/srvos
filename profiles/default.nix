@@ -62,6 +62,9 @@
   # It's okay to use unfree packages, you know?
   nixpkgs.config.allowUnfree = true;
 
+  # Use the better version of nscd
+  services.nscd.enableNsncd = true;
+
   # Use cloud-init for setting the hostName in dynamic environments.
   services.cloud-init.enable = true;
 
