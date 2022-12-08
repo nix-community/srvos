@@ -33,12 +33,6 @@
   # Delegate the hostname setting to cloud-init by default
   networking.hostName = lib.mkDefault null;
 
-  # Configure all the machines with NumTide's binary cache
-  nix.settings.trusted-public-keys = [
-    "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
-  ];
-  nix.settings.substituters = [ "https://numtide.cachix.org" ];
-
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = 5;
 
