@@ -58,12 +58,6 @@
   # Use the better version of nscd
   services.nscd.enableNsncd = true;
 
-  # Use cloud-init for setting the hostName in dynamic environments.
-  services.cloud-init.enable = true;
-
-  # Use systemd-networkd and let cloud-init control some of its config.
-  services.cloud-init.network.enable = true;
-
   # Allow sudo from the @wheel users
   security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
