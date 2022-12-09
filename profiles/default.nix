@@ -107,9 +107,9 @@
     # Often hangs
     # https://github.com/systemd/systemd/blob/e1b45a756f71deac8c1aa9a008bd0dab47f64777/NEWS#L13
     services = {
-      systemd-networkd-wait-online.enable = false;
       NetworkManager-wait-online.enable = false;
     };
+    network.wait-online.enable = false;
 
     # Given that our systems are headless, emergency mode is useless.
     # We prefer the system to attempt to continue booting so
