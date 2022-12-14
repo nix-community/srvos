@@ -1,0 +1,23 @@
+name: Nix
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+jobs:
+  flake-check:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v17
+      - uses: cachix/cachix-action@v10
+        with:
+          name: numtide
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - run: nix flake check
