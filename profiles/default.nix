@@ -31,7 +31,7 @@
   networking.firewall.allowPing = true;
 
   # Delegate the hostname setting to cloud-init by default
-  networking.hostName = lib.mkDefault null;
+  networking.hostName = lib.mkDefault "";
 
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = 5;
