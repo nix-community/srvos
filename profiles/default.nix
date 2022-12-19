@@ -78,6 +78,9 @@
     useDns = false;
     # Only allow system-level authorized_keys to avoid injections.
     authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
+
+    # unbind gnupg sockets if they exists
+    extraConfig = "StreamLocalBindUnlink yes";
   };
 
   # Pretty heavy dependency for a VM
