@@ -4,6 +4,7 @@
 {
   imports = [
     ./upgrade-diff.nix
+    ./zfs.nix
     ./well-known-hosts.nix
   ];
 
