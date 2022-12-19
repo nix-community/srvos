@@ -9,6 +9,7 @@
   outputs = { self, nixpkgs, ... }: {
     nixosModules = {
       common = import ./profiles/default.nix;
+      github-actions-runner = import ./roles/github-actions-runner.nix;
     };
 
     nixosConfigurations = let
