@@ -22,7 +22,7 @@ Add `srvos` to your flake.nix and include it in your nixos configuration like th
       modules = [
         srvos.nixosModules.common
       ];
-    }
+    };
   };
 }
 ```
