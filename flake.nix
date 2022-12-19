@@ -10,6 +10,7 @@
     nixosModules = {
       common = import ./profiles/default.nix;
       github-actions-runner = import ./roles/github-actions-runner.nix;
+      telegraf = import ./profiles/telegraf.nix;
     };
 
     nixosConfigurations = let
@@ -43,6 +44,14 @@
             roles.github-actions-runner.tokenFile = "/run/gha-token-file";
             roles.github-actions-runner.url = "https://fixup";
           }
+        ];
+      };
+
+      example-telegraf = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.telegraf
+          dummy
         ];
       };
     };
