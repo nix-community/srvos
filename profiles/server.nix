@@ -3,13 +3,8 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./upgrade-diff.nix
-    ./zfs.nix
-    ./well-known-hosts.nix
+    ./common.nix
   ];
-
-  # Work around for https://github.com/NixOS/nixpkgs/issues/124215
-  documentation.info.enable = false;
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
@@ -27,61 +22,19 @@
   # Print the URL instead on servers
   environment.variables.BROWSER = "echo";
 
-  # Use firewalls everywhere
+  # Make sure firewall is enabled
   networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
 
-  # Delegate the hostname setting to cloud-init by default
-  networking.hostName = lib.mkDefault null;
-
-  # Fallback quickly if substituters are not available.
-  nix.settings.connect-timeout = 5;
-
-  # Enable flakes
-  nix.settings.experimental-features = "nix-command flakes";
-
-  # The default at 10 is rarely enough.
-  nix.settings.log-lines = lib.mkDefault 25;
-
-  # Avoid disk full issues
-  nix.settings.max-free = lib.mkDefault (1000 * 1000 * 1000);
-  nix.settings.min-free = lib.mkDefault (128 * 1000 * 1000);
-
-  # Avoid copying unnecessary stuff over SSH
-  nix.settings.builders-use-substitutes = true;
+  # Delegate the hostname setting to dhcp/cloud-init by default
+  networking.hostName = lib.mkDefault "";
 
   # If the user is in @wheel they are trusted by default.
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
-  # It's okay to use unfree packages, you know?
-  nixpkgs.config.allowUnfree = true;
-
-  # Use the better version of nscd
-  services.nscd.enableNsncd = true;
-
-  # Allow sudo from the @wheel users
-  security.sudo.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  # Nginx sends all the access logs to /var/log/nginx/access.log by default.
-  # instead of going to the journal!
-  services.nginx.commonHttpConfig = ''
-    access_log syslog:server=unix:/dev/log;
-  '';
-
   # Enable SSH everywhere
-  services.openssh = {
-    enable = true;
-    forwardX11 = false;
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
-    useDns = false;
-    # Only allow system-level authorized_keys to avoid injections.
-    authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
-
-    # unbind gnupg sockets if they exists
-    extraConfig = "StreamLocalBindUnlink yes";
-  };
+  services.openssh.enable = true;
 
   # Pretty heavy dependency for a VM
   services.udisks2.enable = false;
