@@ -109,6 +109,7 @@
         example-roles-github-actions-runner = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            self.nixosModules.github-runner
             self.nixosModules.roles-github-actions-runner
             dummy
             fake-hardware

@@ -39,7 +39,7 @@ in
   };
 
   config = {
-    services.github-runners = builtins.listToAttrs (map
+    services.srvos-github-runners = builtins.listToAttrs (map
       (n: rec {
         name = "${cfg.name}-${toString n}";
         value = {
