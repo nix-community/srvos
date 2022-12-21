@@ -9,8 +9,9 @@
   outputs = { self, nixpkgs, ... }: {
     nixosModules = {
       common = import ./profiles/common.nix;
-      server = import ./profiles/server.nix;
+      efi = import ./profiles/efi.nix;
       github-actions-runner = import ./roles/github-actions-runner.nix;
+      server = import ./profiles/server.nix;
       telegraf = import ./profiles/telegraf.nix;
     };
 
