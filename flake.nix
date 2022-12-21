@@ -65,8 +65,7 @@
             dummy
             self.nixosModules.hardware-hetzner-cloud
             {
-              systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef
-";
+              systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
             }
           ];
         };
@@ -109,7 +108,6 @@
         example-roles-github-actions-runner = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            self.nixosModules.github-runner
             self.nixosModules.roles-github-actions-runner
             dummy
             fake-hardware
@@ -117,6 +115,24 @@
               roles.github-actions-runner.cachix.cacheName = "cache-name";
               roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
               roles.github-actions-runner.tokenFile = "/run/gha-token-file";
+              roles.github-actions-runner.url = "https://fixup";
+            }
+          ];
+        };
+        example-roles-github-actions-runner-github-app = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            self.nixosModules.roles-github-actions-runner
+            dummy
+            fake-hardware
+            {
+              roles.github-actions-runner.cachix.cacheName = "cache-name";
+              roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
+              roles.github-actions-runner.githubApp = {
+                id = "1234";
+                login = "foo";
+                privateKeyFile = "/run/gha-token-file";
+              };
               roles.github-actions-runner.url = "https://fixup";
             }
           ];

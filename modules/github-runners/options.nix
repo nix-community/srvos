@@ -39,7 +39,8 @@ with lib;
   };
 
   tokenFile = mkOption {
-    type = types.path;
+    type = types.nullOr types.path;
+    default = null;
     description = lib.mdDoc ''
       The full path to a file which contains either a runner registration token or a
       (fine-grained) personal access token (PAT).
@@ -56,23 +57,51 @@ with lib;
     example = "/run/secrets/github-runner/nixos.token";
   };
 
-  name = let
-    # Same pattern as for `networking.hostName`
-    baseType = types.strMatching "^$|^[[:alnum:]]([[:alnum:]_-]{0,61}[[:alnum:]])?$";
-  in mkOption {
-    type = if includeNameDefault then baseType else types.nullOr baseType;
-    description = lib.mdDoc ''
-      Name of the runner to configure. Defaults to the hostname.
-
-      Changing this option triggers a new runner registration.
-    '';
-    example = "nixos";
-  } // (if includeNameDefault then {
-    default = config.networking.hostName;
-    defaultText = literalExpression "config.networking.hostName";
-  } else {
+  githubApp = lib.mkOption {
     default = null;
-  });
+    description = lib.mdDoc ''
+      Authenticate runners using GitHub App
+    '';
+    type = lib.types.nullOr (types.submodule {
+      options = {
+        id = mkOption {
+          type = types.str;
+          description = lib.mdDoc "GitHub App ID";
+        };
+        login = mkOption {
+          type = types.str;
+          description = lib.mdDoc "GitHub login used to register the application";
+        };
+        privateKeyFile = mkOption {
+          type = types.path;
+          description = lib.mdDoc ''
+            The full path to a file containing the GitHub App private key.
+          '';
+        };
+      };
+    });
+  };
+
+  name =
+    let
+      # Same pattern as for `networking.hostName`
+      baseType = types.strMatching "^$|^[[:alnum:]]([[:alnum:]_-]{0,61}[[:alnum:]])?$";
+    in
+    mkOption
+      {
+        type = if includeNameDefault then baseType else types.nullOr baseType;
+        description = lib.mdDoc ''
+          Name of the runner to configure. Defaults to the hostname.
+
+          Changing this option triggers a new runner registration.
+        '';
+        example = "nixos";
+      } // (if includeNameDefault then {
+      default = config.networking.hostName;
+      defaultText = literalExpression "config.networking.hostName";
+    } else {
+      default = null;
+    });
 
   runnerGroup = mkOption {
     type = types.nullOr types.str;
@@ -121,7 +150,7 @@ with lib;
     example = {
       GIT_CONFIG = "/path/to/git/config";
     };
-    default = {};
+    default = { };
   };
 
   serviceOverrides = mkOption {
@@ -132,7 +161,7 @@ with lib;
     example = {
       ProtectHome = false;
     };
-    default = {};
+    default = { };
   };
 
   package = mkOption {
@@ -170,4 +199,5 @@ with lib;
     default = null;
     defaultText = literalExpression "username";
   };
+  defaultText = literalExpression "username";
 }

@@ -16,9 +16,6 @@
   mixins-systemd-boot = import ./mixins/systemd-boot.nix;
   mixins-telegraf = import ./mixins/telegraf.nix;
 
-  # Modules
-  github-runner = import ./modules/github-runners.nix;
-
   # Roles
   roles-github-actions-runner = import ./roles/github-actions-runner.nix;
 }
