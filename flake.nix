@@ -10,6 +10,9 @@
     nixosModules = {
       common = import ./profiles/common.nix;
       server = import ./profiles/server.nix;
+      desktop = import ./profiles/desktop.nix;
+
+      # Roles
       github-actions-runner = import ./roles/github-actions-runner.nix;
       telegraf = import ./profiles/telegraf.nix;
     };
