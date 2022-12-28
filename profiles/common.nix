@@ -6,6 +6,7 @@
     ./common/upgrade-diff.nix
     ./common/well-known-hosts.nix
     ./common/zfs.nix
+    ./common/serial.nix
   ];
 
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
