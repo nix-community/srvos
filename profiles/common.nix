@@ -9,6 +9,9 @@
     ./common/serial.nix
   ];
 
+  # Use systemd during boot as well on systems that do not require networking in early-boot
+  boot.initrd.systemd.enable = lib.mkDefault (!config.boot.initrd.network.enable);
+
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
   documentation.info.enable = false;
 

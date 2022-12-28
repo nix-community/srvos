@@ -13,6 +13,7 @@
       server = import ./profiles/server.nix;
       desktop = import ./profiles/desktop.nix;
 
+      efi = import ./profiles/efi.nix;
       telegraf = import ./profiles/telegraf.nix;
       nginx = import ./profiles/nginx.nix;
 
