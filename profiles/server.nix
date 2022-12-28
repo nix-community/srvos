@@ -36,9 +36,6 @@
   # Enable SSH everywhere
   services.openssh.enable = true;
 
-  # Pretty heavy dependency for a VM
-  services.udisks2.enable = false;
-
   # No need for sound on a server
   sound.enable = false;
 
@@ -80,5 +77,11 @@
       AllowSuspend=no
       AllowHibernation=no
     '';
+  };
+
+  # use TCP BBR has significantly increased throughput and reduced latency for connections
+  boot.kernel.sysctl = {
+    "net.core.default_qdisc" = "fq";
+    "net.ipv4.tcp_congestion_control" = "bbr";
   };
 }

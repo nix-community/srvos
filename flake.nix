@@ -8,11 +8,17 @@
 
   outputs = { self, nixpkgs, ... }: {
     nixosModules = {
+      # Profiles
       common = import ./profiles/common.nix;
-      efi = import ./profiles/efi.nix;
-      github-actions-runner = import ./roles/github-actions-runner.nix;
       server = import ./profiles/server.nix;
+      desktop = import ./profiles/desktop.nix;
+
+      efi = import ./profiles/efi.nix;
       telegraf = import ./profiles/telegraf.nix;
+      nginx = import ./profiles/nginx.nix;
+
+      # Roles
+      github-actions-runner = import ./roles/github-actions-runner.nix;
     };
 
     nixosConfigurations = let
@@ -31,6 +37,20 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.common
+          dummy
+        ];
+      };
+      example-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.server
+          dummy
+        ];
+      };
+      example-desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.desktop
           dummy
         ];
       };
@@ -53,6 +73,14 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.telegraf
+          dummy
+        ];
+      };
+
+      example-nginx = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.nginx
           dummy
         ];
       };
