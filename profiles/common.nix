@@ -3,6 +3,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
+    ./common/flake.nix
     ./common/networking.nix
     ./common/nix.nix
     ./common/openssh.nix
