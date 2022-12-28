@@ -36,9 +36,6 @@
   # Enable SSH everywhere
   services.openssh.enable = true;
 
-  # Pretty heavy dependency for a VM
-  services.udisks2.enable = false;
-
   # No need for sound on a server
   sound.enable = false;
 
