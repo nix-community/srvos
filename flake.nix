@@ -36,6 +36,20 @@
           dummy
         ];
       };
+      example-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.server
+          dummy
+        ];
+      };
+      example-desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.desktop
+          dummy
+        ];
+      };
 
       example-github-runner = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
