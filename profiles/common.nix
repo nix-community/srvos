@@ -8,6 +8,9 @@
     ./common/zfs.nix
   ];
 
+  # Use systemd during boot as well
+  boot.initrd.systemd.enable = true;
+
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
   documentation.info.enable = false;
 
