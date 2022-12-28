@@ -36,12 +36,6 @@
   # Allow sudo from the @wheel users
   security.sudo.enable = true;
 
-  # Nginx sends all the access logs to /var/log/nginx/access.log by default.
-  # instead of going to the journal!
-  services.nginx.commonHttpConfig = ''
-    access_log syslog:server=unix:/dev/log;
-  '';
-
   # Enable SSH everywhere
   services.openssh = {
     forwardX11 = false;
