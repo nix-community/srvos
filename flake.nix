@@ -11,6 +11,8 @@
       # Profiles
       common = import ./profiles/common.nix;
       server = import ./profiles/server.nix;
+      desktop = import ./profiles/desktop.nix;
+
       telegraf = import ./profiles/telegraf.nix;
       nginx = import ./profiles/nginx.nix;
 
@@ -34,6 +36,20 @@
         system = "x86_64-linux";
         modules = [
           self.nixosModules.common
+          dummy
+        ];
+      };
+      example-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.server
+          dummy
+        ];
+      };
+      example-desktop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          self.nixosModules.desktop
           dummy
         ];
       };
