@@ -5,6 +5,7 @@
   server = import ./server.nix;
 
   # Mixins
+  mixins-cloud-init = import ./mixins/cloud-init.nix;
   mixins-efi = import ./mixins/efi.nix;
   mixins-nginx = import ./mixins/nginx.nix;
   mixins-telegraf = import ./mixins/telegraf.nix;
