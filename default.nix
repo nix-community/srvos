@@ -6,6 +6,7 @@
 
   # Hardware
   hardware-amazon = import ./hardware/amazon;
+  hardware-hetzner-cloud = import ./hardware/hetzner-cloud;
 
   # Mixins
   mixins-cloud-init = import ./mixins/cloud-init.nix;
