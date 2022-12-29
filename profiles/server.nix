@@ -7,7 +7,7 @@
   ];
 
   # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     pkgs.curl
     pkgs.dnsutils
     pkgs.htop
