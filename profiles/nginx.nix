@@ -1,4 +1,4 @@
-{ config, lib, ...}: {
+{ config, lib, ... }: {
   networking.firewall.allowedTCPPorts = [ 443 80 ];
 
   services.nginx = {
