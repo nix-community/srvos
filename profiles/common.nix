@@ -18,6 +18,10 @@
   # Allow PMTU / DHCP
   networking.firewall.allowPing = true;
 
+  # Use networkd instead of the pile of shell scripts
+  networking.useNetworkd = lib.mkDefault true;
+  networking.useDHCP = lib.mkDefault false;
+
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = 5;
 
