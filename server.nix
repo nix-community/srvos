@@ -3,7 +3,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./common.nix
+    ./common
   ];
 
   # List packages installed in system profile.
