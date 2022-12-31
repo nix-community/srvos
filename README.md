@@ -31,6 +31,7 @@ Add `srvos` to your flake.nix and include it in your nixos configuration like th
 ## Modules
 
 * common, desktop, server - Used to define the type of machine.
+* hardware - NixOS hardware configurations.
 * mixins - config extensions for a given machine.
 * roles - designed to take over a machine with the given role.
 
