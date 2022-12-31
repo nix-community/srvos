@@ -7,19 +7,7 @@
   };
 
   outputs = { self, nixpkgs, ... }: {
-    nixosModules = {
-      # Profiles
-      common = import ./profiles/common.nix;
-      server = import ./profiles/server.nix;
-      desktop = import ./profiles/desktop.nix;
-
-      efi = import ./profiles/efi.nix;
-      telegraf = import ./profiles/telegraf.nix;
-      nginx = import ./profiles/nginx.nix;
-
-      # Roles
-      github-actions-runner = import ./roles/github-actions-runner.nix;
-    };
+    nixosModules = import ./.;
 
     nixosConfigurations =
       let
@@ -60,7 +48,7 @@
         example-github-runner = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            self.nixosModules.github-actions-runner
+            self.nixosModules.roles-github-actions-runner
             dummy
             {
               roles.github-actions-runner.cachix.cacheName = "cache-name";
@@ -74,7 +62,7 @@
         example-telegraf = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            self.nixosModules.telegraf
+            self.nixosModules.mixins-telegraf
             dummy
           ];
         };
@@ -82,7 +70,7 @@
         example-nginx = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            self.nixosModules.nginx
+            self.nixosModules.mixins-nginx
             dummy
           ];
         };

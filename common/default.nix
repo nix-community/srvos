@@ -3,14 +3,14 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./common/flake.nix
-    ./common/networking.nix
-    ./common/nix.nix
-    ./common/openssh.nix
-    ./common/serial.nix
-    ./common/upgrade-diff.nix
-    ./common/well-known-hosts.nix
-    ./common/zfs.nix
+    ./flake.nix
+    ./networking.nix
+    ./nix.nix
+    ./openssh.nix
+    ./serial.nix
+    ./upgrade-diff.nix
+    ./well-known-hosts.nix
+    ./zfs.nix
   ];
 
   # Use systemd during boot as well on systems that do not require networking in early-boot

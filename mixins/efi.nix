@@ -1,4 +1,4 @@
-# Add this profile to machines that boot with EFI
+# Add this mixin to machines that boot with EFI
 {
   # Only enable during install
   #boot.loader.efi.canTouchEfiVariables = true;
