@@ -80,12 +80,12 @@
             self.nixosModules.mixins-cloud-init
           ];
         };
-        example-mixins-efi = nixpkgs.lib.nixosSystem {
+        example-mixins-systemd-boot = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             dummy
             fake-hardware
-            self.nixosModules.mixins-efi
+            self.nixosModules.mixins-systemd-boot
           ];
         };
         example-mixins-telegraf = nixpkgs.lib.nixosSystem {
