@@ -12,9 +12,15 @@
     pkgs.dnsutils
     pkgs.htop
     pkgs.jq
-    pkgs.termite.terminfo
     pkgs.tmux
     pkgs.vim
+    # avoid compiling desktop stuff when doing cross nixos
+  ] ++ lib.optionals (pkgs.stdenv.hostPlatform == pkgs.stdenv.buildPlatform) [
+    # various terminfo packages
+    pkgs.termite.terminfo
+    pkgs.wezterm.terminfo
+    pkgs.kitty.terminfo
+    pkgs.foot.terminfo
   ];
 
   programs.vim.defaultEditor = true;
