@@ -105,9 +105,11 @@ in
           };
           extraPackages = [
             pkgs.cachix
-            pkgs.nix
-            pkgs.openssh
             pkgs.glibc.bin
+            pkgs.jq
+            pkgs.nix
+            pkgs.nix-eval-jobs
+            pkgs.openssh
           ];
           extraLabels = [ "nix" ];
         };
