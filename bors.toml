@@ -1,0 +1,15 @@
+cut_body_after = "" # don't include text from the PR body in the merge commit message
+status = [
+  "Evaluate flake.nix",
+  "nixosConfig example-common",
+  "nixosConfig example-desktop",
+  "nixosConfig example-hardware-amazon",
+  "nixosConfig example-hardware-hetzner-cloud",
+  "nixosConfig example-mixins-cloud-init",
+  "nixosConfig example-mixins-nginx",
+  "nixosConfig example-mixins-systemd-boot",
+  "nixosConfig example-mixins-telegraf",
+  "nixosConfig example-roles-github-actions-runner",
+  "nixosConfig example-roles-github-actions-runner-github-app",
+  "nixosConfig example-server"
+]
