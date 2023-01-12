@@ -1,7 +1,7 @@
 {
   # General
   common = import ./common;
-  desktop = import ./desktop.nix;
+  desktop = import ./desktop;
   server = import ./server.nix;
 
   # Hardware
