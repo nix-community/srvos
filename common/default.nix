@@ -16,7 +16,8 @@
   # Use systemd during boot as well on systems except:
   # - systems that require networking in early-boot
   # - systems with raids as this currently require manual configuration (https://github.com/NixOS/nixpkgs/issues/210210)
-  boot.initrd.systemd.enable = lib.mkDefault (!config.boot.initrd.network.enable && !config.boot.initrd.services.swraid.enable);
+  # - for containers we currently rely on the `stage-2` init script that sets up our /etc
+  boot.initrd.systemd.enable = lib.mkDefault (!config.boot.initrd.network.enable && !config.boot.initrd.services.swraid.enable && !config.boot.isContainer);
 
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
   documentation.info.enable = false;
