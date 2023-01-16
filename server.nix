@@ -14,13 +14,6 @@
     pkgs.jq
     pkgs.tmux
     pkgs.vim
-    pkgs.wezterm.terminfo # this one does not need compilation
-    # avoid compiling desktop stuff when doing cross nixos
-  ] ++ lib.optionals (pkgs.stdenv.hostPlatform == pkgs.stdenv.buildPlatform) [
-    # various terminfo packages
-    pkgs.termite.terminfo
-    pkgs.kitty.terminfo
-    pkgs.foot.terminfo
   ];
 
   programs.vim.defaultEditor = true;
