@@ -95,6 +95,14 @@
             self.nixosModules.mixins-telegraf
           ];
         };
+        example-mixins-terminfo = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            dummy
+            fake-hardware
+            self.nixosModules.mixins-terminfo
+          ];
+        };
         example-mixins-nginx = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [

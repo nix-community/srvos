@@ -15,6 +15,7 @@
   mixins-nginx = import ./mixins/nginx.nix;
   mixins-systemd-boot = import ./mixins/systemd-boot.nix;
   mixins-telegraf = import ./mixins/telegraf.nix;
+  mixins-terminfo = import ./mixins/terminfo.nix;
 
   # Roles
   roles-github-actions-runner = import ./roles/github-actions-runner.nix;
