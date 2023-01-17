@@ -5,7 +5,7 @@
     forwardX11 = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PasswordAuthentication = false;
-    useDns = false;
+    settings.UseDns = false;
     # Only allow system-level authorized_keys to avoid injections.
     # We currently don't enable this when git-based software that relies on this is enabled.
     # It would be nicer to make it more granular using `Match`.
