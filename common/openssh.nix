@@ -3,8 +3,8 @@
 {
   services.openssh = {
     forwardX11 = false;
-    kbdInteractiveAuthentication = false;
-    passwordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    settings.PasswordAuthentication = false;
     useDns = false;
     # Only allow system-level authorized_keys to avoid injections.
     # We currently don't enable this when git-based software that relies on this is enabled.
