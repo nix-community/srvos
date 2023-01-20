@@ -103,6 +103,14 @@
             self.nixosModules.mixins-terminfo
           ];
         };
+        example-mixins-trusted-nix-caches = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            dummy
+            fake-hardware
+            self.nixosModules.mixins-trusted-nix-caches
+          ];
+        };
         example-mixins-nginx = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [

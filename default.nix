@@ -16,6 +16,7 @@
   mixins-systemd-boot = import ./mixins/systemd-boot.nix;
   mixins-telegraf = import ./mixins/telegraf.nix;
   mixins-terminfo = import ./mixins/terminfo.nix;
+  mixins-trusted-nix-caches = import ./mixins/trusted-nix-caches.nix;
 
   # Roles
   roles-github-actions-runner = import ./roles/github-actions-runner.nix;
