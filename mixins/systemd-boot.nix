@@ -1,5 +1,6 @@
 # Add this mixin to machines that boot with EFI
 {
+  _file = ./systemd-boot.nix;
   # Only enable during install
   #boot.loader.efi.canTouchEfiVariables = true;
 

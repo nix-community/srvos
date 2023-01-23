@@ -2,6 +2,7 @@
 # Common configuration accross *all* the machines
 { config, pkgs, lib, ... }:
 {
+  _file = ./server.nix;
   imports = [
     ./common
   ];

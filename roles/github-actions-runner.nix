@@ -3,6 +3,7 @@ let
   cfg = config.roles.github-actions-runner;
 in
 {
+  _file = ./github-actions-runner.nix;
   imports = [
     ../modules/github-runners
   ];

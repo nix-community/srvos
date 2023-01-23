@@ -1,5 +1,6 @@
 { modulesPath, ... }:
 {
+  _file = ./default.nix;
   imports = [
     "${modulesPath}/virtualisation/amazon-image.nix"
     ../../mixins/cloud-init.nix
