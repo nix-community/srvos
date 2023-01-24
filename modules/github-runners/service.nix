@@ -210,9 +210,10 @@ with lib;
         ]);
 
       ExecStopPost =
-        let unregisterScript = writeScript "unregister-runner" ''
-          RUNNER_ALLOW_RUNASROOT=1 ${cfg.package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
-        '';
+        let
+          unregisterScript = writeScript "unregister-runner" ''
+            RUNNER_ALLOW_RUNASROOT=1 ${cfg.package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
+          '';
         in
         map (x: "${x} ${escapeShellArgs [ stateDir runtimeDir logsDir ]}") [
           (optionalString (!isNull cfg.githubApp) "-+${unregisterScript}")

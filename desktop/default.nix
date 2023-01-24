@@ -1,4 +1,5 @@
 {
+  _file = ./default.nix;
   imports = [
     ../common
     ./pipewire.nix
