@@ -22,11 +22,6 @@
     in map escapeIPv6 resolvers;
 
     sslDhparam = config.security.dhparams.params.nginx.path;
-
-    # FIXME:
-    # nginx: [alert] could not open error log file: open() "/var/log/nginx/error.log" failed (2: No such file or directory)
-    # 2022/12/23 02:57:47 [emerg] 7#7: BIO_new_file("/var/lib/dhparams/nginx.pem") failed (SSL: error:80000002:system library::No such file or directory:calling fopen(/var/lib/dhparams/nginx.pem, r) error:10000080:BIO routines::no such file)
-    validateConfig = false;
   };
 
   security.dhparams = {
