@@ -2,9 +2,9 @@
 # Common configuration accross *all* the machines
 { config, pkgs, lib, ... }:
 {
-  _file = ./server.nix;
+  _file = ./default.nix;
   imports = [
-    ./common
+    ../common
   ];
 
   # List packages installed in system profile.
