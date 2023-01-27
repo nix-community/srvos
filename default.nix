@@ -1,23 +1,23 @@
 {
   # General
-  common = import ./common;
-  desktop = import ./desktop;
-  server = import ./server.nix;
+  common = import ./nixos/common;
+  desktop = import ./nixos/desktop;
+  server = import ./nixos/server;
 
   # Hardware
-  hardware-amazon = import ./hardware/amazon;
-  hardware-hetzner-cloud = import ./hardware/hetzner-cloud;
-  hardware-hetzner-online-amd = import ./hardware/hetzner-online/amd.nix;
-  hardware-hetzner-online-intel = import ./hardware/hetzner-online/intel.nix;
+  hardware-amazon = import ./nixos/hardware/amazon;
+  hardware-hetzner-cloud = import ./nixos/hardware/hetzner-cloud;
+  hardware-hetzner-online-amd = import ./nixos/hardware/hetzner-online/amd.nix;
+  hardware-hetzner-online-intel = import ./nixos/hardware/hetzner-online/intel.nix;
 
   # Mixins
-  mixins-cloud-init = import ./mixins/cloud-init.nix;
-  mixins-nginx = import ./mixins/nginx.nix;
-  mixins-systemd-boot = import ./mixins/systemd-boot.nix;
-  mixins-telegraf = import ./mixins/telegraf.nix;
-  mixins-terminfo = import ./mixins/terminfo.nix;
-  mixins-trusted-nix-caches = import ./mixins/trusted-nix-caches.nix;
+  mixins-cloud-init = import ./nixos/mixins/cloud-init.nix;
+  mixins-nginx = import ./nixos/mixins/nginx.nix;
+  mixins-systemd-boot = import ./nixos/mixins/systemd-boot.nix;
+  mixins-telegraf = import ./nixos/mixins/telegraf.nix;
+  mixins-terminfo = import ./nixos/mixins/terminfo.nix;
+  mixins-trusted-nix-caches = import ./nixos/mixins/trusted-nix-caches.nix;
 
   # Roles
-  roles-github-actions-runner = import ./roles/github-actions-runner.nix;
+  roles-github-actions-runner = import ./nixos/roles/github-actions-runner.nix;
 }
