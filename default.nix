@@ -20,4 +20,5 @@
 
   # Roles
   roles-github-actions-runner = import ./nixos/roles/github-actions-runner.nix;
+  roles-nix-remote-builder = import ./nixos/roles/nix-remote-builder.nix;
 }
