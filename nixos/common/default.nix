@@ -28,9 +28,6 @@
   # unecessary rebuilds.
   environment.noXlibs = false;
 
-  # Use the better version of nscd
-  services.nscd.enableNsncd = true;
-
   # Allow sudo from the @wheel group
   security.sudo.enable = true;
 }
