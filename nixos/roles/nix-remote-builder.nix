@@ -27,10 +27,13 @@ in
     ];
 
     # Give restricted SSH access to the build scheduler
-    users.extraUsers.root.openssh.authorizedKeys.keys = map
+    users.extraUsers.builder.openssh.authorizedKeys.keys = map
       (key:
-        ''command="nix-store --serve --write",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
+        ''command="nix-daemon --stdio",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
       )
       cfg.schedulerPublicKeys;
+    users.users.builder.isNormalUser = true;
+    users.users.builder.group = "nogroup";
+    nix.settings.trusted-users = ["builder"];
   };
 }
