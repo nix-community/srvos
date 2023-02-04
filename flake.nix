@@ -153,6 +153,19 @@
             }
           ];
         };
+        example-roles-nix-remote-builder = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            self.nixosModules.roles-nix-remote-builder
+            dummy
+            fake-hardware
+            {
+              roles.nix-remote-builder.schedulerPublicKeys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuiDoBOxgyer8vGcfAIbE6TC4n4jo8lhG9l01iJ0bZz zimbatm@no1"
+              ];
+            }
+          ];
+        };
       };
   };
 }
