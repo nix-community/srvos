@@ -32,8 +32,8 @@ in
         ''command="nix-daemon --stdio",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
       )
       cfg.schedulerPublicKeys;
-    users.users.builder.isNormalUser = true;
-    users.users.builder.group = "nogroup";
-    nix.settings.trusted-users = ["builder"];
+    users.users.nix-remote-builder.isNormalUser = true;
+    users.users.nix-remote-builder.group = "nogroup";
+    nix.settings.trusted-users = ["nix-remote-builder"];
   };
 }
