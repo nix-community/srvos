@@ -1,10 +1,12 @@
-# srvos
+# SrvOS - NixOS for your server
 
 STATUS: **experimental**
 
-Opinionated and sharable set of NixOS configurations.
+SrvOS is a collection of opinionated and sharable NixOS configurations.
 
 As we learn more about NixOS in various deployments, we end up re-writing the same modules and configs. This is a way for us to speed up and share our setups.
+
+Instead of supporting everything, our goal is to target certain verticals and make the support super smooth there.
 
 ## Usage
 
