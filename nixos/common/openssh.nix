@@ -2,7 +2,7 @@
 { config, lib, ... }:
 {
   services.openssh = {
-    forwardX11 = false;
+    settings.X11Forwarding = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PasswordAuthentication = false;
     settings.UseDns = false;
