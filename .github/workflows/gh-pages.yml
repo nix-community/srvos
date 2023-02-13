@@ -28,10 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v19
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
       
       - name: Build
         id: build
-        # TODO: --baseURL "${{ steps.pages.outputs.base_url }}/"
         run: |
           nix build .#docs
           echo "result=$(readlink ./result)" >> $GITHUB_OUTPUT
