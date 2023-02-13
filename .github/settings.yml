@@ -8,10 +8,10 @@ repository:
   description: Server-optimized nixos configuration
 
   # A URL with more information about the repository
-  homepage: ""
+  homepage: "https://numtide.github.io/srvos"
 
   # A comma-separated list of topics to set on the repository
-  topics: ""
+  topics: "nix, nixos"
 
   # Either `true` to make the repository private, or `false` to make it public.
   private: false
