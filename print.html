@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">2.</strong> Design</a></li><li class="chapter-item expanded "><a href="modules.html"><strong aria-hidden="true">3.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="modules/general.html"><strong aria-hidden="true">3.1.</strong> General</a></li><li class="chapter-item expanded "><a href="modules/hardware.html"><strong aria-hidden="true">3.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="modules/mixins.html"><strong aria-hidden="true">3.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="modules/roles.html"><strong aria-hidden="true">3.4.</strong> Roles</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="modules.html"><strong aria-hidden="true">2.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="modules/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="modules/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="modules/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="modules/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">3.</strong> Design</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -146,9 +146,6 @@
                         <h1 id="hello"><a class="header" href="#hello">Hello</a></h1>
 <p>Welcome to the new docs website.</p>
 <p>For now it's mostly an information dump that needs to be sorted out.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="design"><a class="header" href="#design">Design</a></h1>
-<p>This page explains some of the design decisions that have been made trough
-this project.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="modules"><a class="header" href="#modules">Modules</a></h2>
 <p>All modules are defined in the repo's top-level <code>default.nix</code></p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="general"><a class="header" href="#general">General</a></h2>
@@ -208,6 +205,12 @@ for monitoring rules targeting this telegraf configuration.</li>
 <ul>
 <li><code>roles-github-actions-runner</code> configures GitHub actions runner on a machine</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="design"><a class="header" href="#design">Design</a></h1>
+<p>This page explains some of the design decisions that have been made trough
+this project.</p>
+<h2 id="_file-attribute-in-the-nixos-modules"><a class="header" href="#_file-attribute-in-the-nixos-modules"><code>_file</code> attribute in the NixOS modules</a></h2>
+<p>You might see that all the NixOS modules in this repo have a <code>_file</code> attribute, which is quite uncommon to see. The reason we do this is to improve the error reporting whenever a type issue happens.</p>
+<p>Normally that attribute is set by the recursive module <code>imports</code> traversal, when <code>imports</code> is a list of paths. The issue is that <code>nix flake check</code> expects all the modules attached to the <code>nixosModules</code> attributes to be functions and not paths. This forces us to use the <code>import</code> keyword, and that loses the reference to the path. So we add them back manually.</p>
 
                     </main>
 
