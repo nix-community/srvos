@@ -3,8 +3,22 @@
 This page explains some of the design decisions that have been made trough
 this project.
 
-## `_file` attribute in the NixOS modules
+## What are there `_file` attributes in the NixOS modules?
 
-You might see that all the NixOS modules in this repo have a `_file` attribute, which is quite uncommon to see. The reason we do this is to improve the error reporting whenever a type issue happens.
+TL;DR: to provide better error reporting.
 
-Normally that attribute is set by the recursive module `imports` traversal, when `imports` is a list of paths. The issue is that `nix flake check` expects all the modules attached to the `nixosModules` attributes to be functions and not paths. This forces us to use the `import` keyword, and that loses the reference to the path. So we add them back manually.
+This is a bit of a subtle issue, combining knowlede about both Flakes and the Nix module system, so please hang with me.
+
+First, there are two types of imports in the Nix ecosystem:
+
+1. The `import` builtin function. This can be used anywhere in the code read a target Nix file, and return the evaluation result in its place.
+2. The `imports` attribute in the Nix module system. This takes a list of either path, attr or function, which is then used to extend the module system with new option of config values.
+
+The reason to add the `_file` attribute is that it's used to report when there are value or type clashes while building the config tree.
+It helps the user be pointed directly to the right location. Typically, NixOS modules are passed as a path, and in that case, the module system transparently annotates the module with the `_file` attribute so you don't see it in most cases.
+
+Now let's talk about flakes.
+
+When running `nix flake check`, Nix expects the NixOS modules to sit in the `nixosModules.<name>` prefix. And that the value is a function. If we give it a path, it will fail the check. So we can't have a path to (2) and therefor need to use (1) and annotate the `_file` manually.
+
+Case closed :)
