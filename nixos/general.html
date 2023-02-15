@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../modules.html"><strong aria-hidden="true">2.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../modules/general.html" class="active"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../modules/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../modules/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../modules/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../nixos.html"><strong aria-hidden="true">2.</strong> NixOS modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../nixos/general.html" class="active"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../nixos/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../nixos/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../nixos/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,50 +142,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="general"><a class="header" href="#general">General</a></h2>
-<p>Used to define the type of machine.</p>
-<ul>
-<li><code>server</code>:
-<ul>
-<li>Use this for headless systems that are remotely managed via ssh</li>
-<li>Includes everything from common</li>
-<li>Disables desktop features like sound</li>
-<li>Defaults to UTC</li>
-<li>Enables ssh</li>
-<li>Configures watchdog for reboot</li>
-<li>Sets up sudo without password</li>
-<li>...</li>
-</ul>
-</li>
-<li><code>desktop</code>:
-<ul>
-<li>Mostly based on common but also includes some optimization for useful for interactive usage</li>
-</ul>
-</li>
-<li><code>common</code>:
-<ul>
-<li>Use if you are unsure if your nixos module will be used on server or desktop</li>
-<li>Better nix-daemon defaults</li>
-<li>Better serial console support</li>
-<li>Colored package diffs on nixos-rebuild</li>
-<li>Use systemd in initrd by default and networkd as a backend for the
-Networking module</li>
-<li>Do not block on networkd/networkmanager's online target</li>
-<li>Better zfs defaults</li>
-<li>Add well-known ssh git ssh keys to the git configuration</li>
-</ul>
-</li>
-</ul>
+                        <h1 id="general"><a class="header" href="#general">General</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../modules.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../nixos.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../modules/hardware.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../nixos/hardware.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -195,11 +162,11 @@ Networking module</li>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../modules.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../nixos.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../modules/hardware.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../nixos/hardware.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

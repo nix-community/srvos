@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Mixins - SrvOS - NixOS for your server</title>
+        <title>Roles - SrvOS - NixOS for your server</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../modules.html"><strong aria-hidden="true">2.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../modules/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../modules/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../modules/mixins.html" class="active"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../modules/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../nixos.html"><strong aria-hidden="true">2.</strong> NixOS modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../nixos/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../nixos/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../nixos/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../nixos/roles.html" class="active"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,26 +142,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="mixins"><a class="header" href="#mixins">Mixins</a></h2>
-<p>Config extensions for a given machine.</p>
-<ul>
-<li><code>mixins-cloud-init</code> enables <a href="https://cloud-init.io">cloud-init</a></li>
-<li><code>mixins-systemd-boot</code> configure systemd-boot as bootloader</li>
-<li><code>mixins-telegraf</code> enables a generic telegraf configuration. See <a href="https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix">Mic's dotfiles</a>
-for monitoring rules targeting this telegraf configuration.</li>
-<li><code>mixins-nginx</code> recommended nginx settings</li>
-<li><code>mixins-trusted-nix-caches</code> list of trust-worthy public binary caches</li>
-</ul>
+                        <h1 id="roles"><a class="header" href="#roles">Roles</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../modules/hardware.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../nixos/mixins.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../modules/roles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../installation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -171,11 +162,11 @@ for monitoring rules targeting this telegraf configuration.</li>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../modules/hardware.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../nixos/mixins.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../modules/roles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../installation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
