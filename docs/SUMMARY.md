@@ -6,4 +6,6 @@
     - [Hardware](./modules/hardware.md)
     - [Mixins](./modules/mixins.md)
     - [Roles](./modules/roles.md)
+- [Installation](./installation.md)
+    - [Hetzner Cloud](./installation/hetzner_cloud.md)
 - [Design](./design.md)

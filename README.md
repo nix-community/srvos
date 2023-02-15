@@ -31,13 +31,15 @@ example to deploy a GitHub Action runner on Hetzner:
 }
 ```
 
-For more usage and documentation in general, see <https://numtide.github.io/srvos/>.
+## Documentation
 
-## Known limitations
+The [Documentation](https://numtide.github.io/srvos/) website shows more general usage, how to install SrvOS, etc...
 
-The current modules are only tested to work on the NixOS unstable release.
-When updating srvos, we commend that you follow the same pin of nixpkgs that
-is being used by this project.
+To improve the documentation, take a look at the `./docs` folder. You can also run `nix run .#docs.serve` to start a preview server on <http://localhost:3000>.
+
+## Contributing
+
+Contributions are always welcome.
 
 ## License
 
