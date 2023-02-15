@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="hello.html" class="active"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="modules.html"><strong aria-hidden="true">2.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="modules/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="modules/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="modules/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="modules/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">3.</strong> Design</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="hello.html" class="active"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="modules.html"><strong aria-hidden="true">2.</strong> Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="modules/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="modules/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="modules/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="modules/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li></ol></li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,8 +143,35 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="hello"><a class="header" href="#hello">Hello</a></h1>
-<p>Welcome to the new docs website.</p>
-<p>For now it's mostly an information dump that needs to be sorted out.</p>
+<p>SrvOS is a collection of opinionated and sharable NixOS configurations.</p>
+<p>As we learn more about NixOS in various deployments, we end up re-writing the same modules and configs. This is a way for us to speed up and share our setups.</p>
+<p>Instead of supporting everything, our goal is to target certain verticals and make the support super smooth there.</p>
+<h2 id="quick-usage"><a class="header" href="#quick-usage">Quick Usage</a></h2>
+<p>Add <code>srvos</code> to your <code>flake.nix</code> to augment your NixOS configuration. For
+example to deploy a GitHub Action runner on Hetzner:</p>
+<pre><code class="language-nix">{
+  inputs = {
+    srvos.url = &quot;github:numtide/srvos&quot;;
+  };
+  outputs = { srvos, nixpkgs, ... }: {
+    nixosConfigurations.myHost = nixpkgs.lib.nixosSystem {
+      system = &quot;x86_64-linux&quot;;
+      modules = [
+        srvos.nixosModules.common
+        srvos.nixosModules.hardware-hetzner-amd
+        srvos.nixosModules.roles-github-actions-runner
+      ];
+    };
+  };
+}
+</code></pre>
+<h2 id="technologies"><a class="header" href="#technologies">Technologies</a></h2>
+<p>SrvOS is a thin wrapper, sitting on the shoulder of others:</p>
+<ul>
+<li><a href="https://nixos.org">Nix and NixOS</a> of course.</li>
+<li><a href="https://github.com/numtide/nixos-anywhere">nixos-anywhere</a> to bootstrap new systems.</li>
+<li><a href="https://github.com/nix-community/disko">disko</a> to partition and configure disks.</li>
+</ul>
 
                     </main>
 
