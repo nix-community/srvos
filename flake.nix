@@ -7,11 +7,15 @@
 
   outputs = { self, nixpkgs, ... }:
     let
-      forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
     in
+    (import ./.) //
     {
-      nixosModules = import ./.;
-
       packages = forAllSystems (system: {
         docs = nixpkgs.legacyPackages.${system}.callPackage ./docs { };
       });

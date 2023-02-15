@@ -1,11 +1,11 @@
 # Table of Content
 
 - [Hello](./hello.md)
-- [Modules](./modules.md)
-    - [General](./modules/general.md)
-    - [Hardware](./modules/hardware.md)
-    - [Mixins](./modules/mixins.md)
-    - [Roles](./modules/roles.md)
+- [NixOS modules](./nixos.md)
+    - [General](./nixos/general.md)
+    - [Hardware](./nixos/hardware.md)
+    - [Mixins](./nixos/mixins.md)
+    - [Roles](./nixos/roles.md)
 - [Installation](./installation.md)
     - [Hetzner Cloud](./installation/hetzner_cloud.md)
 - [Design](./design.md)
