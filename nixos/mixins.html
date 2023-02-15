@@ -142,7 +142,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="mixins"><a class="header" href="#mixins">Mixins</a></h1>
+                        <h2 id="mixins"><a class="header" href="#mixins">Mixins</a></h2>
+<p>Config extensions for a given machine.</p>
+<ul>
+<li><code>mixins-cloud-init</code> enables <a href="https://cloud-init.io">cloud-init</a></li>
+<li><code>mixins-systemd-boot</code> configure systemd-boot as bootloader</li>
+<li><code>mixins-telegraf</code> enables a generic telegraf configuration. See <a href="https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix">Mic's dotfiles</a>
+for monitoring rules targeting this telegraf configuration.</li>
+<li><code>mixins-nginx</code> recommended nginx settings</li>
+<li><code>mixins-trusted-nix-caches</code> list of trust-worthy public binary caches</li>
+</ul>
 
                     </main>
 

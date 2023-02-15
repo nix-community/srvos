@@ -142,7 +142,40 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="general"><a class="header" href="#general">General</a></h1>
+                        <h2 id="general"><a class="header" href="#general">General</a></h2>
+<p>Used to define the type of machine.</p>
+<ul>
+<li><code>server</code>:
+<ul>
+<li>Use this for headless systems that are remotely managed via ssh</li>
+<li>Includes everything from common</li>
+<li>Disables desktop features like sound</li>
+<li>Defaults to UTC</li>
+<li>Enables ssh</li>
+<li>Configures watchdog for reboot</li>
+<li>Sets up sudo without password</li>
+<li>...</li>
+</ul>
+</li>
+<li><code>desktop</code>:
+<ul>
+<li>Mostly based on common but also includes some optimization for useful for interactive usage</li>
+</ul>
+</li>
+<li><code>common</code>:
+<ul>
+<li>Use if you are unsure if your nixos module will be used on server or desktop</li>
+<li>Better nix-daemon defaults</li>
+<li>Better serial console support</li>
+<li>Colored package diffs on nixos-rebuild</li>
+<li>Use systemd in initrd by default and networkd as a backend for the
+Networking module</li>
+<li>Do not block on networkd/networkmanager's online target</li>
+<li>Better zfs defaults</li>
+<li>Add well-known ssh git ssh keys to the git configuration</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 

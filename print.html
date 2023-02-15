@@ -175,10 +175,63 @@ example to deploy a GitHub Action runner on Hetzner:</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="nixos-modules"><a class="header" href="#nixos-modules">NixOS modules</a></h2>
 <p>All modules are defined in the repo's top-level <code>default.nix</code></p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="general"><a class="header" href="#general">General</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="hardware"><a class="header" href="#hardware">Hardware</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="mixins"><a class="header" href="#mixins">Mixins</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="roles"><a class="header" href="#roles">Roles</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="general"><a class="header" href="#general">General</a></h2>
+<p>Used to define the type of machine.</p>
+<ul>
+<li><code>server</code>:
+<ul>
+<li>Use this for headless systems that are remotely managed via ssh</li>
+<li>Includes everything from common</li>
+<li>Disables desktop features like sound</li>
+<li>Defaults to UTC</li>
+<li>Enables ssh</li>
+<li>Configures watchdog for reboot</li>
+<li>Sets up sudo without password</li>
+<li>...</li>
+</ul>
+</li>
+<li><code>desktop</code>:
+<ul>
+<li>Mostly based on common but also includes some optimization for useful for interactive usage</li>
+</ul>
+</li>
+<li><code>common</code>:
+<ul>
+<li>Use if you are unsure if your nixos module will be used on server or desktop</li>
+<li>Better nix-daemon defaults</li>
+<li>Better serial console support</li>
+<li>Colored package diffs on nixos-rebuild</li>
+<li>Use systemd in initrd by default and networkd as a backend for the
+Networking module</li>
+<li>Do not block on networkd/networkmanager's online target</li>
+<li>Better zfs defaults</li>
+<li>Add well-known ssh git ssh keys to the git configuration</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="hardware"><a class="header" href="#hardware">Hardware</a></h2>
+<p>NixOS hardware configurations that we know about.</p>
+<ul>
+<li><code>hardware-amazon</code>: Amazon AWS virtual machines</li>
+<li><code>hardware-hetzner-cloud</code>: Hardware and network defaults for Hetzner virtual machine</li>
+<li><code>hardware-hetzner-amd</code>: Hardware and network defaults for Hetzner bare-metal servers for AMD and Intel cpus.</li>
+<li><code>hardware-hetzner-intel</code>: &quot;</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="mixins"><a class="header" href="#mixins">Mixins</a></h2>
+<p>Config extensions for a given machine.</p>
+<ul>
+<li><code>mixins-cloud-init</code> enables <a href="https://cloud-init.io">cloud-init</a></li>
+<li><code>mixins-systemd-boot</code> configure systemd-boot as bootloader</li>
+<li><code>mixins-telegraf</code> enables a generic telegraf configuration. See <a href="https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix">Mic's dotfiles</a>
+for monitoring rules targeting this telegraf configuration.</li>
+<li><code>mixins-nginx</code> recommended nginx settings</li>
+<li><code>mixins-trusted-nix-caches</code> list of trust-worthy public binary caches</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="roles"><a class="header" href="#roles">Roles</a></h2>
+<p>Designed to take over a machine with the given role.</p>
+<ul>
+<li><code>roles-github-actions-runner</code> configures GitHub actions runner on a machine</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
 <ul>
 <li><a href="./installation/hetzner_cloud.html">Hetzner Cloud</a></li>
