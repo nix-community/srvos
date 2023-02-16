@@ -18,7 +18,20 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "snow": "snow"
+      }
+    },
+    "snow": {
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-Sp7bkzbkK1jj5A46rT5RptTOVXK5/62iiUJk0v5Q6zE=",
+        "path": "./snow",
+        "type": "path"
+      },
+      "original": {
+        "path": "./snow",
+        "type": "path"
       }
     }
   },
