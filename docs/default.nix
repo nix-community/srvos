@@ -8,7 +8,7 @@ runCommand
   "srvos-docs"
 {
   passthru.serve = writeShellScriptBin "serve" ''
-    set -euo pipefail
+    set -xeuo pipefail
     cd docs
     workdir=$(${coreutils}/bin/mktemp -d)
     trap 'rm -rf "$workdir"' EXIT
