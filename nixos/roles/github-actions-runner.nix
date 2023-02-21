@@ -86,6 +86,15 @@ in
         type = lib.types.str;
       };
     };
+
+    extraPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      description = lib.mdDoc ''
+        Extra packages to add to `PATH` of the service to make them available to workflows.
+      '';
+      default = [ ];
+    };
+
   };
 
   config = {
@@ -108,10 +117,10 @@ in
             pkgs.cachix
             pkgs.glibc.bin
             pkgs.jq
-            pkgs.nix
+            config.nix.package
             pkgs.nix-eval-jobs
             pkgs.openssh
-          ];
+          ] ++ cfg.extraPackages;
           extraLabels = [ "nix" ];
         };
       })
