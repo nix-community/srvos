@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Hardware - SrvOS - NixOS for your server</title>
+        <title>GitHub Action Runner - SrvOS - NixOS for your server</title>
 
 
         <!-- Custom HTML head -->
@@ -12,21 +12,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="../favicon.svg">
-        <link rel="shortcut icon" href="../favicon.png">
-        <link rel="stylesheet" href="../css/variables.css">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/chrome.css">
-        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../fonts/fonts.css">
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -35,7 +35,7 @@
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
-            var path_to_root = "../";
+            var path_to_root = "../../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../nixos.html"><strong aria-hidden="true">2.</strong> NixOS modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../nixos/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../nixos/hardware.html" class="active"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../nixos/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../nixos/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../nixos/roles/github_actions_runner.html"><strong aria-hidden="true">2.4.1.</strong> GitHub Action Runner</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../hello.html"><strong aria-hidden="true">1.</strong> Hello</a></li><li class="chapter-item expanded "><a href="../../nixos.html"><strong aria-hidden="true">2.</strong> NixOS modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../nixos/general.html"><strong aria-hidden="true">2.1.</strong> General</a></li><li class="chapter-item expanded "><a href="../../nixos/hardware.html"><strong aria-hidden="true">2.2.</strong> Hardware</a></li><li class="chapter-item expanded "><a href="../../nixos/mixins.html"><strong aria-hidden="true">2.3.</strong> Mixins</a></li><li class="chapter-item expanded "><a href="../../nixos/roles.html"><strong aria-hidden="true">2.4.</strong> Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../nixos/roles/github_actions_runner.html" class="active"><strong aria-hidden="true">2.4.1.</strong> GitHub Action Runner</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../installation.html"><strong aria-hidden="true">3.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../installation/hetzner_cloud.html"><strong aria-hidden="true">3.1.</strong> Hetzner Cloud</a></li></ol></li><li class="chapter-item expanded "><a href="../../design.html"><strong aria-hidden="true">4.</strong> Design</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -113,7 +113,7 @@
                     <h1 class="menu-title">SrvOS - NixOS for your server</h1>
 
                     <div class="right-buttons">
-                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -142,24 +142,64 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="hardware"><a class="header" href="#hardware">Hardware</a></h2>
-<p>NixOS hardware configurations that we know about.</p>
+                        <h1 id="github-action-runner"><a class="header" href="#github-action-runner">GitHub Action Runner</a></h1>
+<p>This role installs:</p>
 <ul>
-<li><code>hardware-amazon</code>: Amazon AWS virtual machines</li>
-<li><code>hardware-hetzner-cloud</code>: Hardware and network defaults for Hetzner virtual machine</li>
-<li><code>hardware-hetzner-amd</code>: Hardware and network defaults for Hetzner bare-metal servers for AMD and Intel cpus.</li>
-<li><code>hardware-hetzner-intel</code>: &quot;</li>
+<li>One or more self hosted github action runner</li>
+<li>One <a href="https://www.cachix.org">cachix</a> watch store service</li>
 </ul>
+<h2 id="authentication"><a class="header" href="#authentication">Authentication</a></h2>
+<p>There are different ways a self hosted runner can register itself by GitHub.</p>
+<ul>
+<li>Using a Registration token</li>
+<li>Using a Personal Authentication token</li>
+<li>Using a GitHub App</li>
+</ul>
+<p>We will document hereafter how to connect using a new GitHub Application in your organization.</p>
+<p>First, create the GitHub Application in <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></p>
+<ul>
+<li>Click on <code>New GitHub App</code>.</li>
+<li>In &quot;GitHub App name&quot; type <code>&lt;YOUR ORGANISATION&gt; App for GitHub runners</code>.</li>
+<li>In &quot;Homepage&quot; fill in your project URL. It is required but won't be used hereafter.</li>
+<li>Unselect <code>Expire user authorization tokens</code>.</li>
+<li>Unselect <code>Active</code> in the &quot;Webhook&quot; section.</li>
+<li>In the &quot;Organization permissions&quot; select <code>Read and write</code> next to the &quot;Self-hosted runner&quot; permission</li>
+<li>Click on <code>Create GitHub App</code></li>
+</ul>
+<p>You should save securely the generated pem encoded private key. We will use that private key to configure the CI to use it.
+You should also save the generated GitHub App Id.</p>
+<p>Once created, you should also limit the usage of this github app to the CI hosts IPs (ipv4 and ipv6).</p>
+<p>Application can be now be installed in your organization:</p>
+<ul>
+<li>Go to <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></li>
+<li>Click on the Edit button for our newly created GitHub app</li>
+<li>Click on Install App and choose to install it on your organization</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-bash">roles.github-actions-runner = {
+  url = &quot;https://github.com/&lt;YOUR ORGANIZATION&gt;&quot;;
+  count = 12;
+  name = &quot;github-runner&quot;;
+  githubApp = {
+    id = &quot;&lt;YOUR GENERATED APP ID&gt;&quot;;
+    login = &quot;&lt;YOUR ORGANIZATION&gt;&quot;;
+    privateKeyFile = config.age.secrets.github-app-runner-private-key.path;
+  };
+  cachix.cacheName = &quot;&lt;YOUR CACHIX ORGANIZATION&gt;&quot;;
+  cachix.tokenFile = config.age.secrets.cachixToken.path;
+};
+</code></pre>
+<p><a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/creating-a-github-app">Official GitHub App creation documentation</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../nixos/general.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../nixos/roles.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next" href="../nixos/mixins.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../../installation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -169,11 +209,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../nixos/general.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../nixos/roles.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next" href="../nixos/mixins.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../../installation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -188,13 +228,13 @@
         </script>
 
 
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
 
-        <script src="../clipboard.min.js"></script>
-        <script src="../highlight.js"></script>
-        <script src="../book.js"></script>
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
 
         <!-- Custom JS scripts -->
 
