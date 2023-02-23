@@ -79,6 +79,8 @@ in
     cachix = {
       cacheName = lib.mkOption {
         description = "Cachix cache name";
+        type = lib.types.nullOr lib.types.str;
+        default = null;
       };
 
       tokenFile = lib.mkOption {
@@ -130,7 +132,7 @@ in
     programs.nix-ld.enable = true;
 
     # Automatically sync all the locally built artifacts to cachix.
-    services.cachix-watch-store = {
+    services.cachix-watch-store = lib.mkIf (cfg.cachix.cacheName != null) {
       enable = true;
       cacheName = cfg.cachix.cacheName;
       cachixTokenFile = cfg.cachix.tokenFile;
