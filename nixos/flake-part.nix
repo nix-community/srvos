@@ -27,17 +27,13 @@
             system = null;
           }
         );
-      fake-hardware = {
-        boot.loader.grub.devices = [ "/dev/sda" ];
-        fileSystems."/" = {
-          device = "/dev/sda";
-        };
-      };
       # some example configuration to make it eval
       dummy = { config, ... }: {
         networking.hostName = "example-common";
         system.stateVersion = config.system.nixos.version;
         users.users.root.initialPassword = "fnord23";
+        boot.loader.grub.devices = lib.mkForce [ "/dev/sda" ];
+        fileSystems."/".device = lib.mkDefault  "/dev/sda";
       };
     in
     {
@@ -46,7 +42,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.common
         ];
       };
@@ -54,7 +49,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.server
         ];
       };
@@ -62,7 +56,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.desktop
         ];
       };
@@ -91,7 +84,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-cloud-init
         ];
       };
@@ -99,7 +91,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-systemd-boot
         ];
       };
@@ -107,7 +98,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-telegraf
         ];
       };
@@ -115,7 +105,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-terminfo
         ];
       };
@@ -123,7 +112,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-trusted-nix-caches
         ];
       };
@@ -131,7 +119,6 @@
         system = "x86_64-linux";
         modules = [
           dummy
-          fake-hardware
           self.nixosModules.mixins-nginx
         ];
       };
@@ -142,7 +129,6 @@
         modules = [
           self.nixosModules.roles-github-actions-runner
           dummy
-          fake-hardware
           {
             roles.github-actions-runner.cachix.cacheName = "cache-name";
             roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
@@ -156,7 +142,6 @@
         modules = [
           self.nixosModules.roles-github-actions-runner
           dummy
-          fake-hardware
           {
             roles.github-actions-runner.cachix.cacheName = "cache-name";
             roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
@@ -174,7 +159,6 @@
         modules = [
           self.nixosModules.roles-nix-remote-builder
           dummy
-          fake-hardware
           {
             roles.nix-remote-builder.schedulerPublicKeys = [
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOuiDoBOxgyer8vGcfAIbE6TC4n4jo8lhG9l01iJ0bZz zimbatm@no1"
