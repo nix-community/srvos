@@ -13,10 +13,10 @@
             "x86_64-darwin"
             "x86_64-linux"
           ]
-          (system: f { inherit system; pkgs = nixpkgs.legacyPackages.${system}; });
+          (system: f { inherit self system; pkgs = nixpkgs.legacyPackages.${system}; });
     in
     {
-      packages = eachSystem ({ system, pkgs }: {
+      packages = eachSystem ({ pkgs, ... }: {
         docs = pkgs.callPackage ./docs { };
       });
 
@@ -28,5 +28,7 @@
 
       # we use this to test our modules
       nixosConfigurations = import ./nixos/test-configurations.nix inputs;
+
+      checks = eachSystem (import ./checks);
     };
 }
