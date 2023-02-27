@@ -34,6 +34,6 @@ in
       cfg.schedulerPublicKeys;
     users.users.nix-remote-builder.isNormalUser = true;
     users.users.nix-remote-builder.group = "nogroup";
-    nix.settings.trusted-users = ["nix-remote-builder"];
+    nix.settings.trusted-users = [ "nix-remote-builder" ];
   };
 }
