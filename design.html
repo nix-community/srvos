@@ -145,19 +145,6 @@
                         <h1 id="design"><a class="header" href="#design">Design</a></h1>
 <p>This page explains some of the design decisions that have been made trough
 this project.</p>
-<h2 id="what-are-there-_file-attributes-in-the-nixos-modules"><a class="header" href="#what-are-there-_file-attributes-in-the-nixos-modules">What are there <code>_file</code> attributes in the NixOS modules?</a></h2>
-<p>TL;DR: to provide better error reporting.</p>
-<p>This is a bit of a subtle issue, combining knowlede about both Flakes and the Nix module system, so please hang with me.</p>
-<p>First, there are two types of imports in the Nix ecosystem:</p>
-<ol>
-<li>The <code>import</code> builtin function. This can be used anywhere in the code read a target Nix file, and return the evaluation result in its place.</li>
-<li>The <code>imports</code> attribute in the Nix module system. This takes a list of either path, attr or function, which is then used to extend the module system with new option of config values.</li>
-</ol>
-<p>The reason to add the <code>_file</code> attribute is that it's used to report when there are value or type clashes while building the config tree.
-It helps the user be pointed directly to the right location. Typically, NixOS modules are passed as a path, and in that case, the module system transparently annotates the module with the <code>_file</code> attribute so you don't see it in most cases.</p>
-<p>Now let's talk about flakes.</p>
-<p>When running <code>nix flake check</code>, Nix expects the NixOS modules to sit in the <code>nixosModules.&lt;name&gt;</code> prefix. And that the value is a function. If we give it a path, it will fail the check. So we can't have a path to (2) and therefor need to use (1) and annotate the <code>_file</code> manually.</p>
-<p>Case closed :)</p>
 
                     </main>
 
