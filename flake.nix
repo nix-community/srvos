@@ -1,28 +1,32 @@
 {
-  description = "Server-optimized nixos configuration";
+  description = "Server-optimized NixOS configuration";
 
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+  outputs = inputs@{ self, nixpkgs }:
+    let
+      eachSystem = f:
+        nixpkgs.lib.genAttrs
+          [
+            "aarch64-darwin"
+            "aarch64-linux"
+            "x86_64-darwin"
+            "x86_64-linux"
+          ]
+          (system: f { inherit system; pkgs = nixpkgs.legacyPackages.${system}; });
+    in
+    {
+      packages = eachSystem ({ system, pkgs }: {
+        docs = pkgs.callPackage ./docs { };
+      });
 
-      systems = [
-        "aarch64-darwin"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "x86_64-linux"
-      ];
+      # generates future flake outputs: `modules.<kind>.<module-name>`
+      modules.nixos = import ./nixos;
 
-      imports = [ ./all-parts.nix ];
+      # compat to current schema: `nixosModules` / `darwinModules`
+      nixosModules = self.modules.nixos;
+
+      # we use this to test our modules
+      nixosConfigurations = import ./nixos/test-configurations.nix inputs;
     };
 }

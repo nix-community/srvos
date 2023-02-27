@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-    # Based on https://unix.stackexchange.com/questions/16578/resizable-serial-console-window
+  # Based on https://unix.stackexchange.com/questions/16578/resizable-serial-console-window
   resize = pkgs.writeScriptBin "resize" ''
     export PATH=${pkgs.coreutils}/bin
     if [ ! -t 0 ]; then
