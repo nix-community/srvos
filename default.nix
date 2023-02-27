@@ -1,14 +1,11 @@
 # This file provides backward compatibility to nix < 2.4 clients
+{ system ? builtins.currentSystem }:
 let
-  flake =
-    import
-    (
-      let lock = builtins.fromJSON (builtins.readFile ./flake.lock); in
-      fetchTarball {
-        url = "https://github.com/edolstra/flake-compat/archive/${lock.nodes.flake-compat.locked.rev}.tar.gz";
-        sha256 = lock.nodes.flake-compat.locked.narHash;
-      }
-    )
-    { src = ./.; };
+  flake-compat = builtins.fetchTarball {
+    url = "https://github.com/edolstra/flake-compat/archive/35bb57c0c8d8b62bbfd284272c928ceb64ddbde9.tar.gz";
+    sha256 = "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=";
+  };
+
+  flake = import flake-compat { src = ./.; inherit system; };
 in
-  flake.defaultNix
+flake.defaultNix
