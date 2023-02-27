@@ -1,5 +1,5 @@
 { config, lib, ... }: {
-  _file = ./nginx.nix;
+
   networking.firewall.allowedTCPPorts = [ 443 80 ];
 
   services.nginx = {

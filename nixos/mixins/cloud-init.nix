@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  _file = ./cloud-init.nix;
+
   config = {
     services.cloud-init.enable = true;
     services.cloud-init.network.enable = true;

@@ -1,5 +1,5 @@
 { lib, config, ... }: {
-  _file = ./intel.nix;
+
   imports = [ ./. ];
 
   boot.kernelModules = [ "kvm-intel" ];

@@ -2,7 +2,7 @@
 # Common configuration accross *all* the machines
 { config, pkgs, lib, ... }:
 {
-  _file = ./default.nix;
+
   imports = [
     ./flake.nix
     ./mdmonitor-fix.nix

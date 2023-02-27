@@ -1,5 +1,5 @@
 { lib, config, ... }: {
-  _file = ./amd.nix;
+
   imports = [ ./. ];
 
   boot.kernelModules = [ "kvm-amd" ];

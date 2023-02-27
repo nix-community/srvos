@@ -9,7 +9,7 @@ let
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 in
 {
-  _file = ./telegraf.nix;
+
   systemd.services.telegraf.path = lib.optional (!isVM && hasNvme) pkgs.nvme-cli;
 
   services.telegraf = {

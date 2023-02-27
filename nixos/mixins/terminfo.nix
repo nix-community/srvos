@@ -1,6 +1,6 @@
 { pkgs, lib, ... }:
 {
-  _file = ./terminfo.nix;
+
   # various terminfo packages
   environment.systemPackages = [
     pkgs.wezterm.terminfo # this one does not need compilation

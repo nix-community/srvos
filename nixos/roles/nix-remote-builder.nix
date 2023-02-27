@@ -3,7 +3,7 @@ let
   cfg = config.roles.nix-remote-builder;
 in
 {
-  _file = ./nix-remote-builder.nix;
+
 
   options.roles.nix-remote-builder = {
     schedulerPublicKeys = lib.mkOption {
