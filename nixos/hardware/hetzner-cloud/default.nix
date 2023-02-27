@@ -1,6 +1,6 @@
 { config, modulesPath, lib, ... }:
 {
-  _file = ./default.nix;
+
   imports = [
     ../../mixins/cloud-init.nix
     "${modulesPath}/profiles/qemu-guest.nix"
