@@ -19,7 +19,7 @@ in
     nix.gc.options = ''--max-freed "$((128 * 1024**3 - 1024 * $(df -P -k /nix/store | tail -n 1 | ${pkgs.gawk}/bin/awk '{ print $4 }')))"'';
 
     # Randomize GC to avoid thundering herd effects.
-    systemd.timers.nix-gc.timerConfig.RandomizedDelaySec = lib.mkForce "1800";
+    nix.gc.randomizedDelaySec = "1800";
 
     # Allow more open files for non-root users to run NixOS VM tests.
     security.pam.loginLimits = [
