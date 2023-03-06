@@ -113,7 +113,6 @@ in
           serviceOverrides = {
             DeviceAllow = [ "/dev/kvm" ];
             PrivateDevices = false;
-            ExtraGroups = [ "kvm" ];
           };
           extraPackages = [
             pkgs.cachix
