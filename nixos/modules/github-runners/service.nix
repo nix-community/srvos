@@ -230,7 +230,7 @@ with lib;
 
       # If running in ephemeral mode, restart the service on-exit (i.e., successful de-registration of the runner)
       # to trigger a fresh registration.
-      Restart = if cfg.ephemeral then "on-success" else "no";
+      Restart = if cfg.ephemeral then "always" else "no";
       # If the runner exits with `ReturnCode.RetryableError = 2`, always restart the service:
       # https://github.com/actions/runner/blob/40ed7f8/src/Runner.Common/Constants.cs#L146
       RestartForceExitStatus = [ 2 ];
