@@ -96,20 +96,28 @@ with lib;
             text = ./token.sh;
           };
 
+          remove_existing_runner = pkgs.writeShellApplication {
+            name = "remove_existing_runner";
+            runtimeInputs = with pkgs;[ jq curl ];
+            text = ./remove_existing_runner.sh;
+          };
+
           unconfigureRunnerGitHubApp = writeScript "unconfigure-github-app" ''
             set -euo pipefail
+            export APP_ID=${cfg.githubApp.id}
+            export APP_LOGIN=${cfg.githubApp.login}
+            export RUNNER_SCOPE="org"
+            export ORG_NAME="${cfg.githubApp.login}"
+            export APP_PRIVATE_KEY=$(cat ${cfg.githubApp.privateKeyFile})
+            ACCESS_TOKEN=$(${app_token}/bin/fetch_access_token)
+            export ACCESS_TOKEN
+            umask 000
+            export RUNNER_NAME=${escapeShellArg cfg.name}
+
             unregister_previous_runner() {
-              RUNNER_ALLOW_RUNASROOT=1 ${cfg.package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
+              ${remove_existing_runner}/bin/remove_existing_runner
             }
             copy_tokens() {
-              export APP_ID=${cfg.githubApp.id}
-              export APP_LOGIN=${cfg.githubApp.login}
-              export RUNNER_SCOPE="org"
-              export ORG_NAME="${cfg.githubApp.login}"
-              export APP_PRIVATE_KEY=$(cat ${cfg.githubApp.privateKeyFile})
-              ACCESS_TOKEN=$(${app_token}/bin/fetch_access_token)
-              export ACCESS_TOKEN
-              umask 000
               ${token}/bin/fetch_runner_token | ${pkgs.jq}/bin/jq -r '.token' > ${newConfigTokenPath}
               ls -l ${newConfigTokenPath}
               install --mode=600 ${newConfigTokenPath} "${currentConfigTokenPath}"
@@ -222,7 +230,7 @@ with lib;
 
       # If running in ephemeral mode, restart the service on-exit (i.e., successful de-registration of the runner)
       # to trigger a fresh registration.
-      Restart = if cfg.ephemeral then "on-success" else "no";
+      Restart = if cfg.ephemeral then "always" else "no";
       # If the runner exits with `ReturnCode.RetryableError = 2`, always restart the service:
       # https://github.com/actions/runner/blob/40ed7f8/src/Runner.Common/Constants.cs#L146
       RestartForceExitStatus = [ 2 ];
