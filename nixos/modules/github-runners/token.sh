@@ -24,7 +24,6 @@
 # SOFTWARE.
 
 set -eu
-set -x
 _GITHUB_HOST=${GITHUB_HOST:="github.com"}
 
 # If URL is not github.com then use the enterprise api endpoint
