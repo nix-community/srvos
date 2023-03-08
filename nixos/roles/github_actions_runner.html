@@ -142,21 +142,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="github-action-runner"><a class="header" href="#github-action-runner">GitHub Action Runner</a></h1>
-<p>This role installs:</p>
-<ul>
-<li>One or more self hosted github action runner</li>
-<li>One <a href="https://www.cachix.org">cachix</a> watch store service</li>
-</ul>
+                        <h1 id="installing-a-github-action-runner"><a class="header" href="#installing-a-github-action-runner">Installing a GitHub Action Runner</a></h1>
+<p>GitHub Action Runners are processes that execute the automated jobs you specify in your GitHub Actions workflows. These runners can be hosted on GitHub-hosted infrastructure or your infrastructure. Self-hosted runners run for your project only and are available at no additional cost.</p>
+<p>This article looks at how to install a GitHub runner in your own NixOS infrastructure, making sure the environment is scalable and secure.</p>
+<p>We have built a <a href="https://nixos.wiki/wiki/NixOS_modules">NixOS module</a> that installs one or more <a href="https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners">self-hosted github action runner</a>, along with a <a href="https://www.cachix.org/">cachix</a> watch store service with the most secure defaults.</p>
 <h2 id="authentication"><a class="header" href="#authentication">Authentication</a></h2>
-<p>There are different ways a self hosted runner can register itself by GitHub.</p>
+<p>In order to use a self-hosted GitHub action runner, you will need to register the runner with your GitHub account or organization. There are three different ways a self hosted runner can register itself on GitHub:</p>
 <ul>
 <li>Using a Registration token</li>
 <li>Using a Personal Authentication token</li>
-<li>Using a GitHub App</li>
+<li>Using a <a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/about-apps">Github app</a></li>
 </ul>
-<p>We will document hereafter how to connect using a new GitHub Application in your organization.</p>
-<p>First, create the GitHub Application in <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></p>
+<p>In this document, I will describe the most secure option: how to connect using a new GitHub App in your organization.</p>
+<p>To ensure that you have complete control over the permissions that the app requires, you should create your own GitHub Application.</p>
+<p>First, go to the setting page of your organization: <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></p>
 <ul>
 <li>Click on <code>New GitHub App</code>.</li>
 <li>In &quot;GitHub App name&quot; type <code>&lt;YOUR ORGANISATION&gt; App for GitHub runners</code>.</li>
@@ -166,17 +165,29 @@
 <li>In the &quot;Organization permissions&quot; select <code>Read and write</code> next to the &quot;Self-hosted runner&quot; permission</li>
 <li>Click on <code>Create GitHub App</code></li>
 </ul>
-<p>You should save securely the generated pem encoded private key. We will use that private key to configure the CI to use it.
-You should also save the generated GitHub App Id.</p>
-<p>Once created, you should also limit the usage of this github app to the CI hosts IPs (ipv4 and ipv6).</p>
-<p>Application can be now be installed in your organization:</p>
+<p>You should save securely the generated PEM encoded private key. You will need that private key when you configure the CI. You should also save the generated GitHub App Id.</p>
+<p>Once created, you should also limit the usage of this github app to your CI hosts public IPs (ipv4 and ipv6).</p>
+<p>The application can be now be installed in your organization:</p>
 <ul>
 <li>Go to <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></li>
-<li>Click on the Edit button for our newly created GitHub app</li>
+<li>Click on the Edit button for your newly created GitHub app</li>
 <li>Click on Install App and choose to install it on your organization</li>
 </ul>
-<p>Example:</p>
-<pre><code class="language-bash">roles.github-actions-runner = {
+<p>You can now use the NixOS role to install and configure the GitHub self hosted runner in your NixOS CI host.</p>
+<p>If someone else is configuring the runner for you, you will need to provide him the the generated PEM encoded private key and the GitHub App Id.</p>
+<p>You can find more information in the <a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/creating-a-github-app">Official GitHub App creation documentation</a>.</p>
+<h2 id="using-the-nixos-module"><a class="header" href="#using-the-nixos-module">Using the NixOS module</a></h2>
+<p>The module has been created as a role. Roles are used to define the specific purpose of a node, making it easy to manage and scale your infrastructure.</p>
+<p>The following options must be configured</p>
+<p><code>url</code> the full URI to your organization or your repository. This URI has to match with the location where you installed the GitHub App.</p>
+<p><code>count</code> the number of runners you want to start on the host.</p>
+<p><code>githubApp.id</code> the Id of the GitHub App that was created.</p>
+<p><code>githubApp.login</code> the name of your organization / user where the GitHub App was registered.</p>
+<p><code>githubApp.privateKeyFile</code> the path to the file containing the GitHub App generated PEM encoded private key. This file should be present on the host and deployed as a secret (using <a href="https://github.com/Mic92/sops-nix">sops-nix</a> or <a href="https://github.com/ryantm/agenix">agenix</a>).</p>
+<p><code>cachix.cacheName</code> the name of your cachix organization.</p>
+<p><code>cachix.tokenFile</code> the path to the file containing your cachix token. This file should also be present on the host and deployed as a secret (using <a href="https://github.com/Mic92/sops-nix">sops-nix</a> or <a href="https://github.com/ryantm/agenix">agenix</a>).</p>
+<p>Example of a module to configure 12 Github runners:</p>
+<pre><code>roles.github-actions-runner = {
   url = &quot;https://github.com/&lt;YOUR ORGANIZATION&gt;&quot;;
   count = 12;
   name = &quot;github-runner&quot;;
@@ -189,7 +200,11 @@ You should also save the generated GitHub App Id.</p>
   cachix.tokenFile = config.age.secrets.cachixToken.path;
 };
 </code></pre>
-<p><a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/creating-a-github-app">Official GitHub App creation documentation</a></p>
+<h2 id="scaling"><a class="header" href="#scaling">Scaling</a></h2>
+<p>There are multiple ways to scale your GitHub runners, such as increasing the number of hosts or increasing the number of services on a single host.
+All services are completely isolated from each other, so there is no real distinction between one or the other approach. Your decision should be based on the compute/memory power your project needs.</p>
+<p>You now have a fully functional self-hosted runner running on your NixOS infrastructure. If you need any further assistance in managing or improving your CI workflows with Nix, don't hesitate to <a href="https://numtide.com">contact us</a>.
+Our team of experts is here to help you optimize your CI/CD pipelines and streamline your development process.</p>
 
                     </main>
 
