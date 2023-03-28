@@ -1,7 +1,7 @@
 # We use the nixosConfigurations to test all the modules below.
 #
 # This is not optimal, but it gets the job done
-{ self, nixpkgs }:
+{ self, nixpkgs, ... }:
 let
   inherit (nixpkgs) lib;
   inherit (lib) nixosSystem;

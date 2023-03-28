@@ -1,6 +1,6 @@
 { config
-, pkgs
 , lib
+, pkgs
 , ...
 }@args:
 
@@ -41,7 +41,7 @@ in
   config = {
     assertions =
       (mapAttrsToList
-        (name: c:
+        (_name: c:
           {
             assertion = !(c.tokenFile == null && c.githubApp == null);
             message = "Missing token file or github app private key file. Specify path either for token in `tokenFile` either for github app private key File in `githubApp.privateKeyFile`";
