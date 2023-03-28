@@ -15,6 +15,7 @@ status = [
   "nixosConfig example-mixins-trusted-nix-caches",
   "nixosConfig example-roles-github-actions-runner",
   "nixosConfig example-roles-github-actions-runner-github-app",
+  "nixosConfig example-roles-github-actions-runner-github-app-queued-build-hook",
   "nixosConfig example-roles-nix-remote-builder",
   "nixosConfig example-server",
 ]

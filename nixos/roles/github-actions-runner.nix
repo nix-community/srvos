@@ -1,11 +1,16 @@
 { lib, config, pkgs, ... }:
 let
   cfg = config.roles.github-actions-runner;
+  queued-build-hook = builtins.fetchTarball {
+    url = "https://github.com/nix-community/queued-build-hook/archive/dcbc8cdf915370abb789b108088d42e241008c2f.tar.gz";
+    sha256 = "0y02741kpk57h54jnm8y6qa60fr0wklajy13sk4r02hq7m4vz6rr";
+  };
 in
 {
 
   imports = [
     ../modules/github-runners
+    "${queued-build-hook}/module.nix"
   ];
 
   options.roles.github-actions-runner = {
@@ -89,6 +94,36 @@ in
       };
     };
 
+    binary-cache = {
+      script = lib.mkOption {
+        description = lib.mdDoc "Script used by asynchronous process to upload Nix packages to the binary cache, without requiring the use of Cachix.";
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
+      enqueueScript = lib.mkOption {
+        description = lib.mdDoc ''
+          Script content responsible for enqueuing newly-built packages and passing them to the daemon.
+
+          Although the default configuration should suffice, there may be situations that require customized handling of specific packages.
+          For example, it may be necessary to process certain packages synchronously using the 'queued-build-hook wait' command, or to ignore certain packages entirely.
+        '';
+        type = lib.types.str;
+        default = "";
+      };
+      credentials = lib.mkOption {
+        description = lib.mdDoc ''
+          Credentials to load by startup. Keys that are UPPER_SNAKE will be loaded as env vars. Values are absolute paths to the credentials.
+        '';
+        type = lib.types.attrsOf lib.types.str;
+        default = { };
+
+        example = {
+          AWS_SHARED_CREDENTIALS_FILE = "/run/keys/aws-credentials";
+          binary-cache-key = "/run/keys/binary-cache-key";
+        };
+      };
+    };
+
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       description = lib.mdDoc ''
@@ -147,5 +182,13 @@ in
       jobs = 4;
     };
 
+    queued-build-hook = lib.mkIf (cfg.binary-cache.script != null)
+      ({
+        enable = true;
+        postBuildScriptContent = cfg.binary-cache.script;
+        credentials = cfg.binary-cache.credentials;
+      } // (lib.optionalAttrs (cfg.binary-cache.enqueueScript != "") {
+        enqueueScriptContent = cfg.binary-cache.enqueueScript;
+      }));
   };
 }
