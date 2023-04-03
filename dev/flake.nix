@@ -6,6 +6,7 @@
   inputs.nixpkgs.follows = "srvos/nixpkgs";
 
   inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
+  inputs.mkdocs-numtide.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,26 +20,31 @@
           srvos.lib.supportedSystems
           (system: f nixpkgs.legacyPackages.${system});
 
-      treefmt = eachSystem (pkgs: treefmt-nix.lib.mkWrapper pkgs ./treefmt.nix);
+      treefmtCfg = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+      treefmt = eachSystem (pkgs: treefmtCfg.${pkgs.system}.config.build.wrapper);
     in
     {
-      formatter = eachSystem (pkgs: treefmt.${pkgs.system});
-
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [
             mkdocs-numtide.packages.${pkgs.system}.default
-            pkgs.nixpkgs-fmt
+            pkgs.nix-eval-jobs
             treefmt.${pkgs.system}
           ];
         };
       });
 
       packages = eachSystem (pkgs: {
+        treefmt = treefmt.${pkgs.system};
+
         docs = mkdocs-numtide.lib.${pkgs.system}.mkDocs {
           name = "srvos";
           src = toString srvos;
         };
+      });
+
+      checks = eachSystem (pkgs: {
+        treefmt = treefmtCfg.${pkgs.system}.config.build.check srvos;
       });
     };
 }
