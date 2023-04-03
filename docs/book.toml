@@ -1,6 +1,0 @@
-[book]
-authors = [ ]
-language = "en"
-multilingual = false
-src = "."
-title = "SrvOS - NixOS for your server"

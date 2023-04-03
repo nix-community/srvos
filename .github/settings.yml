@@ -5,7 +5,7 @@ repository:
   name: srvos
 
   # A short description of the repository that will show up on GitHub
-  description: Server-optimized nixos configuration
+  description: NixOS profiles for servers
 
   # A URL with more information about the repository
   homepage: "https://numtide.github.io/srvos"

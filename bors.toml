@@ -17,5 +17,4 @@ status = [
   "nixosConfig example-roles-github-actions-runner-github-app",
   "nixosConfig example-roles-nix-remote-builder",
   "nixosConfig example-server",
-  "package docs [x86_64-linux]",
 ]

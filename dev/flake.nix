@@ -5,12 +5,14 @@
 
   inputs.nixpkgs.follows = "srvos/nixpkgs";
 
+  inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
+
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.flake-compat.url = "github:nix-community/flake-compat";
 
-  outputs = { self, nixpkgs, treefmt-nix, srvos, ... }:
+  outputs = { self, nixpkgs, mkdocs-numtide, treefmt-nix, srvos, ... }:
     let
       eachSystem = f:
         nixpkgs.lib.genAttrs
@@ -25,9 +27,17 @@
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [
+            mkdocs-numtide.packages.${pkgs.system}.default
             pkgs.nixpkgs-fmt
             treefmt.${pkgs.system}
           ];
+        };
+      });
+
+      packages = eachSystem (pkgs: {
+        docs = mkdocs-numtide.lib.${pkgs.system}.mkDocs {
+          name = "srvos";
+          src = toString srvos;
         };
       });
     };

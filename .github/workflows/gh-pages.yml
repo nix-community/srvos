@@ -24,7 +24,7 @@ jobs:
       - name: Build
         id: build
         run: |
-          nix build .#docs
+          nix build ./dev#docs --override-input srvos "path:$PWD"
           echo "result=$(readlink ./result)" >> $GITHUB_OUTPUT
 
       - name: Deploy

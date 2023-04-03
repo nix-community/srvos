@@ -5,11 +5,11 @@ let
   keys = lib.attrNames;
 
   borsChecks =
-    map (name: ''  "check ${name} [${system}]"'') (keys self.checks.${system})
+    map (name: ''  "check ${name} [${system}]"'') (keys self.checks.${system} or { })
     ++
-    map (name: ''  "nixosConfig ${name}"'') (keys self.nixosConfigurations)
+    map (name: ''  "nixosConfig ${name}"'') (keys self.nixosConfigurations or { })
     ++
-    map (name: ''  "package ${name} [${system}]"'') (keys self.packages.${system})
+    map (name: ''  "package ${name} [${system}]"'') (keys self.packages.${system} or { })
   ;
 
   borsTOML = pkgs.writeText "bors.toml" ''

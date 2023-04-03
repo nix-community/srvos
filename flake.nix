@@ -18,10 +18,6 @@
         "x86_64-linux"
       ];
 
-      packages = eachSystem ({ pkgs, ... }: {
-        docs = pkgs.callPackage ./docs { };
-      });
-
       # generates future flake outputs: `modules.<kind>.<module-name>`
       modules.nixos = import ./nixos;
 

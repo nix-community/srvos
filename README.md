@@ -1,4 +1,4 @@
-# SrvOS - NixOS for your server
+# SrvOS - NixOS profiles for servers
 
 STATUS: **experimental**
 
