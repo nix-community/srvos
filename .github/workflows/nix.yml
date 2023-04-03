@@ -1,0 +1,19 @@
+name: Nix
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - trying
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        system:
+          - x86_64-linux
+    runs-on: [nix]
+    steps:
+      - uses: actions/checkout@v3
+      - run: ./dev/ci.sh --argstr system ${{ matrix.system }}

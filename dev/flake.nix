@@ -20,14 +20,15 @@
           srvos.lib.supportedSystems
           (system: f nixpkgs.legacyPackages.${system});
 
-      treefmt = eachSystem (pkgs: treefmt-nix.lib.mkWrapper pkgs ./treefmt.nix);
+      treefmtCfg = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+      treefmt = eachSystem (pkgs: treefmtCfg.${pkgs.system}.config.build.wrapper);
     in
     {
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [
             mkdocs-numtide.packages.${pkgs.system}.default
-            pkgs.nixpkgs-fmt
+            pkgs.nix-eval-jobs
             treefmt.${pkgs.system}
           ];
         };
@@ -40,6 +41,10 @@
           name = "srvos";
           src = toString srvos;
         };
+      });
+
+      checks = eachSystem (pkgs: {
+        treefmt = treefmtCfg.${pkgs.system}.config.build.check srvos;
       });
     };
 }
