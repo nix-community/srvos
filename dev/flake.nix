@@ -6,6 +6,7 @@
   inputs.nixpkgs.follows = "srvos/nixpkgs";
 
   inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
+  inputs.mkdocs-numtide.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
