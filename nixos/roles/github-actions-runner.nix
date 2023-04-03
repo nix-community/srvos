@@ -97,6 +97,15 @@ in
       default = [ ];
     };
 
+    extraLabels = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = lib.mdDoc ''
+        Extra labels to add to the runners to be able to target them.
+      '';
+      default = [ "nix" ];
+    };
+
+
   };
 
   config = {
@@ -122,7 +131,7 @@ in
             pkgs.nix-eval-jobs
             pkgs.openssh
           ] ++ cfg.extraPackages;
-          extraLabels = [ "nix" ];
+          extraLabels = cfg.extraLabels;
         };
       })
       (lib.range 1 cfg.count));
