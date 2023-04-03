@@ -7,15 +7,17 @@
     let
       eachSystem = f:
         nixpkgs.lib.genAttrs
-          [
-            "aarch64-darwin"
-            "aarch64-linux"
-            "x86_64-darwin"
-            "x86_64-linux"
-          ]
+          self.lib.supportedSystems
           (system: f { inherit self system; pkgs = nixpkgs.legacyPackages.${system}; });
     in
     {
+      lib.supportedSystems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
+
       packages = eachSystem ({ pkgs, ... }: {
         docs = pkgs.callPackage ./docs { };
       });
