@@ -23,8 +23,6 @@
       treefmt = eachSystem (pkgs: treefmt-nix.lib.mkWrapper pkgs ./treefmt.nix);
     in
     {
-      formatter = eachSystem (pkgs: treefmt.${pkgs.system});
-
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShellNoCC {
           packages = [
@@ -36,6 +34,8 @@
       });
 
       packages = eachSystem (pkgs: {
+        treefmt = treefmt.${pkgs.system};
+
         docs = mkdocs-numtide.lib.${pkgs.system}.mkDocs {
           name = "srvos";
           src = toString srvos;
