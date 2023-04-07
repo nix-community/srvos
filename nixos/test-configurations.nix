@@ -133,6 +133,27 @@ in
       }
     ];
   };
+  example-roles-github-actions-runner-github-app-queued-build-hook = nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      self.nixosModules.roles-github-actions-runner
+      dummy
+      {
+        roles.github-actions-runner = {
+          githubApp = {
+            id = "1234";
+            login = "foo";
+            privateKeyFile = "/run/gha-token-file";
+          };
+          url = "https://fixup";
+          binary-cache.script = ''
+            exec nix copy --experimental-features nix-command --to "file:///var/nix-cache" $OUT_PATHS
+          '';
+        };
+      }
+    ];
+  };
+
   example-roles-nix-remote-builder = nixosSystem {
     system = "x86_64-linux";
     modules = [
