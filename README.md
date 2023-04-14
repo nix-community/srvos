@@ -15,16 +15,26 @@ example to deploy a GitHub Action runner on Hetzner:
 
 ```nix
 {
+  description = "My machines flakes";
   inputs = {
     srvos.url = "github:numtide/srvos";
+    # Use the version of nixpkgs that has been tested to work with SrvOS
+    nixpkgs.follows = "srvos/nixpkgs";
   };
-  outputs = { srvos, nixpkgs, ... }: {
+  outputs = { self, nixpkgs, srvos }: {
     nixosConfigurations.myHost = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        srvos.nixosModules.common
+        # This machine is a server
+        srvos.nixosModules.server
+        # Deployed on the AMD Hetzner hardware
         srvos.nixosModules.hardware-hetzner-amd
+        # Configured with extra terminfos
+        srvos.nixosModules.mixins-terminfo
+        # And designed to run the GitHub Actions runners
         srvos.nixosModules.roles-github-actions-runner
+        # Finally add your configuration here
+        ./myHost.nix
       ];
     };
   };
@@ -39,7 +49,7 @@ To improve the documentation, take a look at the `./docs` folder. You can also r
 
 ## Contributing
 
-Contributions are always welcome.
+Contributions are always welcome!
 
 ## License
 

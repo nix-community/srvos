@@ -1,4 +1,4 @@
-# Installing a GitHub Action Runner
+# GitHub Actions Runner
 
 GitHub Action Runners are processes that execute the automated jobs you specify in your GitHub Actions workflows. These runners can be hosted on GitHub-hosted infrastructure or your infrastructure. Self-hosted runners run for your project only and are available at no additional cost.
 
