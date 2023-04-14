@@ -10,27 +10,27 @@
       
       
       
-        <link rel="canonical" href="https://numtide.github.io/srvos/nixos/roles/github_actions_runner/">
+        <link rel="canonical" href="https://numtide.github.io/srvos/getting_started/">
       
       
-        <link rel="prev" href="../../mixins/">
+        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../../../installation/hetzner_cloud/">
+        <link rel="next" href="../user_guide/">
       
-      <link rel="icon" href="../../../assets/logo.png">
+      <link rel="icon" href="../assets/logo.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.15">
     
     
       
-        <title>GitHub Action Runner - srvos</title>
+        <title>Getting started - SrvOS</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.113286f1.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.113286f1.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -48,7 +48,7 @@
     
       <link rel="stylesheet" href="https://numtide.github.io/mkdocs-numtide/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installing-a-github-action-runner" class="md-skip">
+        <a href="#getting-started-with-srvos" class="md-skip">
           Skip to content
         </a>
       
@@ -91,9 +91,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="srvos" class="md-header__button md-logo" aria-label="srvos" data-md-component="logo">
+    <a href=".." title="SrvOS" class="md-header__button md-logo" aria-label="SrvOS" data-md-component="logo">
       
-  <img src="../../../assets/logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,13 +103,13 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            srvos
+            SrvOS
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              GitHub Action Runner
+              Getting started
             
           </span>
         </div>
@@ -204,8 +204,8 @@
 
 
   <li class="md-tabs__item">
-    <a href="../../.." class="md-tabs__link">
-      Hello
+    <a href=".." class="md-tabs__link">
+      Home
     </a>
   </li>
 
@@ -217,15 +217,11 @@
   
 
 
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../general/" class="md-tabs__link md-tabs__link--active">
-        NixOS modules
-      </a>
-    </li>
-  
+  <li class="md-tabs__item">
+    <a href="./" class="md-tabs__link md-tabs__link--active">
+      Getting started
+    </a>
+  </li>
 
       
         
@@ -237,11 +233,23 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../installation/hetzner_cloud/" class="md-tabs__link">
-        Installation
+      <a href="../user_guide/" class="md-tabs__link">
+        User guide
       </a>
     </li>
   
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../help/" class="md-tabs__link">
+      Getting help
+    </a>
+  </li>
 
       
     </ul>
@@ -265,12 +273,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="srvos" class="md-nav__button md-logo" aria-label="srvos" data-md-component="logo">
+    <a href=".." title="SrvOS" class="md-nav__button md-logo" aria-label="SrvOS" data-md-component="logo">
       
-  <img src="../../../assets/logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
-    srvos
+    SrvOS
   </label>
   
     <div class="md-nav__source">
@@ -295,8 +303,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
-        Hello
+      <a href=".." class="md-nav__link">
+        Home
       </a>
     </li>
   
@@ -306,106 +314,6 @@
       
       
 
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
-          NixOS modules
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          NixOS modules
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../general/" class="md-nav__link">
-        General
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../hardware/" class="md-nav__link">
-        Hardware
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../mixins/" class="md-nav__link">
-        Mixins
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-    
-  
-  
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-      
-      
-      
-      
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
-      
-      
-      
-        <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
-          Roles
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
-        <label class="md-nav__title" for="__nav_2_4">
-          <span class="md-nav__icon md-icon"></span>
-          Roles
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-              
   
   
     
@@ -420,12 +328,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          GitHub Action Runner
+          Getting started
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        GitHub Action Runner
+        Getting started
       </a>
       
         
@@ -444,22 +352,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#authentication" class="md-nav__link">
-    Authentication
+  <a href="#finding-your-way-around" class="md-nav__link">
+    Finding your way around
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-nixos-module" class="md-nav__link">
-    Using the NixOS module
+  <a href="#example" class="md-nav__link">
+    Example
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#scaling" class="md-nav__link">
-    Scaling
+  <a href="#continue" class="md-nav__link">
+    Continue
   </a>
   
 </li>
@@ -468,20 +376,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-            
-          
-        </ul>
-      </nav>
     </li>
   
 
@@ -506,12 +400,197 @@
       
       
         <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-          Installation
+          User guide
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          User guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_guide/" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          NixOS modules
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          NixOS modules
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/type/" class="md-nav__link">
+        Machine type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/hardware/" class="md-nav__link">
+        Machine hardware
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/role/" class="md-nav__link">
+        Machine role
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/mixins/" class="md-nav__link">
+        Configuration mixins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+          Roles
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Roles
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../github_actions_runner/" class="md-nav__link">
+        GitHub Action Runner
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_4">
           <span class="md-nav__icon md-icon"></span>
           Installation
         </label>
@@ -523,7 +602,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../installation/hetzner_cloud/" class="md-nav__link">
+      <a href="../installation/hetzner_cloud/" class="md-nav__link">
         Hetzner Cloud
       </a>
     </li>
@@ -533,6 +612,42 @@
           
         </ul>
       </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help/" class="md-nav__link">
+        Getting help
+      </a>
     </li>
   
 
@@ -564,22 +679,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#authentication" class="md-nav__link">
-    Authentication
+  <a href="#finding-your-way-around" class="md-nav__link">
+    Finding your way around
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#using-the-nixos-module" class="md-nav__link">
-    Using the NixOS module
+  <a href="#example" class="md-nav__link">
+    Example
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#scaling" class="md-nav__link">
-    Scaling
+  <a href="#continue" class="md-nav__link">
+    Continue
   </a>
   
 </li>
@@ -602,69 +717,48 @@
   
 
 
-<h1 id="installing-a-github-action-runner">Installing a GitHub Action Runner</h1>
-<p>GitHub Action Runners are processes that execute the automated jobs you specify in your GitHub Actions workflows. These runners can be hosted on GitHub-hosted infrastructure or your infrastructure. Self-hosted runners run for your project only and are available at no additional cost.</p>
-<p>This article looks at how to install a GitHub runner in your own NixOS infrastructure, making sure the environment is scalable and secure.</p>
-<p>We have built a <a href="https://nixos.wiki/wiki/NixOS_modules">NixOS module</a> that installs one or more <a href="https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners">self-hosted github action runner</a>, along with a <a href="https://www.cachix.org/">cachix</a> watch store service with the most secure defaults.</p>
-<h2 id="authentication">Authentication</h2>
-<p>In order to use a self-hosted GitHub action runner, you will need to register the runner with your GitHub account or organization. There are three different ways a self hosted runner can register itself on GitHub:</p>
+<h1 id="getting-started-with-srvos">Getting Started with SrvOS</h1>
+<p>This project is designed to work in combination with <a href="https://nixos.org">NixOS</a>.</p>
+<p>In this documentation, we expect the reader to be already familiar with the base operating system, and introduce how to compose it with our own extensions.</p>
+<h2 id="finding-your-way-around">Finding your way around</h2>
+<p>This project exports four big categories of NixOS modules which are useful to define a server configuration:</p>
 <ul>
-<li>Using a Registration token</li>
-<li>Using a Personal Authentication token</li>
-<li>Using a <a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/about-apps">Github app</a></li>
+<li>Machine type - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.</li>
+<li>Machine hardware - these define hardware-releated settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).</li>
+<li>Machine role - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)</li>
+<li>Configuration mixins - these define addons to be added to the machine configuration. One or more can be added.</li>
 </ul>
-<p>In this document, I will describe the most secure option: how to connect using a new GitHub App in your organization.</p>
-<p>To ensure that you have complete control over the permissions that the app requires, you should create your own GitHub Application.</p>
-<p>First, go to the setting page of your organization: <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></p>
-<ul>
-<li>Click on <code>New GitHub App</code>.</li>
-<li>In "GitHub App name" type <code>&lt;YOUR ORGANISATION&gt; App for GitHub runners</code>.</li>
-<li>In "Homepage" fill in your project URL. It is required but won't be used hereafter.</li>
-<li>Unselect <code>Expire user authorization tokens</code>.</li>
-<li>Unselect <code>Active</code> in the "Webhook" section.</li>
-<li>In the "Organization permissions" select <code>Read and write</code> next to the "Self-hosted runner" permission</li>
-<li>Click on <code>Create GitHub App</code></li>
-</ul>
-<p>You should save securely the generated PEM encoded private key. You will need that private key when you configure the CI. You should also save the generated GitHub App Id.</p>
-<p>Once created, you should also limit the usage of this github app to your CI hosts public IPs (ipv4 and ipv6).</p>
-<p>The application can be now be installed in your organization:</p>
-<ul>
-<li>Go to <code>https://github.com/organizations/&lt;YOUR ORGANIZATION&gt;/settings/apps</code></li>
-<li>Click on the Edit button for your newly created GitHub app</li>
-<li>Click on Install App and choose to install it on your organization</li>
-</ul>
-<p>You can now use the NixOS role to install and configure the GitHub self hosted runner in your NixOS CI host.</p>
-<p>If someone else is configuring the runner for you, you will need to provide him the the generated PEM encoded private key and the GitHub App Id.</p>
-<p>You can find more information in the <a href="https://docs.github.com/en/apps/creating-github-apps/creating-github-apps/creating-a-github-app">Official GitHub App creation documentation</a>.</p>
-<h2 id="using-the-nixos-module">Using the NixOS module</h2>
-<p>The module has been created as a role. Roles are used to define the specific purpose of a node, making it easy to manage and scale your infrastructure.</p>
-<p>The following options must be configured</p>
-<p><code>url</code> the full URI to your organization or your repository. This URI has to match with the location where you installed the GitHub App.</p>
-<p><code>count</code> the number of runners you want to start on the host.</p>
-<p><code>githubApp.id</code> the Id of the GitHub App that was created.</p>
-<p><code>githubApp.login</code> the name of your organization / user where the GitHub App was registered.</p>
-<p><code>githubApp.privateKeyFile</code> the path to the file containing the GitHub App generated PEM encoded private key. This file should be present on the host and deployed as a secret (using <a href="https://github.com/Mic92/sops-nix">sops-nix</a> or <a href="https://github.com/ryantm/agenix">agenix</a>).</p>
-<p><code>cachix.cacheName</code> the name of your cachix organization.</p>
-<p><code>cachix.tokenFile</code> the path to the file containing your cachix token. This file should also be present on the host and deployed as a secret (using <a href="https://github.com/Mic92/sops-nix">sops-nix</a> or <a href="https://github.com/ryantm/agenix">agenix</a>).</p>
-<p>Example of a module to configure 12 Github runners:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>roles.github-actions-runner = {
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  url = &quot;https://github.com/&lt;YOUR ORGANIZATION&gt;&quot;;
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  count = 12;
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  name = &quot;github-runner&quot;;
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  githubApp = {
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    id = &quot;&lt;YOUR GENERATED APP ID&gt;&quot;;
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    login = &quot;&lt;YOUR ORGANIZATION&gt;&quot;;
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    privateKeyFile = config.age.secrets.github-app-runner-private-key.path;
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  };
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  cachix.cacheName = &quot;&lt;YOUR CACHIX ORGANIZATION&gt;&quot;;
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  cachix.tokenFile = config.age.secrets.cachixToken.path;
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>};
+<h2 id="example">Example</h2>
+<p>Combining all of those together, here is how your <code>flake.nix</code> might look like, to deploy a GitHub Actions runner on Hetzner:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="ss">description =</span> <span class="s2">&quot;My machines flakes&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="ss">inputs =</span> <span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    srvos<span class="o">.</span><span class="ss">url =</span> <span class="s2">&quot;github:numtide/srvos&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># Use the version of nixpkgs that has been tested to work with SrvOS</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    nixpkgs<span class="o">.</span><span class="ss">follows =</span> <span class="s2">&quot;srvos/nixpkgs&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  <span class="p">};</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  <span class="ss">outputs =</span> <span class="p">{</span> self<span class="p">,</span> nixpkgs<span class="p">,</span> srvos <span class="p">}:</span> <span class="p">{</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    nixosConfigurations<span class="o">.</span><span class="ss">myHost =</span> nixpkgs<span class="o">.</span>lib<span class="o">.</span>nixosSystem <span class="p">{</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>      <span class="ss">system =</span> <span class="s2">&quot;x86_64-linux&quot;</span><span class="p">;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>      <span class="ss">modules =</span> <span class="p">[</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="c1"># This machine is a server</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>server
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="c1"># Deployed on the AMD Hetzner hardware</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>hardware-hetzner-amd
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="c1"># Configured with extra terminfos</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>mixins-terminfo
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="c1"># And designed to run the GitHub Actions runners</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>roles-github-actions-runner
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="c1"># Finally add your configuration here</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="o">.</span><span class="l">/myHost.nix</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>      <span class="p">];</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="p">};</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>  <span class="p">};</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">}</span>
 </code></pre></div>
-<h2 id="scaling">Scaling</h2>
-<p>There are multiple ways to scale your GitHub runners, such as increasing the number of hosts or increasing the number of services on a single host.
-All services are completely isolated from each other, so there is no real distinction between one or the other approach. Your decision should be based on the compute/memory power your project needs.</p>
-<p>You now have a fully functional self-hosted runner running on your NixOS infrastructure. If you need any further assistance in managing or improving your CI workflows with Nix, don't hesitate to <a href="https://numtide.com">contact us</a>.
-Our team of experts is here to help you optimize your CI/CD pipelines and streamline your development process.</p>
+<h2 id="continue">Continue</h2>
+<p>Now that we have gone over the high-level details, you should have an idea of how to use this project.</p>
+<p>To dig further, take a look at the <a href="../user_guide/">User guide</a>.</p>
 
 
 
@@ -723,10 +817,10 @@ Our team of experts is here to help you optimize your CI/CD pipelines and stream
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["tabs", "instant", "navigation.tabs", "navigation.expand", "navigation.instant", "navigation.tracking", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["tabs", "instant", "navigation.tabs", "navigation.expand", "navigation.instant", "navigation.tracking", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.2a6f1dda.min.js"></script>
+      <script src="../assets/javascripts/bundle.2a6f1dda.min.js"></script>
       
     
   </body>

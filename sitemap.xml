@@ -6,12 +6,32 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://numtide.github.io/srvos/installation/hetzner_cloud/</loc>
+         <loc>https://numtide.github.io/srvos/faq/</loc>
          <lastmod>1980-01-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://numtide.github.io/srvos/nixos/general/</loc>
+         <loc>https://numtide.github.io/srvos/getting_started/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://numtide.github.io/srvos/github_actions_runner/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://numtide.github.io/srvos/help/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://numtide.github.io/srvos/user_guide/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://numtide.github.io/srvos/installation/hetzner_cloud/</loc>
          <lastmod>1980-01-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -26,7 +46,12 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://numtide.github.io/srvos/nixos/roles/github_actions_runner/</loc>
+         <loc>https://numtide.github.io/srvos/nixos/role/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://numtide.github.io/srvos/nixos/type/</loc>
          <lastmod>1980-01-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
