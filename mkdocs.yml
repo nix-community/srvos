@@ -2,7 +2,7 @@ INHERIT: !ENV MKDOCS_NUMTIDE_THEME
 
 ### Site metadata ###
 
-site_name: srvos
+site_name: SrvOS
 site_description: NixOS profiles for servers
 site_url: https://numtide.github.io/srvos/
 repo_name: 'numtide/srvos'
@@ -12,12 +12,19 @@ edit_uri: edit/main/docs
 ### Navigation ###
 
 nav:
-  - Hello: index.md
-  - NixOS modules:
-      - General: nixos/general.md
-      - Hardware: nixos/hardware.md
-      - Mixins: nixos/mixins.md
-      - Roles:
-        - GitHub Action Runner: nixos/roles/github_actions_runner.md
-  - Installation:
-      - Hetzner Cloud: installation/hetzner_cloud.md
+  - Home: index.md
+
+  - Getting started: getting_started.md
+  - User guide:
+    - Intro: user_guide.md
+    - NixOS modules:
+      - Machine type: nixos/type.md
+      - Machine hardware: nixos/hardware.md
+      - Machine role: nixos/role.md
+      - Configuration mixins: nixos/mixins.md
+    - Roles:
+      - GitHub Action Runner: github_actions_runner.md
+    - Installation:
+        - Hetzner Cloud: installation/hetzner_cloud.md
+    - FAQ: faq.md
+  - Getting help: help.md
