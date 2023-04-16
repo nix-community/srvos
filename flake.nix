@@ -18,6 +18,8 @@
         "x86_64-linux"
       ];
 
+      lib.nixosSystem = import ./lib/nixosSystem { inherit nixpkgs; };
+
       # generates future flake outputs: `modules.<kind>.<module-name>`
       modules.nixos = import ./nixos;
 

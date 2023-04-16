@@ -4,7 +4,8 @@
 { self, nixpkgs }:
 let
   inherit (nixpkgs) lib;
-  inherit (lib) nixosSystem;
+
+  nixosSystem = self.lib.nixosSystem;
 
   # some example configuration to make it eval
   dummy = { config, ... }: {
