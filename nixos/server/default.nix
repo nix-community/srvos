@@ -17,6 +17,8 @@
     pkgs.vim
   ];
 
+  documentation.enable = lib.mkDefault false;
+
   programs.vim.defaultEditor = true;
 
   # Print the URL instead on servers
