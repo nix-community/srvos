@@ -20,6 +20,23 @@ let
       ${join ",\n  " borsChecks},
     ]
   '';
+
+  nixosTest = import "${pkgs.path}/nixos/lib/testing-python.nix" { inherit system pkgs; };
+
+  moduleTests = {
+    server = nixosTest.makeTest {
+      name = "server";
+
+      nodes.machine = { ... }: {
+        imports = [ self.nixosModules.server ];
+        networking.hostName = "machine";
+      };
+      testScript = ''
+        machine.wait_for_unit("sshd.service")
+        # TODO: what else to test for?
+      '';
+    };
+  };
 in
 {
   # Check if the bors.toml needs to be updated
@@ -36,4 +53,5 @@ in
       fi
       touch $out
     '';
-}
+
+} // (lib.optionalAttrs pkgs.stdenv.isLinux moduleTests)
