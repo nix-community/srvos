@@ -17,6 +17,9 @@
     pkgs.vim
   ];
 
+  # Notice this also disables --help for some commands such es nixos-rebuild
+  documentation.enable = lib.mkDefault false;
+
   programs.vim.defaultEditor = true;
 
   # Print the URL instead on servers
