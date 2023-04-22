@@ -23,6 +23,9 @@
   documentation.man.enable = lib.mkDefault false;
   documentation.nixos.enable = lib.mkDefault false;
 
+  # No need for fonts on a server
+  fonts.fontconfig.enable = lib.mkDefault false;
+
   programs.vim.defaultEditor = true;
 
   # Print the URL instead on servers
