@@ -8,6 +8,8 @@ status = [
   "nixosConfig example-desktop",
   "nixosConfig example-hardware-amazon",
   "nixosConfig example-hardware-hetzner-cloud",
+  "nixosConfig example-hardware-vultr-bare-metal",
+  "nixosConfig example-hardware-vultr-vm",
   "nixosConfig example-mixins-cloud-init",
   "nixosConfig example-mixins-nginx",
   "nixosConfig example-mixins-systemd-boot",
