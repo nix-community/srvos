@@ -17,9 +17,9 @@
       }
     ];
 
-    boot.cleanTmpDir = true;
     boot.growPartition = true;
     boot.loader.grub.device = "/dev/sda";
+    boot.tmp.cleanOnBoot = true;
 
     fileSystems."/" = lib.mkDefault { device = "/dev/sda1"; fsType = "ext4"; };
 
