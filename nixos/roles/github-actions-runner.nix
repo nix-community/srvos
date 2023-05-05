@@ -81,6 +81,19 @@ in
       type = lib.types.int;
     };
 
+    extraReadWritePaths = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = lib.mdDoc ''
+        The GitHub Runner service is configured to makes the entire system read-only by default.
+        This option can be used to allow specific paths to remain writable for the service.
+
+        Warning: As different unit might get the same UID/GID assigned later on, the files created in those paths are 
+        eventually accessible to all github runners. 
+        Therefore, this option should not be used if different GitHub Action pipelines should not be able to access state between each other for security reasons
+      '';
+      default = [ ];
+    };
+
     cachix = {
       cacheName = lib.mkOption {
         description = "Cachix cache name";
@@ -144,11 +157,13 @@ in
   };
 
   config = {
+    users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
     services.srvos-github-runners = builtins.listToAttrs (map
       (n: rec {
         name = "${cfg.name}-${toString n}";
         value = {
           inherit name;
+          user = name;
           enable = true;
           url = cfg.url;
           tokenFile = cfg.tokenFile;
@@ -157,7 +172,10 @@ in
           serviceOverrides = {
             DeviceAllow = [ "/dev/kvm" ];
             PrivateDevices = false;
-          };
+          } // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
+            ReadWritePaths = cfg.extraReadWritePaths;
+            Group = [ "github-runner" ];
+          });
           extraPackages = [
             pkgs.cachix
             pkgs.glibc.bin
