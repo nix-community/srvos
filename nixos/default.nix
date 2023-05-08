@@ -42,6 +42,8 @@ exposeModules ./. [
   ./hardware/hetzner-cloud
   ./hardware/hetzner-online/amd.nix
   ./hardware/hetzner-online/intel.nix
+  ./hardware/vultr/bare-metal.nix
+  ./hardware/vultr/vm.nix
   ./mixins/cloud-init.nix
   ./mixins/nginx.nix
   ./mixins/systemd-boot.nix

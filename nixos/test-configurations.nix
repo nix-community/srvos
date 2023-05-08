@@ -57,6 +57,20 @@ in
       }
     ];
   };
+  example-hardware-vultr-bare-metal = nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      dummy
+      self.nixosModules.hardware-vultr-bare-metal
+    ];
+  };
+  example-hardware-vultr-vm = nixosSystem {
+    system = "x86_64-linux";
+    modules = [
+      dummy
+      self.nixosModules.hardware-vultr-vm
+    ];
+  };
 
   # Mixins
   example-mixins-cloud-init = nixosSystem {
