@@ -28,7 +28,6 @@ in
             exec /run/wrappers/bin/sudo ${pkgs.smartmontools}/bin/smartctl "$@"
           '';
         };
-        mdstat = { };
         system = { };
         mem = { };
         file =
@@ -75,7 +74,7 @@ in
                     if builtins.elem fs.fsType [ "nfs" "nfs3" "nfs4" ]
                     then
                       shares
-                      // (
+                        // (
                         let
                           # also match ipv6 addresses
                           group = builtins.match "\\[?([^\]]+)]?:([^:]+)$" fs.device;
@@ -124,6 +123,8 @@ in
           device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
         };
         diskio = { };
+      } // lib.optionalAttrs config.boot.initrd.services.swraid.enable {
+        mdstat = { };
       };
       outputs.prometheus_client = {
         listen = ":9273";
