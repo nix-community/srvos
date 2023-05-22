@@ -28,7 +28,7 @@ First, go to the setting page of your organization: `https://github.com/organiza
 * In the "Organization permissions" select `Read and write` next to the "Self-hosted runner" permission
 * Click on `Create GitHub App`
 
-You should save securely the generated PEM encoded private key. You will need that private key when you configure the CI. You should also save the generated GitHub App Id.
+Once the app is created, the app's settings page will be presented. Scroll to the *Private keys* section and click the button labeled *Generate a private key*. You should save securely the generated PEM encoded private key. You will need that private key when you configure the CI. You should also save the generated GitHub App Id.
 
 Once created, you should also limit the usage of this github app to your CI hosts public IPs (ipv4 and ipv6).
 
