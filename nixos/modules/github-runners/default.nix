@@ -55,6 +55,8 @@ in
           })
         cfg);
 
+    nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.0" ];
+
     systemd.services = flip mapAttrs' cfg (n: v:
       let
         svcName = "github-runner-${n}";
