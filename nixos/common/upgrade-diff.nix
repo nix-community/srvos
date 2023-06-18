@@ -5,7 +5,9 @@
     supportsDryActivation = true;
     text = ''
     if [[ -e /run/current-system ]]; then
+      echo "--- diff to current-system"
       ${pkgs.nix}/bin/nix --extra-experimental-features nix-command store diff-closures /run/current-system "$systemConfig"
+      echo "---"
     fi
   '';
   };
