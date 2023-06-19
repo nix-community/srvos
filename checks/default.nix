@@ -37,6 +37,15 @@ let
       '';
     };
   };
+
+  # Only check the configurations for the current system
+  sysConfigs = lib.filterAttrs (_name: value: value.pkgs.system == system) self.nixosConfigurations;
+
+  # Add all the nixos configurations to the checks
+  nixosChecks =
+    lib.mapAttrs'
+      (name: value: { name = "nixos-${name}"; value = value.config.system.build.toplevel; })
+      sysConfigs;
 in
 {
   # Check if the bors.toml needs to be updated
@@ -54,4 +63,6 @@ in
       touch $out
     '';
 
-} // (lib.optionalAttrs pkgs.stdenv.isLinux moduleTests)
+}
+// (lib.optionalAttrs pkgs.stdenv.isLinux moduleTests)
+  // nixosChecks
