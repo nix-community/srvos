@@ -1,24 +1,5 @@
-# Generated with ./bors.toml.sh
 cut_body_after = "" # don't include text from the PR body in the merge commit message
 status = [
-  "Evaluate flake.nix",
-  "check server [x86_64-linux]",
-  "check testBorsTOML [x86_64-linux]",
-  "nixosConfig example-common",
-  "nixosConfig example-desktop",
-  "nixosConfig example-hardware-amazon",
-  "nixosConfig example-hardware-hetzner-cloud",
-  "nixosConfig example-hardware-vultr-bare-metal",
-  "nixosConfig example-hardware-vultr-vm",
-  "nixosConfig example-mixins-cloud-init",
-  "nixosConfig example-mixins-nginx",
-  "nixosConfig example-mixins-systemd-boot",
-  "nixosConfig example-mixins-telegraf",
-  "nixosConfig example-mixins-terminfo",
-  "nixosConfig example-mixins-trusted-nix-caches",
-  "nixosConfig example-roles-github-actions-runner",
-  "nixosConfig example-roles-github-actions-runner-github-app",
-  "nixosConfig example-roles-github-actions-runner-github-app-queued-build-hook",
-  "nixosConfig example-roles-nix-remote-builder",
-  "nixosConfig example-server",
+  "build (aarch64-darwin)",
+  "build (x86_64-linux)"
 ]
