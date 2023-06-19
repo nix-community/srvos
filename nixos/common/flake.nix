@@ -10,7 +10,7 @@ in
       type = lib.types.nullOr lib.types.raw;
       default = null;
       description = lib.mdDoc ''
-        Flake that the nixos contains the nixos configuration.
+        Flake that contains the nixos configuration.
       '';
     };
 
