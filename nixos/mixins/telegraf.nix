@@ -90,7 +90,7 @@ in
         prometheus.metric_version = 2;
         kernel_vmstat = { };
         smart = lib.mkIf (!isVM) {
-          path = pkgs.writeShellScript "smartctl" ''
+          path_smartctl = pkgs.writeShellScript "smartctl" ''
             exec /run/wrappers/bin/sudo ${pkgs.smartmontools}/bin/smartctl "$@"
           '';
         };
