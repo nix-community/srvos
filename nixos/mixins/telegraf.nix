@@ -91,7 +91,7 @@ in
                 lib.mapAttrsToList
                   (
                     host: args:
-                      (pkgs.writeScript "zpool-health" ''
+                      (pkgs.writeScript "nfs-health" ''
                         #!${pkgs.gawk}/bin/awk -f
                         BEGIN {
                           for (i = 2; i < ARGC; i++) {
