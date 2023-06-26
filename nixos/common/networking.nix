@@ -3,6 +3,10 @@
   # Allow PMTU / DHCP
   networking.firewall.allowPing = true;
 
+  # Keep dmesg/journalctl -k output readable by NOT logging
+  # each refused connection on the open internet.
+  networking.firewall.logRefusedConnections = lib.mkDefault false;
+
   # Use networkd instead of the pile of shell scripts
   networking.useNetworkd = lib.mkDefault true;
   networking.useDHCP = lib.mkDefault false;
