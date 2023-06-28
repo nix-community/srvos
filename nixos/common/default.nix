@@ -35,4 +35,7 @@
 
   # Allow sudo from the @wheel group
   security.sudo.enable = true;
+
+  # Ensure a clean & sparkling /tmp on fresh boots.
+  boot.tmp.cleanOnBoot = lib.mkDefault true;
 }
