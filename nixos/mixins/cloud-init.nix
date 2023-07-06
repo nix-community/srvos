@@ -8,6 +8,7 @@
     # Automatically enable the filesystems that are used
     services.cloud-init.btrfs.enable = lib.mkDefault (lib.any (fs: fs.fsType == "btrfs") (lib.attrValues config.fileSystems));
     services.cloud-init.ext4.enable = lib.mkDefault (lib.any (fs: fs.fsType == "ext4") (lib.attrValues config.fileSystems));
+    services.cloud-init.xfs.enable = lib.mkDefault (lib.any (fs: fs.fsType == "xfs") (lib.attrValues config.fileSystems));
 
     # Delegate the hostname setting to cloud-init by default
     networking.hostName = lib.mkDefault "";
