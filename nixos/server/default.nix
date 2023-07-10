@@ -8,7 +8,7 @@
   ];
 
   # List packages installed in system profile.
-  environment.systemPackages = [
+  environment.systemPackages = map lib.lowPrio [
     pkgs.curl
     pkgs.dnsutils
     pkgs.htop
