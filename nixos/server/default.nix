@@ -8,13 +8,13 @@
   ];
 
   # List packages installed in system profile.
-  environment.systemPackages = [
+  environment.systemPackages = map lib.lowPrio [
     pkgs.curl
     pkgs.dnsutils
+    pkgs.gitMinimal
     pkgs.htop
     pkgs.jq
     pkgs.tmux
-    pkgs.vim
   ];
 
   # Notice this also disables --help for some commands such es nixos-rebuild
@@ -26,7 +26,7 @@
   # No need for fonts on a server
   fonts.fontconfig.enable = lib.mkDefault false;
 
-  programs.vim.defaultEditor = true;
+  programs.vim.defaultEditor = lib.mkDefault true;
 
   # Print the URL instead on servers
   environment.variables.BROWSER = "echo";
