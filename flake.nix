@@ -3,13 +3,7 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  outputs = inputs@{ self, nixpkgs }:
-    let
-      eachSystem = f:
-        nixpkgs.lib.genAttrs
-          self.lib.supportedSystems
-          (system: f { inherit self system; pkgs = nixpkgs.legacyPackages.${system}; });
-    in
+  outputs = { self, nixpkgs }:
     {
       lib.supportedSystems = [
         "aarch64-darwin"
@@ -23,10 +17,5 @@
 
       # compat to current schema: `nixosModules` / `darwinModules`
       nixosModules = self.modules.nixos;
-
-      # we use this to test our modules
-      nixosConfigurations = import ./nixos/test-configurations.nix inputs;
-
-      checks = eachSystem (import ./checks);
     };
 }
