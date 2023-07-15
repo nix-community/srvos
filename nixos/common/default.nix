@@ -21,7 +21,7 @@
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
   boot.initrd.systemd.enable = lib.mkDefault (
     !config.boot.initrd.network.enable &&
-    !config.boot.initrd.services.swraid.enable &&
+    !config.boot.swraid.enable &&
     !config.boot.isContainer &&
     !config.boot.growPartition
   );

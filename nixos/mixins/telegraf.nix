@@ -126,7 +126,7 @@ in
           device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
         };
         diskio = { };
-      } // lib.optionalAttrs config.boot.initrd.services.swraid.enable {
+      } // lib.optionalAttrs config.boot.swraid.enable {
         mdstat = { };
       };
       outputs.prometheus_client = {
