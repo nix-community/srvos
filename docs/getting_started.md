@@ -23,6 +23,7 @@ Combining all of those together, here is how your `flake.nix` might look like, t
   inputs = {
     srvos.url = "github:numtide/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
+    # Alternativly we also support the latest nixos release and unstable
     nixpkgs.follows = "srvos/nixpkgs";
   };
   outputs = { self, nixpkgs, srvos }: {
