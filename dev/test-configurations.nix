@@ -1,7 +1,7 @@
 # We use the nixosConfigurations to test all the modules below.
 #
 # This is not optimal, but it gets the job done
-{ self, nixpkgs }:
+{ srvos, nixpkgs, system }:
 let
   inherit (nixpkgs) lib;
   inherit (lib) nixosSystem;
@@ -18,109 +18,109 @@ in
 {
   # General
   example-common = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.common
+      srvos.nixosModules.common
     ];
   };
   example-server = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.server
+      srvos.nixosModules.server
     ];
   };
   example-desktop = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.desktop
+      srvos.nixosModules.desktop
     ];
   };
 
   # Hardware
   example-hardware-amazon = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.hardware-amazon
+      srvos.nixosModules.hardware-amazon
     ];
   };
   example-hardware-hetzner-cloud = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.hardware-hetzner-cloud
+      srvos.nixosModules.hardware-hetzner-cloud
       {
         systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
       }
     ];
   };
   example-hardware-vultr-bare-metal = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.hardware-vultr-bare-metal
+      srvos.nixosModules.hardware-vultr-bare-metal
     ];
   };
   example-hardware-vultr-vm = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.hardware-vultr-vm
+      srvos.nixosModules.hardware-vultr-vm
     ];
   };
 
   # Mixins
   example-mixins-cloud-init = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-cloud-init
+      srvos.nixosModules.mixins-cloud-init
     ];
   };
   example-mixins-systemd-boot = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-systemd-boot
+      srvos.nixosModules.mixins-systemd-boot
     ];
   };
   example-mixins-telegraf = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-telegraf
+      srvos.nixosModules.mixins-telegraf
     ];
   };
   example-mixins-terminfo = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-terminfo
+      srvos.nixosModules.mixins-terminfo
     ];
   };
   example-mixins-trusted-nix-caches = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-trusted-nix-caches
+      srvos.nixosModules.mixins-trusted-nix-caches
     ];
   };
   example-mixins-nginx = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
       dummy
-      self.nixosModules.mixins-nginx
+      srvos.nixosModules.mixins-nginx
     ];
   };
 
   # Roles
   example-roles-github-actions-runner = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
-      self.nixosModules.roles-github-actions-runner
+      srvos.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner.cachix.cacheName = "cache-name";
@@ -131,9 +131,9 @@ in
     ];
   };
   example-roles-github-actions-runner-github-app = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
-      self.nixosModules.roles-github-actions-runner
+      srvos.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner.cachix.cacheName = "cache-name";
@@ -148,9 +148,9 @@ in
     ];
   };
   example-roles-github-actions-runner-github-app-queued-build-hook = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
-      self.nixosModules.roles-github-actions-runner
+      srvos.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner = {
@@ -169,9 +169,9 @@ in
   };
 
   example-roles-nix-remote-builder = nixosSystem {
-    system = "x86_64-linux";
+    inherit system;
     modules = [
-      self.nixosModules.roles-nix-remote-builder
+      srvos.nixosModules.roles-nix-remote-builder
       dummy
       {
         roles.nix-remote-builder.schedulerPublicKeys = [

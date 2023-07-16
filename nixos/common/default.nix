@@ -22,7 +22,6 @@
   boot.initrd.systemd.enable = lib.mkDefault (
     !config.boot.initrd.network.enable &&
     !(if lib.versionOlder (lib.versions.majorMinor lib.version) "23.11" then config.boot.initrd.services.swraid.enable else config.boot.swraid.enable) &&
-    !config.boot.swraid.enable &&
     !config.boot.isContainer &&
     !config.boot.growPartition
   );
