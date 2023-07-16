@@ -1,6 +1,6 @@
 # SrvOS - NixOS profiles for servers
 
-STATUS: **experimental**
+STATUS: stable
 
 SrvOS is a collection of opinionated and sharable NixOS configurations.
 
