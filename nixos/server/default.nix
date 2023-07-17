@@ -37,6 +37,10 @@
   # Delegate the hostname setting to dhcp/cloud-init by default
   networking.hostName = lib.mkDefault "";
 
+  # Only give normal users access to the nix-daemon.
+  nix.settings.allowed-users =
+    map (u: u.name) (lib.filterAttrs (_: u: u.isNormalUser) config.users.users);
+
   # If the user is in @wheel they are trusted by default.
   nix.settings.trusted-users = [ "root" "@wheel" ];
 
