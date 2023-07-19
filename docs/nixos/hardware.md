@@ -27,3 +27,9 @@ Introduces some workaround for the perticular IPv6 configuration that Hetzner ha
 Hardware configuration for <https://www.hetzner.com/dedicated-rootserver> bare-metal Intel servers.
 
 Introduces some workaround for the perticular IPv6 configuration that Hetzner has.
+
+### `nixosModules.hardware-hetzner-online-ex101`
+
+Hardware configuration for <https://www.hetzner.com/de/dedicated-rootserver/ex101> bare-metal Intel Core i9-13900 servers.
+
+Introduces some workaround for crashes under load.
