@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 {
   # Use a version of Nix that works
-  nix.package = pkgs.nixVersions.nix_2_16;
+  nix.package = lib.mkDefault pkgs.nixVersions.nix_2_16;
 
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = 5;
