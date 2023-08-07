@@ -16,6 +16,12 @@ Hardware configuration for <https://www.hetzner.com/cloud> instances.
 
 The main difference here is that cloud-init is enabled.
 
+### `nixosModules.hardware-hetzner-cloud-arm`
+
+Hardware configuration for <https://www.hetzner.com/cloud> arm instances.
+
+The main difference from `nixosModules.hardware-hetzner-cloud` is using systemd-boot by default.
+
 ### `nixosModules.hardware-hetzner-online-amd`
 
 Hardware configuration for <https://www.hetzner.com/dedicated-rootserver> bare-metal AMD servers.
