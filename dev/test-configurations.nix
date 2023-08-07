@@ -57,6 +57,16 @@ in
       }
     ];
   };
+  example-hardware-hetzner-cloud-arm = nixosSystem {
+    inherit system;
+    modules = [
+      dummy
+      srvos.nixosModules.hardware-hetzner-cloud-arm
+      {
+        systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
+      }
+    ];
+  };
   example-hardware-vultr-bare-metal = nixosSystem {
     inherit system;
     modules = [
