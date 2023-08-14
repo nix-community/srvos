@@ -89,6 +89,9 @@ in
         ];
         prometheus.metric_version = 2;
         kernel_vmstat = { };
+        nginx.urls = lib.mkIf config.services.nginx.statusPage [
+          "http://localhost/nginx_status"
+        ];
         smart = lib.mkIf (!isVM) {
           path_smartctl = pkgs.writeShellScript "smartctl" ''
             exec /run/wrappers/bin/sudo ${pkgs.smartmontools}/bin/smartctl "$@"
