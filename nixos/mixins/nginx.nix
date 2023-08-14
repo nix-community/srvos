@@ -5,6 +5,7 @@
   services.nginx = {
     enable = true;
 
+    statusPage = lib.mkDefault true;
     recommendedBrotliSettings = lib.mkDefault true;
     recommendedGzipSettings = lib.mkDefault true;
     recommendedOptimisation = lib.mkDefault true;
