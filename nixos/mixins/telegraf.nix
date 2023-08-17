@@ -126,6 +126,9 @@ in
           device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
         };
         diskio = { };
+        zfs = {
+          poolMetrics = true;
+        };
       } // lib.optionalAttrs (if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then config.boot.swraid.enable else config.boot.initrd.services.swraid.enable) {
         mdstat = { };
       };
