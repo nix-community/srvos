@@ -58,6 +58,7 @@ in
     nixpkgs.config.permittedInsecurePackages = [
       "nodejs-16.20.0"
       "nodejs-16.20.1"
+      "nodejs-16.20.2"
     ];
 
     systemd.services = flip mapAttrs' cfg (n: v:
