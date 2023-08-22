@@ -3,7 +3,7 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  outputs = { self, nixpkgs }:
+  outputs = { self, ... }:
     {
       lib.supportedSystems = [
         "aarch64-darwin"

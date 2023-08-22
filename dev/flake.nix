@@ -15,7 +15,7 @@
 
   inputs.flake-compat.url = "github:nix-community/flake-compat";
 
-  outputs = { self, nixpkgs, nixos-23_05, mkdocs-numtide, treefmt-nix, srvos, ... }:
+  outputs = { nixpkgs, nixos-23_05, mkdocs-numtide, treefmt-nix, srvos, ... }:
     let
       inherit (nixpkgs) lib;
       eachSystem = f:
