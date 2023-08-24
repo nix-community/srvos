@@ -52,12 +52,13 @@ To improve the documentation, take a look at the `./docs` folder. You can also r
 
 Contributions are always welcome!
 
+## Commercial support
+
+Looking for help or customization?
+
+Get in touch with Numtide to get a quote. We make it easy for companies to
+work with Open Source projects: <https://numtide.com/contact>
+
 ## License
 
 [MIT](LICENSE)
-
-***
-
-This is a [Numtide](https://numtide.com) project.
-
-<img src="https://numtide.com/logo.png" alt="NumTide Logo" width="80">
