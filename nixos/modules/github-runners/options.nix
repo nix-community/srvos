@@ -199,5 +199,4 @@ with lib;
     default = null;
     defaultText = literalExpression "username";
   };
-  defaultText = literalExpression "username";
 }
