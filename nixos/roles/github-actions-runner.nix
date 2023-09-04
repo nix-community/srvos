@@ -153,7 +153,13 @@ in
       default = [ "nix" ];
     };
 
-
+    nodeRuntimes = lib.mkOption {
+      type = with lib.types; nonEmptyListOf (enum [ "node16" "node20" ]);
+      default = [ "node20" ];
+      description = lib.mdDoc ''
+        List of Node.js runtimes the runner should support.
+      '';
+    };
   };
 
   config = {
@@ -169,6 +175,7 @@ in
           tokenFile = cfg.tokenFile;
           githubApp = cfg.githubApp;
           ephemeral = cfg.ephemeral;
+          nodeRuntimes = cfg.nodeRuntimes;
           serviceOverrides = {
             DeviceAllow = [ "/dev/kvm" ];
             PrivateDevices = false;
