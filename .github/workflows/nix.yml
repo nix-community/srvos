@@ -16,5 +16,5 @@ jobs:
           - x86_64-linux
     runs-on: [nix]
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: ./dev/ci.sh --argstr system ${{ matrix.system }}
