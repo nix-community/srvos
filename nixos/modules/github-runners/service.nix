@@ -21,7 +21,12 @@
 with lib;
 
 let
-  package = cfg.package.override { inherit (cfg) nodeRuntimes; };
+  package =
+    if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then
+    # we do not have this option in 23.04 yet
+      cfg.package.override { inherit (cfg) nodeRuntimes; }
+    else
+      cfg.package;
 in
 {
   description = "GitHub Actions runner";
@@ -64,7 +69,7 @@ in
         ${lines}
       '';
     in
-    rec {
+    {
       ExecStart = "${package}/bin/Runner.Listener run --startuptype service";
 
       # Does the following, sequentially:
