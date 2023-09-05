@@ -20,6 +20,9 @@
 
 with lib;
 
+let
+  package = cfg.package.override { inherit (cfg) nodeRuntimes; };
+in
 {
   description = "GitHub Actions runner";
 
@@ -62,7 +65,7 @@ with lib;
       '';
     in
     rec {
-      ExecStart = "${cfg.package}/bin/Runner.Listener run --startuptype service";
+      ExecStart = "${package}/bin/Runner.Listener run --startuptype service";
 
       # Does the following, sequentially:
       # - If the module configuration or the token has changed, purge the state directory,
@@ -191,7 +194,7 @@ with lib;
               else
                 args+=(--token "$token")
               fi
-              ${cfg.package}/bin/config.sh "''${args[@]}"
+              ${package}/bin/config.sh "''${args[@]}"
               # Move the automatically created _diag dir to the logs dir
               mkdir -p  "$STATE_DIRECTORY/_diag"
               cp    -r  "$STATE_DIRECTORY/_diag/." "$LOGS_DIRECTORY/"
@@ -220,7 +223,7 @@ with lib;
       ExecStopPost =
         let
           unregisterScript = writeScript "unregister-runner" ''
-            RUNNER_ALLOW_RUNASROOT=1 ${cfg.package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
+            RUNNER_ALLOW_RUNASROOT=1 ${package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
           '';
         in
         map (x: "${x} ${escapeShellArgs [ stateDir runtimeDir logsDir ]}") [
