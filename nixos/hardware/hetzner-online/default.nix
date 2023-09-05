@@ -1,4 +1,4 @@
-{ config, modulesPath, ... }:
+{ lib, config, modulesPath, ... }:
 {
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
@@ -14,6 +14,9 @@
         '';
       }
     ];
+
+    # To make hetzner kvm console work. It uses VGA rather than serial. Serial leads to nowhere.
+    srvos.boot.consoles = lib.mkDefault [ ];
 
     boot.initrd.availableKernelModules = [
       "xhci_pci"
