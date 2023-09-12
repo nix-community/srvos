@@ -117,7 +117,7 @@
       TelegrafDown = {
         expr = "min(up{job=~\"telegraf\",type!='mobile'}) by (source, job, instance, org) == 0";
         for = "3m";
-        annotations.description = "{{$labels.instance}}: {{$labels.job}} telegraf exporter from {{$labels.source}} is down";
+        annotations.description = "{{$labels.instance}}: telegraf exporter from {{$labels.instance}} is down";
       };
 
       Ping = {
