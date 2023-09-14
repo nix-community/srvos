@@ -26,14 +26,18 @@ in
       { domain = "*"; item = "nofile"; type = "-"; value = "20480"; }
     ];
 
-    # Give restricted SSH access to the build scheduler
-    users.users.nix-remote-builder.openssh.authorizedKeys.keys = map
-      (key:
-        ''command="nix-daemon --stdio",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
-      )
-      cfg.schedulerPublicKeys;
-    users.users.nix-remote-builder.isNormalUser = true;
-    users.users.nix-remote-builder.group = "nogroup";
+    users.users.nix-remote-builder = {
+      isSystemUser = true;
+      group = "nix-remote-builder";
+      # Give restricted SSH access to the build scheduler
+      openssh.authorizedKeys.keys = map
+        (key:
+          ''command="nix-daemon --stdio",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
+        )
+        cfg.schedulerPublicKeys;
+      home = "/var/empty";
+    };
+    users.groups.nix-remote-builder = { };
     nix.settings.trusted-users = [ "nix-remote-builder" ];
   };
 }
