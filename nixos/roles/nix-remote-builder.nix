@@ -29,7 +29,7 @@ in
     # Give restricted SSH access to the build scheduler
     users.users.nix-remote-builder.openssh.authorizedKeys.keys = map
       (key:
-        ''command="nix-daemon --stdio",no-agent-forwarding,no-port-forwarding,no-pty,no-user-rc,no-X11-forwarding ${key}''
+        ''restrict,command="nix-daemon --stdio" ${key}''
       )
       cfg.schedulerPublicKeys;
     users.users.nix-remote-builder.isNormalUser = true;
