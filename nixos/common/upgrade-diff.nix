@@ -6,7 +6,7 @@
     text = ''
       if [[ -e /run/current-system ]]; then
         echo "--- diff to current-system"
-        PATH=${config.nix.package}/bin:$PATH ${pkgs.nvd}/bin/nvd diff /run/current-system "$systemConfig"
+        ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
         echo "---"
       fi
     '';
