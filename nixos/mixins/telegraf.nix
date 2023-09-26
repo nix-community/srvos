@@ -129,6 +129,7 @@ in
           device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
         };
         diskio = { };
+        internal = { };
         zfs = {
           poolMetrics = true;
         };
