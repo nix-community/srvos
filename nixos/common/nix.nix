@@ -7,6 +7,9 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
+    "repl-flake"
+    "impure-derivations"
+    "auto-allocate-uids"
   ];
 
   # The default at 10 is rarely enough.
