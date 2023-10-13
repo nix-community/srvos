@@ -9,8 +9,16 @@
     "flakes"
     "repl-flake"
     "impure-derivations"
+    # for container in builds support
     "auto-allocate-uids"
+    "cgroups"
   ];
+
+  # no longer need to pre-allocate build users for everything
+  nix.settings.auto-allocate-uids = true;
+
+  # for container in builds support
+  nix.settings.system-features = lib.mkDefault [ "uid-range" ];
 
   # The default at 10 is rarely enough.
   nix.settings.log-lines = lib.mkDefault 25;
