@@ -504,8 +504,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nixosmodulesnginx" class="md-nav__link">
-    nixosModules.nginx
+  <a href="#nixosmodulesmixins-nginx" class="md-nav__link">
+    nixosModules.mixins-nginx
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nixosmodulesmixins-nix-experimental" class="md-nav__link">
+    nixosModules.mixins-nix-experimental
   </a>
   
 </li>
@@ -714,8 +721,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#nixosmodulesnginx" class="md-nav__link">
-    nixosModules.nginx
+  <a href="#nixosmodulesmixins-nginx" class="md-nav__link">
+    nixosModules.mixins-nginx
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nixosmodulesmixins-nix-experimental" class="md-nav__link">
+    nixosModules.mixins-nix-experimental
   </a>
   
 </li>
@@ -755,8 +769,11 @@
 <p>Configure systemd-boot as bootloader.</p>
 <h3 id="nixosmodulesmixins-telegraf"><code>nixosModules.mixins-telegraf</code></h3>
 <p>Enables a generic telegraf configuration. See <a href="https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix">Mic's dotfiles</a> for monitoring rules targeting this telegraf configuration.</p>
-<h3 id="nixosmodulesnginx"><code>nixosModules.nginx</code></h3>
+<h3 id="nixosmodulesmixins-nginx"><code>nixosModules.mixins-nginx</code></h3>
 <p>Configure Nginx with recommended settings. Is quite useful when using nginx as a reverse-proxy on the machine to other services.</p>
+<h3 id="nixosmodulesmixins-nix-experimental"><code>nixosModules.mixins-nix-experimental</code></h3>
+<p>Enables all experimental features in nix, that are known safe to use (i.e. are only used when explicitly requested in a build).
+This for example unlocks use of containers in the nix sandbox.</p>
 <h3 id="nixosmodulesmixins-trusted-nix-caches"><code>nixosModules.mixins-trusted-nix-caches</code></h3>
 <p>Add the common list of public nix binary caches that we trust.</p>
 
