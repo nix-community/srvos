@@ -8,10 +8,13 @@
     "nix-command"
     "flakes"
     "repl-flake"
+    # run builds with network access but without fixed-output checksum
     "impure-derivations"
     # for container in builds support
     "auto-allocate-uids"
     "cgroups"
+    # allows to drop references from filesystem images
+    "discard-references"
   ];
 
   # no longer need to pre-allocate build users for everything
