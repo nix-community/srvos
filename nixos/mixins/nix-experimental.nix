@@ -7,10 +7,9 @@
     "cgroups"
     # run builds with network access but without fixed-output checksum
     "impure-derivations"
-  ] ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.18") [
+  ] ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.18")
     # allows to drop references from filesystem images
-    "discard-references"
-  ];
+    "discard-references";
 
   # no longer need to pre-allocate build users for everything
   nix.settings.auto-allocate-uids = true;
