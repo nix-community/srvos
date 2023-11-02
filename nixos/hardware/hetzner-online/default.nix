@@ -30,11 +30,9 @@
 
     networking.useNetworkd = true;
     networking.useDHCP = false;
-    # Hetzner servers commonly only have one interface, so its either to just match by that.
-    networking.usePredictableInterfaceNames = false;
 
     systemd.network.networks."10-uplink" = {
-      matchConfig.Name = "eth0";
+      matchConfig.Name = lib.mkDefault "en* eth0";
       networkConfig.DHCP = "ipv4";
       # hetzner requires static ipv6 addresses
       networkConfig.Gateway = "fe80::1";
