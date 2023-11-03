@@ -16,7 +16,8 @@ in
   options.roles.github-actions-runner = {
     url = lib.mkOption {
       description = "URL of the repo or organization to connect to";
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
 
     tokenFile = lib.mkOption {
@@ -162,7 +163,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf (cfg.url != null) {
     users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
     services.srvos-github-runners = builtins.listToAttrs (map
       (n: rec {
