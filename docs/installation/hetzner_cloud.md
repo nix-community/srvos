@@ -9,8 +9,8 @@
 
 ```nix
 {
-  inputs.nixos-anywhere.url = "github:numtide/nixos-anywere";
-  inputs.srvos.url = "github:numtide/srvos"; 
+  inputs.nixos-anywhere.url = "github:nix-community/nixos-anywhere";
+  inputs.srvos.url = "github:nix-community/srvos"; 
   inputs.disko.url = "github:nix-community/disko";
 
   outputs = { self, nixos-remote, srvos, disko, nixpkgs }: {

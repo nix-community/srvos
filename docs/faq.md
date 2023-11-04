@@ -8,7 +8,7 @@ If you want to make sure to use a tested version, use the "follows" mechanims of
 
 ```nix
 {
-  inputs.srvos.url = "github:numtide/srvos";
+  inputs.srvos.url = "github:nix-community/srvos";
   # Use the version of nixpkgs that has been tested to work with SrvOS
   inputs.nixpkgs.follows = "srvos/nixpkgs";
 }

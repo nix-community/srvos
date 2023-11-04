@@ -2,7 +2,7 @@
 
 ## Bugs
 
-If you found a bug, feel free to create a new [GitHub issue](https://github.com/numtide/srvos/issues/new/choose).
+If you found a bug, feel free to create a new [GitHub issue](https://github.com/nix-community/srvos/issues/new/choose).
 
 ## Feature development
 

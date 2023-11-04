@@ -4,9 +4,9 @@ INHERIT: !ENV MKDOCS_NUMTIDE_THEME
 
 site_name: SrvOS
 site_description: NixOS profiles for servers
-site_url: https://numtide.github.io/srvos/
-repo_name: 'numtide/srvos'
-repo_url: https://github.com/numtide/srvos
+site_url: https://nix-community.github.io/srvos/
+repo_name: 'nix-community/srvos'
+repo_url: https://github.com/nix-community/srvos
 edit_uri: edit/main/docs
 
 ### Navigation ###
