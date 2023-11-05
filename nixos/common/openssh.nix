@@ -2,10 +2,12 @@
 { config, lib, ... }:
 {
   services.openssh = {
-    settings.X11Forwarding = false;
-    settings.KbdInteractiveAuthentication = false;
-    settings.PasswordAuthentication = false;
-    settings.UseDns = false;
+    allowSFTP = lib.mkDefault false;
+
+    settings.X11Forwarding = lib.mkDefault false;
+    settings.KbdInteractiveAuthentication = lib.mkDefault false;
+    settings.PasswordAuthentication = lib.mkDefault false;
+    settings.UseDns = lib.mkDefault false;
 
     # Use key exchange algorithms recommended by `nixpkgs#ssh-audit`
     settings.KexAlgorithms = [
