@@ -26,7 +26,9 @@ nix flake lock "$(dirname "$0")" --update-input srvos
 
 error=0
 
-for job in $(nix-eval-jobs "${args[@]}" | jq -r '. | @base64'); do
+output=$(nix run --inputs-from . "nixpkgs#nix-eval-jobs" -- "${args[@]}")
+
+for job in $(echo "$output" | jq -r '. | @base64'); do
   job=$(echo "$job" | base64 -d)
   attr=$(echo "$job" | jq -r .attr)
   echo "### $attr"

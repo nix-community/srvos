@@ -9,12 +9,8 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    strategy:
-      matrix:
-        system:
-          - aarch64-darwin
-          - x86_64-linux
-    runs-on: [nix]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ./dev/ci.sh --argstr system ${{ matrix.system }}
+      - uses: cachix/install-nix-action@v23
+      - run: ./dev/ci.sh
