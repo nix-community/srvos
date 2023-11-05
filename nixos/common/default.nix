@@ -10,6 +10,7 @@
     ./nix.nix
     ./openssh.nix
     ./serial.nix
+    ./sudo.nix
     ./upgrade-diff.nix
     ./well-known-hosts.nix
     ./zfs.nix
@@ -35,12 +36,6 @@
   # This is pulled in by the container profile, but it seems broken and causes
   # unecessary rebuilds.
   environment.noXlibs = false;
-
-  # Allow sudo from the @wheel group
-  security.sudo.enable = true;
-  security.sudo.extraConfig = ''
-    Defaults lecture = never
-  '';
 
   # Ensure a clean & sparkling /tmp on fresh boots.
   boot.tmp.cleanOnBoot = lib.mkDefault true;
