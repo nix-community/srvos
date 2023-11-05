@@ -4,7 +4,7 @@ set -euo pipefail
 args=(
   "$@"
   --accept-flake-config
-  --max-memory-size "12000"
+  --max-memory-size "8000"
   --option allow-import-from-derivation false
   --show-trace
   --workers 4
@@ -26,7 +26,9 @@ nix flake lock "$(dirname "$0")" --update-input srvos
 
 error=0
 
-for job in $(nix-eval-jobs "${args[@]}" | jq -r '. | @base64'); do
+output=$(nix run "nixpkgs#nix-eval-jobs" -- "${args[@]}")
+
+for job in $(echo "$output" | jq -r '. | @base64'); do
   job=$(echo "$job" | base64 -d)
   attr=$(echo "$job" | jq -r .attr)
   echo "### $attr"

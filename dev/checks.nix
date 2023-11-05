@@ -10,18 +10,19 @@ let
   };
 
   moduleTests = {
-    server = nixosTest.makeTest {
-      name = "${prefix}-server";
+    # FIXME: restore once we have a kvm capable machine
+    # server = nixosTest.makeTest {
+    #   name = "${prefix}-server";
 
-      nodes.machine = { ... }: {
-        imports = [ srvos.nixosModules.server ];
-        networking.hostName = "machine";
-      };
-      testScript = ''
-        machine.wait_for_unit("sshd.service")
-        # TODO: what else to test for?
-      '';
-    };
+    #   nodes.machine = { ... }: {
+    #     imports = [ srvos.nixosModules.server ];
+    #     networking.hostName = "machine";
+    #   };
+    #   testScript = ''
+    #     machine.wait_for_unit("sshd.service")
+    #     # TODO: what else to test for?
+    #   '';
+    # };
   };
 
   configurations = import ./test-configurations.nix {
