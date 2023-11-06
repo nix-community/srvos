@@ -1,4 +1,4 @@
-name: update-flake-lock
+name: update-dev-flake-lock
 on:
   workflow_dispatch: # allows manual triggering
   schedule:
