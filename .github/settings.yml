@@ -134,4 +134,4 @@ branches:
       restrictions:
         apps: [ "mergify" ]
         users: []
-        teams: []
+        teams: [ "srvos" ]
