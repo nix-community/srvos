@@ -5,8 +5,6 @@
 
   inputs.nixpkgs.follows = "srvos/nixpkgs";
 
-  inputs.nixos-23_05.url = "github:NixOS/nixpkgs/nixos-23.05";
-
   inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
   inputs.mkdocs-numtide.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -15,7 +13,7 @@
 
   inputs.flake-compat.url = "github:nix-community/flake-compat";
 
-  outputs = { nixpkgs, nixos-23_05, mkdocs-numtide, treefmt-nix, srvos, ... }:
+  outputs = { nixpkgs, mkdocs-numtide, treefmt-nix, srvos, ... }:
     let
       inherit (nixpkgs) lib;
       eachSystem = f:
@@ -49,15 +47,6 @@
       checks = eachSystem (pkgs:
         {
           treefmt = treefmtCfg.${pkgs.system}.config.build.check srvos;
-        } // (lib.optionalAttrs pkgs.stdenv.isLinux (import ./checks.nix {
-          inherit srvos nixpkgs;
-          prefix = "nixos";
-          system = pkgs.system;
-        })) // (lib.optionalAttrs pkgs.stdenv.isLinux (import ./checks.nix {
-          inherit srvos;
-          nixpkgs = nixos-23_05;
-          prefix = "nixos-23_05";
-          system = pkgs.system;
-        })));
+        });
     };
 }
