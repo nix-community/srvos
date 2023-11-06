@@ -14,11 +14,3 @@ jobs:
         uses: cachix/install-nix-action@v23
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v20
-        with:
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-          pr-body: |
-            Automated changes by the update-flake-lock
-            ```
-            {{ env.GIT_COMMIT_MESSAGE }}
-            ```
-            bors merge
