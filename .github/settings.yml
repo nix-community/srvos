@@ -11,7 +11,7 @@ repository:
   homepage: "https://nix-community.github.io/srvos"
 
   # A comma-separated list of topics to set on the repository
-  topics: "nix, nixos"
+  topics: "nix, nixos, nix-community-buildbot"
 
   # Either `true` to make the repository private, or `false` to make it public.
   private: false
@@ -24,13 +24,13 @@ repository:
   has_projects: false
 
   # Either `true` to enable the wiki for this repository, `false` to disable it.
-  has_wiki: true
+  has_wiki: false
 
   # Either `true` to enable downloads for this repository, `false` to disable them.
   has_downloads: false
 
   # Updates the default branch for this repository.
-  default_branch: master
+  default_branch: main
 
   # Either `true` to allow squash-merging pull requests, or `false` to prevent
   # squash-merging.
@@ -104,7 +104,7 @@ teams:
     permission: maintain
 
 branches:
-  - name: master
+  - name: main
     # https://docs.github.com/en/rest/reference/repos#update-branch-protection
     # Branch Protection settings. Set to null to disable
     protection:
@@ -123,15 +123,15 @@ branches:
       # Required. Require status checks to pass before merging. Set to null to disable
       required_status_checks:
         # Required. Require branches to be up to date before merging.
-        strict: true
+        strict: false
         # Required. The list of status checks to require in order to merge into this branch
-        contexts: [ "bors" ]
+        contexts: []
       # Required. Enforce all configured restrictions for administrators. Set to true to enforce required status checks for repository administrators. Set to null to disable.
       enforce_admins: false
       # Disabled for bors to work
       required_linear_history: false
       # Required. Restrict who can push to this branch. Team and user restrictions are only available for organization-owned repositories. Set to null to disable.
       restrictions:
-        apps: [ "bors" ]
+        apps: []
         users: []
         teams: []
