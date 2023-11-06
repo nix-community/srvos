@@ -16,3 +16,5 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@v20
         with:
           path-to-flake-dir: ./dev
+          pr-labels: |
+            merge-queue

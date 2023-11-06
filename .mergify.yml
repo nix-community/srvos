@@ -1,8 +1,8 @@
 queue_rules:
   - name: default
     merge_conditions:
-      - check-success=build (aarch64-darwin)
-      - check-success=build (x86_64-linux)
+      - check-success=buildbot/nix-eval
+      - check-success=build
       - check-success=deploy
 defaults:
   actions:
