@@ -158,7 +158,7 @@
       # https://healthchecks.io/
       Healthchecks = {
         expr = "hc_check_up == 0";
-        annotations.description = "{{$labels.instance}}: healtcheck {{$labels.job}} fails";
+        annotations.description = "{{$labels.instance}}: healthcheck {{$labels.job}} fails";
       };
 
       CertExpiry = {
