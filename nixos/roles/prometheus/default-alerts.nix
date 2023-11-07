@@ -2,12 +2,12 @@
   srvos.prometheus.ruleGroups.srvosAlerts = {
     alertRules = {
       MonitoringTooManyRestarts = {
-        expr = "changes(process_start_time_seconds{job=~\"prometheus|pushgateway|alertmanager|telegraf\"}[15m]) > 2";
+        expr = ''changes(process_start_time_seconds{job=~"prometheus|pushgateway|alertmanager|telegraf"}[15m]) > 2'';
         annotations.description = "Service has restarted more than twice in the last 15 minutes. It might be crashlooping";
       };
 
       AlertManagerConfigNotSynced = {
-        expr = "count(count_values(\"config_hash\", alertmanager_config_hash)) > 1";
+        expr = ''count(count_values("config_hash", alertmanager_config_hash)) > 1'';
         annotations.description = "Configurations of AlertManager cluster instances are out of sync";
       };
 
@@ -28,9 +28,9 @@
       };
 
       PromtailRequestsErrors = {
-        expr = "100 * sum(rate(promtail_request_duration_seconds_count{status_code=~\"5..|failed\"}[1m])) by (namespace, job, route, instance) / sum(rate(promtail_request_duration_seconds_count[1m])) by (namespace, job, route, instance) > 10";
+        expr = ''100 * sum(rate(promtail_request_duration_seconds_count{status_code=~"5..|failed"}[1m])) by (namespace, job, route, instance) / sum(rate(promtail_request_duration_seconds_count[1m])) by (namespace, job, route, instance) > 10'';
         for = "15m";
-        annotations.description = "{{ $labels.job }} {{ $labels.route }} is experiencing {{ printf \"%.2f\" $value }}% errors";
+        annotations.description = ''{{ $labels.job }} {{ $labels.route }} is experiencing {{ printf "%.2f" $value }}% errors'';
       };
 
       PromtailFileLagging = {
@@ -115,7 +115,7 @@
       };
 
       TelegrafDown = {
-        expr = "min(up{job=~\"telegraf\",type!='mobile'}) by (source, job, instance, org) == 0";
+        expr = ''min(up{job=~"telegraf",type!='mobile'}) by (source, job, instance, org) == 0'';
         for = "3m";
         annotations.description = "{{$labels.instance}}: telegraf exporter from {{$labels.instance}} is down";
       };
@@ -222,7 +222,7 @@
       };
 
       AlertmanagerSilencesChanged = {
-        expr = "abs(delta(alertmanager_silences{state=\"active\"}[1h])) >= 1";
+        expr = ''abs(delta(alertmanager_silences{state="active"}[1h])) >= 1'';
         annotations.description = "alertmanager: number of active silences has changed: {{$value}}";
       };
     };
