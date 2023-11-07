@@ -75,7 +75,7 @@
       };
 
       SwapUsing30Percent = {
-        expr = ''mem_swap_total{host!="eva"} - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.3'';
+        expr = ''mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.3'';
         for = "30m";
         annotations.description = "{{$labels.host}} is using 30% of its swap space for at least 30 minutes";
       };
