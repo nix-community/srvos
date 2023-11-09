@@ -132,7 +132,7 @@ in
     services.prometheus = {
       enable = lib.mkDefault true;
       # checks fail because of missing secrets in the sandbox
-      checkConfig = "syntax-only";
+      checkConfig = lib.mkDefault "syntax-only";
       ruleFiles = [ (pkgs.writers.writeYAML "rules.yaml" rules) ];
     };
   };
