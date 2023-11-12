@@ -93,9 +93,7 @@ in
           "http://localhost/nginx_status"
         ];
         smart = lib.mkIf (!isVM) {
-          path_smartctl = pkgs.writeShellScript "smartctl" ''
-            exec /run/wrappers/bin/sudo ${pkgs.smartmontools}/bin/smartctl "$@"
-          '';
+          path_smartctl = "/run/wrappers/bin/smartctl-telegraf";
         };
         system = { };
         mem = { };
@@ -142,21 +140,13 @@ in
       };
     };
   };
-  security.sudo.extraRules = lib.mkIf (!isVM) [
-    {
-      users = [ "telegraf" ];
-      commands = [
-        {
-          command = "${pkgs.smartmontools}/bin/smartctl";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-  # avoid logging sudo use
-  security.sudo.configFile = ''
-    Defaults:telegraf !syslog,!pam_session
-  '';
+  security.wrappers.smartctl-telegraf = lib.mkIf (!isVM) {
+    owner = "telegraf";
+    group = "telegraf";
+    capabilities = "cap_sys_admin,cap_dac_override,cap_sys_rawio+ep";
+    source = "${pkgs.smartmontools}/bin/smartctl";
+  };
+
   # create dummy file to avoid telegraf errors
   systemd.tmpfiles.rules = [
     "f /var/log/telegraf/dummy 0444 root root - -"
