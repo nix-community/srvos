@@ -2,7 +2,7 @@ name: update-flake-lock
 on:
   workflow_dispatch: # allows manual triggering
   schedule:
-    - cron: '0 0 * * 1,4' # Run twice a week
+    - cron: "0 0 * * 1,4" # Run twice a week
 
 jobs:
   lockfile:
@@ -15,5 +15,6 @@ jobs:
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@v20
         with:
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
           pr-labels: |
             merge-queue
