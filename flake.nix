@@ -3,7 +3,7 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  inputs.nixos-23_05.url = "github:NixOS/nixpkgs/nixos-23.05";
+  inputs.nixos-23_05.url = "github:NixOS/nixpkgs/release-23.05";
 
   outputs = { nixpkgs, nixos-23_05, self, ... }:
     let
