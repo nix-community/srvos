@@ -38,5 +38,8 @@
       networkConfig.Gateway = "fe80::1";
       networkConfig.IPv6AcceptRA = "no";
     };
+
+    # Network configuration i.e. when we unlock machines with openssh in the initrd
+    boot.initrd.systemd.network.networks."10-uplink" = config.systemd.network.networks."10-uplink";
   };
 }
