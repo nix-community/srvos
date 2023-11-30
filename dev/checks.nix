@@ -1,12 +1,7 @@
-{ prefix, srvos, nixpkgs, system }:
+{ prefix, srvos, pkgs, lib, system }:
 let
-  pkgs = nixpkgs.legacyPackages.${system};
-
-  inherit (nixpkgs) lib;
-
   nixosTest = import "${pkgs.path}/nixos/lib/testing-python.nix" {
-    inherit pkgs;
-    system = pkgs.system;
+    inherit pkgs system;
   };
 
   moduleTests = {
@@ -25,7 +20,7 @@ let
   };
 
   configurations = import ./test-configurations.nix {
-    inherit srvos nixpkgs system;
+    inherit srvos pkgs lib system;
   };
 
   # Add all the nixos configurations to the checks
