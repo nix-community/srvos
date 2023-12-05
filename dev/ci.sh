@@ -22,7 +22,7 @@ else
 fi
 
 # Update srvos to the latest hash
-nix flake lock "$(dirname "$0")" --update-input srvos
+nix flake update srvos --flake "$(dirname "$0")"/flake.nix
 
 error=0
 
