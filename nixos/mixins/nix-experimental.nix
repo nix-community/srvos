@@ -5,6 +5,15 @@
     # for container in builds support
     "auto-allocate-uids"
     "cgroups"
+
+    # Allow the use of the impure-env setting.
+    "configurable-impure-env"
+
+    # Enable the use of the fetchClosure built-in function in the Nix language.
+    "fetch-closure"
+
+    # Allow derivation builders to call Nix, and thus build derivations recursively.
+    "recursive-nix"
   ] ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.18")
     # allows to drop references from filesystem images
     "discard-references";
