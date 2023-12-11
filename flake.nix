@@ -3,9 +3,9 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  inputs.nixos-23_05.url = "github:NixOS/nixpkgs/nixos-23.05";
+  inputs.nixos-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-  outputs = { nixpkgs, nixos-23_05, self, ... }:
+  outputs = { nixpkgs, nixos-stable, self, ... }:
     let
       srvos = self;
       inherit (nixpkgs) lib;
@@ -39,12 +39,12 @@
           system = pkgs.system;
         })) // (lib.optionalAttrs (pkgs.system == "x86_64-linux") (import ./dev/checks.nix {
           inherit srvos;
-          pkgs = import nixos-23_05 {
+          pkgs = import nixos-stable {
             inherit (pkgs) system;
             config = { inherit permittedInsecurePackages; };
           };
-          inherit (nixos-23_05) lib;
-          prefix = "nixos-23_05";
+          inherit (nixos-stable) lib;
+          prefix = "nixos-stable";
           system = pkgs.system;
         })));
 
