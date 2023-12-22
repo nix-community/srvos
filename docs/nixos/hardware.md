@@ -26,7 +26,7 @@ The main difference from `nixosModules.hardware-hetzner-cloud` is using systemd-
 
 Hardware configuration for <https://www.hetzner.com/dedicated-rootserver> bare-metal AMD servers.
 
-Introduces some workaround for the perticular IPv6 configuration that Hetzner has.
+Introduces some workaround for the particular IPv6 configuration that Hetzner has.
 
 ### `nixosModules.hardware-hetzner-online-intel`
 
