@@ -9,6 +9,9 @@
       enable = lib.mkDefault (lib.any (fs: fs.fsType == fsName) (lib.attrValues config.fileSystems));
     }));
 
+  networking.useNetworkd = lib.mkDefault true;
+  networking.useDHCP = lib.mkDefault false;
+
   # Delegate the hostname setting to cloud-init by default
   networking.hostName = lib.mkDefault "";
 }
