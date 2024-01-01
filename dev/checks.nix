@@ -1,4 +1,4 @@
-{ prefix, srvos, pkgs, lib, system }:
+{ prefix, self, pkgs, lib, system }:
 let
   nixosTest = import "${pkgs.path}/nixos/lib/testing-python.nix" {
     inherit pkgs system;
@@ -9,7 +9,7 @@ let
       name = "${prefix}-server";
 
       nodes.machine = { ... }: {
-        imports = [ srvos.nixosModules.server ];
+        imports = [ self.nixosModules.server ];
         networking.hostName = "machine";
       };
       testScript = ''
@@ -20,7 +20,7 @@ let
   };
 
   configurations = import ./test-configurations.nix {
-    inherit srvos pkgs lib system;
+    inherit self pkgs lib system;
   };
 
   # Add all the nixos configurations to the checks

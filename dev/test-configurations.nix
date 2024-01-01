@@ -1,7 +1,7 @@
 # We use the nixosConfigurations to test all the modules below.
 #
 # This is not optimal, but it gets the job done
-{ srvos, pkgs, lib, system }:
+{ self, pkgs, lib, system }:
 let
   inherit (lib) nixosSystem;
 
@@ -24,21 +24,21 @@ in
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.common
+      self.nixosModules.common
     ];
   };
   example-server = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.server
+      self.nixosModules.server
     ];
   };
   example-desktop = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.desktop
+      self.nixosModules.desktop
     ];
   };
 
@@ -47,14 +47,14 @@ in
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.hardware-amazon
+      self.nixosModules.hardware-amazon
     ];
   };
   example-hardware-hetzner-cloud = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.hardware-hetzner-cloud
+      self.nixosModules.hardware-hetzner-cloud
       {
         systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
       }
@@ -64,7 +64,7 @@ in
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.hardware-hetzner-cloud-arm
+      self.nixosModules.hardware-hetzner-cloud-arm
       {
         systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
       }
@@ -74,14 +74,14 @@ in
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.hardware-vultr-bare-metal
+      self.nixosModules.hardware-vultr-bare-metal
     ];
   };
   example-hardware-vultr-vm = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.hardware-vultr-vm
+      self.nixosModules.hardware-vultr-vm
     ];
   };
 
@@ -90,42 +90,42 @@ in
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-cloud-init
+      self.nixosModules.mixins-cloud-init
     ];
   };
   example-mixins-systemd-boot = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-systemd-boot
+      self.nixosModules.mixins-systemd-boot
     ];
   };
   example-mixins-telegraf = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-telegraf
+      self.nixosModules.mixins-telegraf
     ];
   };
   example-mixins-terminfo = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-terminfo
+      self.nixosModules.mixins-terminfo
     ];
   };
   example-mixins-trusted-nix-caches = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-trusted-nix-caches
+      self.nixosModules.mixins-trusted-nix-caches
     ];
   };
   example-mixins-nginx = nixosSystem {
     inherit system;
     modules = [
       dummy
-      srvos.nixosModules.mixins-nginx
+      self.nixosModules.mixins-nginx
     ];
   };
 
@@ -133,7 +133,7 @@ in
   example-roles-github-actions-runner = nixosSystem {
     inherit system;
     modules = [
-      srvos.nixosModules.roles-github-actions-runner
+      self.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner.cachix.cacheName = "cache-name";
@@ -146,7 +146,7 @@ in
   example-roles-github-actions-runner-github-app = nixosSystem {
     inherit system;
     modules = [
-      srvos.nixosModules.roles-github-actions-runner
+      self.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner.cachix.cacheName = "cache-name";
@@ -163,7 +163,7 @@ in
   example-roles-github-actions-runner-github-app-queued-build-hook = nixosSystem {
     inherit system;
     modules = [
-      srvos.nixosModules.roles-github-actions-runner
+      self.nixosModules.roles-github-actions-runner
       dummy
       {
         roles.github-actions-runner = {
@@ -184,7 +184,7 @@ in
   example-roles-nix-remote-builder = nixosSystem {
     inherit system;
     modules = [
-      srvos.nixosModules.roles-nix-remote-builder
+      self.nixosModules.roles-nix-remote-builder
       dummy
       {
         roles.nix-remote-builder.schedulerPublicKeys = [
