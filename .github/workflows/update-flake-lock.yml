@@ -12,9 +12,25 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Nix
         uses: cachix/install-nix-action@v24
-      - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v20
         with:
-          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
-          pr-labels: |
-            merge-queue
+          extra_nix_config: |
+            accept-flake-config = true
+            experimental-features = nix-command flakes
+      - name: Eval flake
+        run: |
+          nix flake show
+      - name: Update flake
+        run: |
+          nix flake update --commit-lock-file
+      - name: Update dev flake
+        run: |
+          pushd dev/private
+          nix flake update --commit-lock-file
+          popd
+          nix run .#update-dev-private-narHash
+          git commit --amend --no-edit dev/private.narHash
+      - uses: peter-evans/create-pull-request@v5
+        # disable for now
+        #with:
+        #  labels: |
+        #    merge-queue

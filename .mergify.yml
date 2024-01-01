@@ -2,8 +2,6 @@ queue_rules:
   - name: default
     merge_conditions:
       - check-success=buildbot/nix-eval
-      - check-success=build
-      - check-success=deploy
 defaults:
   actions:
     queue:
