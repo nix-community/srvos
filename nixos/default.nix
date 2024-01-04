@@ -42,6 +42,7 @@ exposeModules ./. [
   ./hardware/hetzner-cloud
   ./hardware/hetzner-cloud/arm.nix
   ./hardware/hetzner-online/amd.nix
+  ./hardware/hetzner-online/arm.nix
   ./hardware/hetzner-online/intel.nix
   ./hardware/hetzner-online/ex101.nix
   ./hardware/vultr/bare-metal.nix
