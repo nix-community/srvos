@@ -24,11 +24,11 @@
       ];
 
       checks = eachSystem (pkgs:
-        (lib.optionalAttrs (pkgs.system == "x86_64-linux") (import ./dev/checks.nix {
+        (lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux (import ./dev/checks.nix {
           inherit srvos pkgs lib;
           prefix = "nixos";
           system = pkgs.system;
-        })) // (lib.optionalAttrs (pkgs.system == "x86_64-linux") (import ./dev/checks.nix {
+        })) // (lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux (import ./dev/checks.nix {
           inherit srvos;
           pkgs = import nixos-stable {
             inherit (pkgs) system;
