@@ -10,19 +10,10 @@
       srvos = self;
       inherit (nixpkgs) lib;
 
-      permittedInsecurePackages = [
-        "nodejs-16.20.0"
-        "nodejs-16.20.1"
-        "nodejs-16.20.2"
-      ];
-
       eachSystem = f:
         lib.genAttrs
           srvos.lib.supportedSystems
-          (system: f (import nixpkgs {
-            inherit system;
-            config = { inherit permittedInsecurePackages; };
-          }));
+          (system: f nixpkgs.legacyPackages.${system});
     in
     {
       lib.supportedSystems = [
@@ -41,7 +32,6 @@
           inherit srvos;
           pkgs = import nixos-stable {
             inherit (pkgs) system;
-            config = { inherit permittedInsecurePackages; };
           };
           inherit (nixos-stable) lib;
           prefix = "nixos-stable";
