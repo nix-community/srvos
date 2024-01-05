@@ -29,4 +29,4 @@ let
       (name: value: { name = "${prefix}-${name}"; value = value.config.system.build.toplevel; })
       configurations;
 in
-nixosChecks // moduleTests
+nixosChecks // pkgs.lib.optionalAttrs (pkgs.system == "x86_64-linux") moduleTests
