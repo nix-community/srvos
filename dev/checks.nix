@@ -5,7 +5,7 @@ let
   };
 
   moduleTests = {
-    server = nixosTest.makeTest {
+    "${prefix}-server" = nixosTest.makeTest {
       name = "${prefix}-server";
 
       nodes.machine = { ... }: {
