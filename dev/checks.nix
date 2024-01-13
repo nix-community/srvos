@@ -5,7 +5,7 @@ let
   };
 
   moduleTests = {
-    server = nixosTest.makeTest {
+    "${prefix}-server" = nixosTest.makeTest {
       name = "${prefix}-server";
 
       nodes.machine = { ... }: {
@@ -29,4 +29,4 @@ let
       (name: value: { name = "${prefix}-${name}"; value = value.config.system.build.toplevel; })
       configurations;
 in
-nixosChecks // pkgs.lib.optionalAttrs (pkgs.system == "x86_64-linux") moduleTests
+nixosChecks // moduleTests
