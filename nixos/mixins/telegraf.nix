@@ -123,7 +123,7 @@ in
         systemd_units = { };
         swap = { };
         disk.tagdrop = {
-          fstype = [ "tmpfs" "ramfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs" ];
+          fstype = [ "tmpfs" "ramfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs" "efivarfs" ];
           device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
         };
         diskio = { };
