@@ -37,6 +37,5 @@ jobs:
         with:
           title: Update flake.lock files
           branch: update-flake-lock
-        # disable for now
-        #  labels: |
-        #    merge-queue
+          labels: |
+            merge-queue
