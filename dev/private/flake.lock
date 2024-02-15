@@ -15,6 +15,26 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixos-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1704982712,
+        "narHash": "sha256-2Ptt+9h8dczgle2Oo6z5ni5rt/uLMG47UFTR1ry/wgg=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "07f6395285469419cf9d078f59b5b49993198c00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -135,6 +155,7 @@
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
+        "flake-parts": "flake-parts",
         "mkdocs-numtide": "mkdocs-numtide",
         "nix-darwin": "nix-darwin",
         "nixos-stable": "nixos-stable",

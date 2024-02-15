@@ -1,5 +1,8 @@
-{ prefix, self, pkgs, lib, system }:
+{ prefix, self, pkgs }:
 let
+  lib = pkgs.lib;
+  system = pkgs.system;
+
   nixosTest = import "${pkgs.path}/nixos/lib/testing-python.nix" {
     inherit pkgs system;
   };
@@ -20,7 +23,7 @@ let
   };
 
   configurations = import ./test-configurations.nix {
-    inherit self pkgs lib system;
+    inherit self pkgs;
   };
 
   # Add all the nixos configurations to the checks
