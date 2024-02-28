@@ -21,11 +21,10 @@
     boot.initrd.availableKernelModules = [
       "xhci_pci"
       "ahci"
-      # SATA ssds
+      # SATA SSDs/HDDs
       "sd_mod"
       # NVME
       "nvme"
-      # FIXME: HDD only servers?
     ];
 
     networking.useNetworkd = true;
