@@ -7,15 +7,23 @@
     ../common
   ];
 
-  # List packages installed in system profile.
-  environment.systemPackages = map lib.lowPrio [
-    pkgs.curl
-    pkgs.dnsutils
-    pkgs.gitMinimal
-    pkgs.htop
-    pkgs.jq
-    pkgs.tmux
-  ];
+  environment = {
+    # List packages installed in system profile.
+    systemPackages = map lib.lowPrio [
+      pkgs.curl
+      pkgs.dnsutils
+      pkgs.gitMinimal
+      pkgs.htop
+      pkgs.jq
+      pkgs.tmux
+    ];
+    # Print the URL instead on servers
+    variables.BROWSER = "echo";
+  } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
+    # Don't install the /lib/ld-linux.so.2 and /lib64/ld-linux-x86-64.so.2
+    # stubs. Server users should know what they are doing.
+    stub-ld.enable = lib.mkDefault false;
+  };
 
   # Notice this also disables --help for some commands such es nixos-rebuild
   documentation.enable = lib.mkDefault false;
@@ -27,9 +35,6 @@
   fonts.fontconfig.enable = lib.mkDefault false;
 
   programs.vim.defaultEditor = lib.mkDefault true;
-
-  # Print the URL instead on servers
-  environment.variables.BROWSER = "echo";
 
   # Make sure firewall is enabled
   networking.firewall.enable = true;

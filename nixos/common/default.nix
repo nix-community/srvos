@@ -32,9 +32,15 @@
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
   documentation.info.enable = false;
 
-  # This is pulled in by the container profile, but it seems broken and causes
-  # unecessary rebuilds.
-  environment.noXlibs = false;
+  environment = {
+    # This is pulled in by the container profile, but it seems broken and causes
+    # unecessary rebuilds.
+    noXlibs = false;
+  } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
+    # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of
+    # nixpkgs.
+    ldso32 = null;
+  };
 
   # Ensure a clean & sparkling /tmp on fresh boots.
   boot.tmp.cleanOnBoot = lib.mkDefault true;
