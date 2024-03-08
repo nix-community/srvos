@@ -30,6 +30,6 @@ let
   nixosChecks =
     lib.mapAttrs'
       (name: value: { name = "${prefix}-${name}"; value = value.config.system.build.toplevel; })
-      configurations;
+      (lib.filterAttrs (_name: value: value != null) configurations);
 in
 nixosChecks // moduleTests
