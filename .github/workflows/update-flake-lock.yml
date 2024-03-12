@@ -13,6 +13,8 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v26
         with:
+          # nix run in 2.20 seems broken: Exec format error
+          install_url: https://nixos.org/releases/nix/nix-2.19.4/install
           extra_nix_config: |
             accept-flake-config = true
             experimental-features = nix-command flakes
