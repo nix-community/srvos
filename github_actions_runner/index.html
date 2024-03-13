@@ -850,6 +850,10 @@
 <p>GitHub Action Runners are processes that execute the automated jobs you specify in your GitHub Actions workflows. These runners can be hosted on GitHub-hosted infrastructure or your infrastructure. Self-hosted runners run for your project only and are available at no additional cost.</p>
 <p>This article looks at how to install a GitHub runner in your own NixOS infrastructure, making sure the environment is scalable and secure.</p>
 <p>We have built a <a href="https://nixos.wiki/wiki/NixOS_modules">NixOS module</a> that installs one or more <a href="https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners">self-hosted github action runner</a>, along with a <a href="https://www.cachix.org/">cachix</a> watch store service with the most secure defaults.</p>
+<blockquote>
+<p><strong>NOTE</strong>: if you intend to run NixOS VM tests you must ensure your hosting provider supports <a href="https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/">nested virtualization</a> 
+or use bare-metal hosts, otherwise your tests will take a long time to execute. </p>
+</blockquote>
 <h2 id="authentication">Authentication</h2>
 <p>In order to use a self-hosted GitHub action runner, you will need to register the runner with your GitHub account or organization. There are three different ways a self hosted runner can register itself on GitHub:</p>
 <ul>
