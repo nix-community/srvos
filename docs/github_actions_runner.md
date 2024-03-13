@@ -6,6 +6,9 @@ This article looks at how to install a GitHub runner in your own NixOS infrastru
 
 We have built a [NixOS module](https://nixos.wiki/wiki/NixOS_modules) that installs one or more [self-hosted github action runner](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners), along with a [cachix](https://www.cachix.org/) watch store service with the most secure defaults.
 
+> __NOTE__: if you intend to run NixOS VM tests you must ensure your hosting provider supports [nested virtualization](https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/) 
+> or use bare-metal hosts, otherwise your tests will take a long time to execute. 
+
 ## Authentication
 
 In order to use a self-hosted GitHub action runner, you will need to register the runner with your GitHub account or organization. There are three different ways a self hosted runner can register itself on GitHub:
