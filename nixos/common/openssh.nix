@@ -6,6 +6,8 @@
     settings.KbdInteractiveAuthentication = false;
     settings.PasswordAuthentication = false;
     settings.UseDns = false;
+    # unbind gnupg sockets if they exists
+    settings.StreamLocalBindUnlink = true;
 
     # Use key exchange algorithms recommended by `nixpkgs#ssh-audit`
     settings.KexAlgorithms = [
@@ -28,8 +30,5 @@
         && !config.services.gerrit.enable
         && !config.services.forgejo.enable)
       (lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ]);
-
-    # unbind gnupg sockets if they exists
-    extraConfig = "StreamLocalBindUnlink yes";
   };
 }
