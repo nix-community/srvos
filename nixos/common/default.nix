@@ -1,5 +1,5 @@
 # A default configuration that applies to all servers.
-# Common configuration accross *all* the machines
+# Common configuration across *all* the machines
 { config, lib, ... }:
 {
 
@@ -34,7 +34,7 @@
 
   environment = {
     # This is pulled in by the container profile, but it seems broken and causes
-    # unecessary rebuilds.
+    # unnecessary rebuilds.
     noXlibs = false;
   } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
     # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of
