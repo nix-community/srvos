@@ -32,7 +32,7 @@ Introduces some workaround for the particular IPv6 configuration that Hetzner ha
 
 Hardware configuration for <https://www.hetzner.com/dedicated-rootserver> bare-metal Intel servers.
 
-Introduces some workaround for the perticular IPv6 configuration that Hetzner has.
+Introduces some workaround for the particular IPv6 configuration that Hetzner has.
 
 ### `nixosModules.hardware-hetzner-online-ex101`
 
