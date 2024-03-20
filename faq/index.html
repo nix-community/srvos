@@ -817,7 +817,7 @@
 <p>Some questions and answers that haven't been integrated in the documentation yet.</p>
 <h2 id="what-version-of-nixos-should-i-use">What version of NixOS should I use?</h2>
 <p>SrvOS is currently tested against <code>nixos-unstable</code> and the latest NixOS release. SrvOS itself is automatically updated and tested against the latest version of that channel once a week.</p>
-<p>If you want to make sure to use a tested version, use the "follows" mechanims of Nix flakes to pull the same version as the one of SrvOS:</p>
+<p>If you want to make sure to use a tested version, use the "follows" mechanisms of Nix flakes to pull the same version as the one of SrvOS:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  inputs<span class="o">.</span>srvos<span class="o">.</span><span class="ss">url =</span> <span class="s2">&quot;github:nix-community/srvos&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="c1"># Use the version of nixpkgs that has been tested to work with SrvOS</span>
