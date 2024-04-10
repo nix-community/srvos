@@ -39,6 +39,7 @@ exposeModules ./. [
   ./common
   ./desktop
   ./hardware/amazon
+  ./hardware/digitalocean/droplet.nix
   ./hardware/hetzner-cloud
   ./hardware/hetzner-cloud/arm.nix
   ./hardware/hetzner-online/amd.nix
