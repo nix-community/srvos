@@ -50,6 +50,12 @@ in
       self.nixosModules.hardware-amazon
     ];
   };
+  example-hardware-digitalocean-droplet = nixosSystem {
+    modules = [
+      dummy
+      self.nixosModules.hardware-digitalocean-droplet
+    ];
+  };
   example-hardware-hetzner-cloud = nixosSystem {
     modules = [
       dummy

@@ -10,6 +10,12 @@ Hardware configuration for <https://aws.amazon.com/ec2> instances.
 
 The main difference here is that the default userdata service is replaced by cloud-init.
 
+### `nixosModules.hardware-digitalocean`
+
+Hardware configuration for <https://www.digitalocean.com/> instances.
+
+Enables cloud-init but turns of non-working dhcp.
+
 ### `nixosModules.hardware-hetzner-cloud`
 
 Hardware configuration for <https://www.hetzner.com/cloud> instances.
