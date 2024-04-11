@@ -53,7 +53,7 @@
               prefix = "nixos-stable";
             }));
 
-          devShells = {
+          devShells = lib.optionalAttrs defaultPlatform {
             mkdocs = pkgs.mkShellNoCC {
               packages = [
                 inputs.mkdocs-numtide.packages.${system}.default
