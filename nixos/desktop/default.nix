@@ -1,6 +1,7 @@
 { lib, ... }: {
   imports = [
     ../common
+    ../mixins/mdns.nix
     ./pipewire.nix
   ];
 
