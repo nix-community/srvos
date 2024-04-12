@@ -10,7 +10,7 @@ Hardware configuration for <https://aws.amazon.com/ec2> instances.
 
 The main difference here is that the default userdata service is replaced by cloud-init.
 
-### `nixosModules.hardware-digitalocean`
+### `nixosModules.hardware-digitalocean-droplet`
 
 Hardware configuration for <https://www.digitalocean.com/> instances.
 
