@@ -56,6 +56,7 @@ exposeModules ./. [
   ./mixins/tracing.nix
   ./mixins/trusted-nix-caches.nix
   ./mixins/nix-experimental.nix
+  ./mixins/mdns.nix
   ./roles/github-actions-runner.nix
   ./roles/nix-remote-builder.nix
   ./roles/prometheus
