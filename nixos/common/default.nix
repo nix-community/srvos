@@ -17,9 +17,9 @@
   ];
 
   # Use systemd during boot as well on systems except:
-  # - systems that require networking in early-boot
   # - systems with raids as this currently require manual configuration (https://github.com/NixOS/nixpkgs/issues/210210)
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
+  # - For systemd in initrd we have now systemd-repart, but many images still set boot.growPartition
   boot.initrd.systemd.enable = lib.mkDefault (
     !(if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then
       config.boot.swraid.enable
