@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = 5;
@@ -7,8 +7,8 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "repl-flake"
-  ];
+  ] ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.22")
+    "repl-flake";
 
   # The default at 10 is rarely enough.
   nix.settings.log-lines = lib.mkDefault 25;
