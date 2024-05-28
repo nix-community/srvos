@@ -1,6 +1,6 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ config, lib, ... }:
+{ options, config, lib, ... }:
 {
 
   imports = [
@@ -15,6 +15,13 @@
     ./well-known-hosts.nix
     ./zfs.nix
   ];
+
+  system.switch = {
+    enable = lib.mkDefault false;
+  } // lib.optionalAttrs (options.system.switch ? enableNg) {
+    # can be dropped after 24.05
+    enableNg = lib.mkDefault true;
+  };
 
   # Use systemd during boot as well on systems except:
   # - systems with raids as this currently require manual configuration (https://github.com/NixOS/nixpkgs/issues/210210)
