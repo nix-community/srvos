@@ -16,10 +16,9 @@
     ./zfs.nix
   ];
 
-  system.switch = {
-    enable = lib.mkDefault false;
-  } // lib.optionalAttrs (options.system.switch ? enableNg) {
+  system.switch = lib.optionalAttrs (options.system.switch ? enableNg) {
     # can be dropped after 24.05
+    enable = lib.mkDefault false;
     enableNg = lib.mkDefault true;
   };
 
