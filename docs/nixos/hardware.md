@@ -10,6 +10,12 @@ Hardware configuration for <https://aws.amazon.com/ec2> instances.
 
 The main difference here is that the default userdata service is replaced by cloud-init.
 
+### `nixosModules.hardware-digitalocean-droplet`
+
+Hardware configuration for <https://www.digitalocean.com/> instances.
+
+Enables cloud-init but turns of non-working dhcp.
+
 ### `nixosModules.hardware-hetzner-cloud`
 
 Hardware configuration for <https://www.hetzner.com/cloud> instances.
@@ -32,7 +38,7 @@ Introduces some workaround for the particular IPv6 configuration that Hetzner ha
 
 Hardware configuration for <https://www.hetzner.com/dedicated-rootserver> bare-metal Intel servers.
 
-Introduces some workaround for the perticular IPv6 configuration that Hetzner has.
+Introduces some workaround for the particular IPv6 configuration that Hetzner has.
 
 ### `nixosModules.hardware-hetzner-online-ex101`
 

@@ -1,4 +1,4 @@
-{ lib, config, modulesPath, ... }:
+{ lib, config, options, modulesPath, ... }:
 {
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
@@ -15,17 +15,13 @@
       }
     ];
 
-    # To make hetzner kvm console work. It uses VGA rather than serial. Serial leads to nowhere.
-    srvos.boot.consoles = lib.mkDefault [ ];
-
     boot.initrd.availableKernelModules = [
       "xhci_pci"
       "ahci"
-      # SATA ssds
+      # SATA SSDs/HDDs
       "sd_mod"
       # NVME
       "nvme"
-      # FIXME: HDD only servers?
     ];
 
     networking.useNetworkd = true;
@@ -41,5 +37,10 @@
 
     # Network configuration i.e. when we unlock machines with openssh in the initrd
     boot.initrd.systemd.network.networks."10-uplink" = config.systemd.network.networks."10-uplink";
-  };
+
+  } // (lib.optionalAttrs ((options.srvos.boot or { }) ? consoles) {
+
+    # To make hetzner kvm console work. It uses VGA rather than serial. Serial leads to nowhere.
+    srvos.boot.consoles = lib.mkDefault [ ];
+  });
 }

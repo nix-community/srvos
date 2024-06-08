@@ -11,8 +11,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Install Nix
-        uses: cachix/install-nix-action@v24
+        uses: cachix/install-nix-action@V27
         with:
+          # nix run in 2.20 seems broken: Exec format error
+          install_url: https://nixos.org/releases/nix/nix-2.19.4/install
           extra_nix_config: |
             accept-flake-config = true
             experimental-features = nix-command flakes
@@ -33,8 +35,9 @@ jobs:
           popd
           nix run .#update-dev-private-narHash
           git commit --amend --no-edit dev/private.narHash
-      - uses: peter-evans/create-pull-request@v5
-        # disable for now
-        #with:
-        #  labels: |
-        #    merge-queue
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          title: Update flake.lock files
+          branch: update-flake-lock
+          labels: |
+            merge-queue

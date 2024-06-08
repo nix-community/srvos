@@ -17,7 +17,7 @@ jobs:
       group: ${{ github.workflow }}
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v24
+      - uses: cachix/install-nix-action@V27
         with:
           extra_nix_config: |
             accept-flake-config = true
@@ -31,7 +31,7 @@ jobs:
           echo "result=$(readlink ./result)" >> $GITHUB_OUTPUT
 
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "${{ steps.build.outputs.result }}/"

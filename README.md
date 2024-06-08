@@ -19,7 +19,7 @@ example to deploy a GitHub Action runner on Hetzner:
   inputs = {
     srvos.url = "github:nix-community/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
-    # Alternativly we also support the latest nixos release and unstable
+    # Alternatively we also support the latest nixos release and unstable
     nixpkgs.follows = "srvos/nixpkgs";
   };
   outputs = { self, nixpkgs, srvos }: {

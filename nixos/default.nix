@@ -39,6 +39,7 @@ exposeModules ./. [
   ./common
   ./desktop
   ./hardware/amazon
+  ./hardware/digitalocean/droplet.nix
   ./hardware/hetzner-cloud
   ./hardware/hetzner-cloud/arm.nix
   ./hardware/hetzner-online/amd.nix
@@ -55,6 +56,7 @@ exposeModules ./. [
   ./mixins/tracing.nix
   ./mixins/trusted-nix-caches.nix
   ./mixins/nix-experimental.nix
+  ./mixins/mdns.nix
   ./roles/github-actions-runner.nix
   ./roles/nix-remote-builder.nix
   ./roles/prometheus

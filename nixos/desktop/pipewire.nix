@@ -1,4 +1,4 @@
-# Use pipewire instead of PuleseAudio. See https://nixos.wiki/wiki/PipeWire
+# Use pipewire instead of PulseAudio. See https://wiki.nixos.org/wiki/PipeWire
 { lib, config, ... }:
 {
   security.rtkit.enable = lib.mkDefault config.services.pipewire.enable;

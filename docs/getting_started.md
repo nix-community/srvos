@@ -9,7 +9,7 @@ In this documentation, we expect the reader to be already familiar with the base
 This project exports four big categories of NixOS modules which are useful to define a server configuration:
 
 * Machine type - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.
-* Machine hardware - these define hardware-releated settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
+* Machine hardware - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
 * Machine role - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)
 * Configuration mixins - these define addons to be added to the machine configuration. One or more can be added.
 
@@ -23,7 +23,7 @@ Combining all of those together, here is how your `flake.nix` might look like, t
   inputs = {
     srvos.url = "github:nix-community/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
-    # Alternativly we also support the latest nixos release and unstable
+    # Alternatively we also support the latest nixos release and unstable
     nixpkgs.follows = "srvos/nixpkgs";
   };
   outputs = { self, nixpkgs, srvos }: {
