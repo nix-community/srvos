@@ -7,10 +7,7 @@
   ];
 
   config = {
-    # Don't invoke nixos-rebuild on boot
+    # Don't invoke nixos-rebuild on boot, we use cloud-init instead
     virtualisation.amazon-init.enable = false;
-
-    # Use cloud-init instead
-    services.cloud-init.enable = true;
   };
 }
