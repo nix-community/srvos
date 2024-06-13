@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   # Allow PMTU / DHCP
   networking.firewall.allowPing = true;
@@ -24,4 +24,9 @@
   systemd.services.systemd-networkd.stopIfChanged = false;
   # Services that are only restarted might be not able to resolve when resolved is stopped before
   systemd.services.systemd-resolved.stopIfChanged = false;
+
+  # If networkd in initrd is enabled, just copy the configuration of the normal networkd.
+  # Potentially can miss some drivers, but hopefully it would gracefully degrade in those cases
+  # See https://github.com/NixOS/nixpkgs/issues/157034#issuecomment-2163512812
+  boot.initrd.systemd.network = lib.mkDefault (builtins.removeAttrs config.systemd.network [ "enable" ]);
 }
