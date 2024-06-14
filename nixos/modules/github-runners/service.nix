@@ -21,12 +21,7 @@
 with lib;
 
 let
-  package =
-    if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then
-    # we do not have this option in 23.04 yet
-      cfg.package.override { inherit (cfg) nodeRuntimes; }
-    else
-      cfg.package;
+  package = cfg.package.override { inherit (cfg) nodeRuntimes; };
 in
 {
   description = "GitHub Actions runner";

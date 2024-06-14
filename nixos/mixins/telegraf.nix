@@ -135,7 +135,7 @@ in
         zfs = {
           poolMetrics = true;
         };
-      } // lib.optionalAttrs (if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then config.boot.swraid.enable else config.boot.initrd.services.swraid.enable) {
+      } // lib.optionalAttrs config.boot.swraid.enable {
         mdstat = { };
       };
       outputs.prometheus_client = {
