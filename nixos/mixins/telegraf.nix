@@ -8,11 +8,7 @@ let
   # potentially wrong if the nvme is not used at boot...
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 
-  supportsFs = fs:
-    if builtins.isAttrs config.boot.supportedFilesystems then
-      config.boot.supportedFilesystems.${fs} or false
-    else # FIXME: When nixos 24.05 is released, supportedFilesystems will be always an attrset
-      lib.any (fs2: fs2 == fs) config.boot.supportedFilesystems;
+  supportsFs = fs: config.boot.supportedFilesystems.${fs} or false;
 
   ipv6DadCheck = pkgs.writeShellScript "ipv6-dad-check" ''
     ${pkgs.iproute2}/bin/ip --json addr | \

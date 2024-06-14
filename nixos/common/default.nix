@@ -1,6 +1,6 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ options, config, lib, ... }:
+{ config, lib, ... }:
 {
 
   imports = [
@@ -16,8 +16,7 @@
     ./zfs.nix
   ];
 
-  system.switch = lib.optionalAttrs (options.system.switch ? enableNg) {
-    # can be dropped after 24.05
+  system.switch = {
     enable = lib.mkDefault false;
     enableNg = lib.mkDefault true;
   };
@@ -39,7 +38,6 @@
     # This is pulled in by the container profile, but it seems broken and causes
     # unnecessary rebuilds.
     noXlibs = false;
-  } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
     # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of
     # nixpkgs.
     ldso32 = null;
