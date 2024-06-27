@@ -4,4 +4,5 @@ in
 exposeModules ./. [
   ./common
   ./mixins/telegraf.nix
+  ./mixins/terminfo.nix
 ]
