@@ -8,4 +8,5 @@ exposeModules ./. [
   ./mixins/nix-experimental.nix
   ./mixins/telegraf.nix
   ./mixins/terminfo.nix
+  ./mixins/trusted-nix-caches.nix
 ]
