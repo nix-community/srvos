@@ -36,3 +36,7 @@ This for example unlocks use of containers in the nix sandbox.
 ### `nixosModules.mixins-trusted-nix-caches`
 
 Add the common list of public nix binary caches that we trust.
+
+### `nixosModules.mixins-mdns`
+
+Enables mDNS support in systemd-networkd. Becomes a no-op if avahi is enabled on the same machine
