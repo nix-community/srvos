@@ -3,6 +3,8 @@ let
 in
 exposeModules ./. [
   ./common
+  ./server
+  ./desktop
   ./mixins/telegraf.nix
   ./mixins/terminfo.nix
 ]
