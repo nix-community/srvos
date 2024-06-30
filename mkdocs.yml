@@ -14,7 +14,10 @@ edit_uri: edit/main/docs
 nav:
   - Home: index.md
 
-  - Getting started: getting_started.md
+  - Getting started:
+     - Intro: getting_started.md
+     - NixOS: nixos/getting_started.md
+     - Darwin: darwin/getting_started.md
   - User guide:
     - Intro: user_guide.md
     - NixOS modules:

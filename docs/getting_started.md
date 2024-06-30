@@ -1,53 +1,9 @@
 # Getting Started with SrvOS
 
-This project is designed to work in combination with [NixOS](https://nixos.org).
+This project is designed to work in combination with the Linux distribution [NixOS](https://nixos.org) or [nix-darwin](https://github.com/LnL7/nix-darwin) on macOS.
 
 In this documentation, we expect the reader to be already familiar with the base operating system, and introduce how to compose it with our own extensions.
 
-## Finding your way around
+For NixOS continue reading [here](nixos/getting_started.md),
+for nix-darwin/macOS read [this](darwin/getting_started.md).
 
-This project exports four big categories of NixOS modules which are useful to define a server configuration:
-
-* Machine type - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.
-* Machine hardware - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
-* Machine role - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)
-* Configuration mixins - these define addons to be added to the machine configuration. One or more can be added.
-
-## Example
-
-Combining all of those together, here is how your `flake.nix` might look like, to deploy a GitHub Actions runner on Hetzner:
-
-```nix
-{
-  description = "My machines flakes";
-  inputs = {
-    srvos.url = "github:nix-community/srvos";
-    # Use the version of nixpkgs that has been tested to work with SrvOS
-    # Alternatively we also support the latest nixos release and unstable
-    nixpkgs.follows = "srvos/nixpkgs";
-  };
-  outputs = { self, nixpkgs, srvos }: {
-    nixosConfigurations.myHost = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        # This machine is a server
-        srvos.nixosModules.server
-        # Deployed on the AMD Hetzner hardware
-        srvos.nixosModules.hardware-hetzner-amd
-        # Configured with extra terminfos
-        srvos.nixosModules.mixins-terminfo
-        # And designed to run the GitHub Actions runners
-        srvos.nixosModules.roles-github-actions-runner
-        # Finally add your configuration here
-        ./myHost.nix
-      ];
-    };
-  };
-}
-```
-
-## Continue
-
-Now that we have gone over the high-level details, you should have an idea of how to use this project.
-
-To dig further, take a look at the [User guide](user_guide.md).
