@@ -20,14 +20,19 @@ nav:
      - Darwin: darwin/getting_started.md
   - User guide:
     - Intro: user_guide.md
-    - NixOS modules:
-      - Machine type: nixos/type.md
-      - Machine hardware: nixos/hardware.md
-      - Machine role: nixos/role.md
-      - Configuration mixins: nixos/mixins.md
-    - Roles:
-      - GitHub Action Runner: github_actions_runner.md
-    - Installation:
-        - Hetzner Cloud: installation/hetzner_cloud.md
+    - NixOS:
+      - Modules:
+        - Machine type: nixos/type.md
+        - Machine hardware: nixos/hardware.md
+        - Machine role: nixos/role.md
+        - Configuration mixins: nixos/mixins.md
+      - Roles:
+        - GitHub Action Runner: github_actions_runner.md
+      - Installation:
+          - Hetzner Cloud: installation/hetzner_cloud.md
+    - Nix-darwin:
+      - Modules:
+        - Machine type: darwin/type.md
+        - Configuration mixins: darwin/mixins.md
     - FAQ: faq.md
   - Getting help: help.md
