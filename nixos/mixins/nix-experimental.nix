@@ -14,10 +14,7 @@
     "recursive-nix"
   ] ++ lib.optional (lib.versionAtLeast (lib.versions.majorMinor config.nix.package.version) "2.19")
     # Allow the use of the impure-env setting.
-    "configurable-impure-env"
-  ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.18")
-    # allows to drop references from filesystem images
-    "discard-references";
+    "configurable-impure-env";
 
   # no longer need to pre-allocate build users for everything
   nix.settings.auto-allocate-uids = true;
