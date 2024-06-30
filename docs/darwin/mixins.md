@@ -11,3 +11,7 @@ Enables a generic telegraf configuration. `nixosModules.mixins-prometheus` for m
 Extends the terminfo database with often used terminal emulators.
 Terminfo is used by terminal applications to interfere supported features in the terminal.
 This is useful when connecting to a server via SSH.
+
+### `darwinModules.mixins-nix-experimental`
+
+Enables all experimental features in nix, that are known safe to use (i.e. are only used when explicitly requested in a build).
