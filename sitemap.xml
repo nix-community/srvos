@@ -31,7 +31,27 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://nix-community.github.io/srvos/darwin/getting_started/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nix-community.github.io/srvos/darwin/mixins/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nix-community.github.io/srvos/darwin/type/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://nix-community.github.io/srvos/installation/hetzner_cloud/</loc>
+         <lastmod>1980-01-01</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://nix-community.github.io/srvos/nixos/getting_started/</loc>
          <lastmod>1980-01-01</lastmod>
          <changefreq>daily</changefreq>
     </url>
