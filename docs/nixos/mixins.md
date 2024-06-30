@@ -12,7 +12,17 @@ Configure systemd-boot as bootloader.
 
 ### `nixosModules.mixins-telegraf`
 
-Enables a generic telegraf configuration. See [Mic's dotfiles](https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix) for monitoring rules targeting this telegraf configuration.
+Enables a generic telegraf configuration. `nixosModules.mixins-prometheus` for monitoring rules targeting this telegraf configuration.
+
+### `nixosModules.mixins-terminfo`
+
+Extends the terminfo database with often used terminal emulators.
+Terminfo is used by terminal applications to interfere supported features in the terminal.
+This is useful when connecting to a server via SSH.
+
+### `nixosModules.mixins-prometheus`
+
+Enables a Prometheus and configures it with a set of alert rules targeting our `nixosModules.mixins-prometheus` module.
 
 ### `nixosModules.mixins-nginx`
 

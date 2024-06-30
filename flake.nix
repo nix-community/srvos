@@ -94,8 +94,10 @@
 
       # generates future flake outputs: `modules.<kind>.<module-name>`
       flake.modules.nixos = import ./nixos;
+      flake.modules.darwin = import ./darwin;
 
       # compat to current schema: `nixosModules` / `darwinModules`
       flake.nixosModules = self.modules.nixos;
+      flake.darwinModules = self.modules.darwin;
     };
 }

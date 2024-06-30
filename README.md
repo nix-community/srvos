@@ -46,7 +46,8 @@ example to deploy a GitHub Action runner on Hetzner:
 
 The [Documentation](https://nix-community.github.io/srvos/) website shows more general usage, how to install SrvOS, etc...
 
-To improve the documentation, take a look at the `./docs` folder. You can also run `nix run .#docs.serve` to start a preview server on <http://localhost:3000>.
+To improve the documentation, take a look at the `./docs` folder. You can also run `nix develop .#mkdocs -c mkdocs serve` to start a preview server on <http://localhost:8000>.
+
 
 ## Contributing
 
