@@ -39,8 +39,6 @@ in
   };
 
   config = {
-    warnings = lib.optional (lib.versionOlder (lib.versions.majorMinor lib.version) "23.11" && lib.any (runner: runner.nodeRuntimes != [ "node20" ]) (builtins.attrValues cfg))
-      "services.srvos-github-runner.<name>.nodeRuntimes is only supported in NixOS 23.11 and later";
     assertions =
       (mapAttrsToList
         (_name: c:

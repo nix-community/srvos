@@ -1,6 +1,6 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ options, config, lib, ... }:
+{ config, lib, ... }:
 {
 
   imports = [
@@ -16,8 +16,7 @@
     ./zfs.nix
   ];
 
-  system.switch = lib.optionalAttrs (options.system.switch ? enableNg) {
-    # can be dropped after 24.05
+  system.switch = {
     enable = lib.mkDefault false;
     enableNg = lib.mkDefault true;
   };
@@ -27,10 +26,7 @@
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
   # - For systemd in initrd we have now systemd-repart, but many images still set boot.growPartition
   boot.initrd.systemd.enable = lib.mkDefault (
-    !(if lib.versionAtLeast (lib.versions.majorMinor lib.version) "23.11" then
-      config.boot.swraid.enable
-    else
-      config.boot.initrd.services.swraid.enable) &&
+    !config.boot.swraid.enable &&
     !config.boot.isContainer &&
     !config.boot.growPartition
   );
@@ -42,7 +38,6 @@
     # This is pulled in by the container profile, but it seems broken and causes
     # unnecessary rebuilds.
     noXlibs = false;
-  } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
     # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of
     # nixpkgs.
     ldso32 = null;
