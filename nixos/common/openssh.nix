@@ -9,11 +9,6 @@
     # unbind gnupg sockets if they exists
     settings.StreamLocalBindUnlink = true;
 
-    # We might want to remove this once, openssh is fixed everywhere:
-    # Workaround for CVE-2024-6387
-    # https://github.com/NixOS/nixpkgs/pull/323753#issuecomment-2199762128
-    settings.LoginGraceTime = 0;
-
     # Use key exchange algorithms recommended by `nixpkgs#ssh-audit`
     settings.KexAlgorithms = [
       "curve25519-sha256"
