@@ -20,7 +20,9 @@ Enables cloud-init but turns of non-working dhcp.
 
 Hardware configuration for <https://www.hetzner.com/cloud> instances.
 
-The main difference here is that cloud-init is enabled.
+The main difference here is that:
+1. cloud-init is enabled.
+2. the qemu agent is running, to allow password reset to function.
 
 ### `nixosModules.hardware-hetzner-cloud-arm`
 
