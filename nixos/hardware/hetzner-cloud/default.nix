@@ -1,4 +1,4 @@
-{ config, modulesPath, lib, ... }:
+{ config, modulesPath, lib, pkgs, ... }:
 {
   imports = [
     ../../mixins/cloud-init.nix
@@ -13,5 +13,10 @@
 
     networking.useNetworkd = true;
     networking.useDHCP = false;
+
+    # Needed by the Hetzner Cloud password reset feature.
+    services.qemuGuest.enable = lib.mkDefault true;
+    # https://discourse.nixos.org/t/qemu-guest-agent-on-hetzner-cloud-doesnt-work/8864/2
+    systemd.services.qemu-guest-agent.path = [ pkgs.shadow ];
   };
 }
