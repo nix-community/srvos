@@ -33,16 +33,22 @@ in
     # ubuntu and alpine linux are doing.
     srvos.boot.consoles = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ "tty0" ] ++
+      default =
+        [ "ttyS0,115200" ] ++
         (lib.optional (pkgs.stdenv.hostPlatform.isAarch) "ttyAMA0,115200") ++
         (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200") ++
-        [ "ttyS0,115200" ];
+        [ "tty0" ];
       example = [ "ttyS2,115200" ];
       description = lib.mdDoc ''
         The Linux kernel console option allows you to configure various devices as
-        consoles. The default setting is configured to provide access to serial
-        consoles, such as IPMI SOL console redirection found in BMCs or GPIO-based
-        serial terminals found in embedded devices. You can specify multiple `console=`
+        consoles.
+        The default setting will print kernel messages to graphical console (i.e. VGA/HDMI)
+        but also enables serial console output on the first serial port (ttyS0) at 115200.
+        This helps with getting emergency access IPMI SOL console redirection
+        found in BMCs or GPIO-based serial terminals found in embedded devices.
+        If you need to debug a kernel using serial console, you can either change the
+        setting adhoc in your bootloader or override the default with your own option.
+        You can specify multiple `console=`
         options on the kernel command line, which will result in output appearing on all
         of them. The last device specified will be used when opening /dev/console. This
         information can be found in the Linux documentation at
