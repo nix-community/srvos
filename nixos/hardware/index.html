@@ -1244,7 +1244,9 @@
 <p>Enables cloud-init but turns of non-working dhcp.</p>
 <h3 id="nixosmoduleshardware-hetzner-cloud"><code>nixosModules.hardware-hetzner-cloud</code></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/cloud">https://www.hetzner.com/cloud</a> instances.</p>
-<p>The main difference here is that cloud-init is enabled.</p>
+<p>The main difference here is that:
+1. cloud-init is enabled.
+2. the qemu agent is running, to allow password reset to function.</p>
 <h3 id="nixosmoduleshardware-hetzner-cloud-arm"><code>nixosModules.hardware-hetzner-cloud-arm</code></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/cloud">https://www.hetzner.com/cloud</a> arm instances.</p>
 <p>The main difference from <code>nixosModules.hardware-hetzner-cloud</code> is using systemd-boot by default.</p>
