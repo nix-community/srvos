@@ -1,5 +1,12 @@
-{ lib, config, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
+  nix.package = lib.mkDefault pkgs.nixVersions.latest;
+
   # Enable flakes
   nix.settings.experimental-features =
     [
