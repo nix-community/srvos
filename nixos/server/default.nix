@@ -49,9 +49,6 @@
   # Enable SSH everywhere
   services.openssh.enable = true;
 
-  # No need for sound on a server
-  sound.enable = false;
-
   # UTC everywhere!
   time.timeZone = lib.mkDefault "UTC";
 
