@@ -33,7 +33,11 @@
   # No need for fonts on a server
   fonts.fontconfig.enable = lib.mkDefault false;
 
-  programs.vim.defaultEditor = lib.mkDefault true;
+  programs.vim = {
+    defaultEditor = lib.mkDefault true;
+  } // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.11") {
+    enable = lib.mkDefault true;
+  };
 
   # Make sure firewall is enabled
   networking.firewall.enable = true;
