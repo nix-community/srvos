@@ -6,21 +6,25 @@ let
   lib = pkgs.lib;
   system = pkgs.system;
 
-  nixosSystem = args:
-    import "${toString pkgs.path}/nixos/lib/eval-config.nix" ({ inherit lib system; } // args);
+  nixosSystem =
+    args: import "${toString pkgs.path}/nixos/lib/eval-config.nix" ({ inherit lib system; } // args);
 
   # some example configuration to make it eval
-  dummy = { config, ... }: {
-    networking.hostName = "example-common";
-    system.stateVersion = config.system.nixos.version;
-    users.users.root.initialPassword = "fnord23";
-    boot.loader.grub.devices = lib.mkForce [ "/dev/sda" ];
-    fileSystems."/".device = lib.mkDefault "/dev/sda";
+  dummy =
+    { config, ... }:
+    {
+      networking.hostName = "example-common";
+      system.stateVersion = config.system.nixos.version;
+      users.users.root.initialPassword = "fnord23";
+      boot.loader.grub.devices = lib.mkForce [ "/dev/sda" ];
+      fileSystems."/".device = lib.mkDefault "/dev/sda";
 
-    # Don't reinstantiate nixpkgs for every nixos eval.
-    # Also important to have nixpkgs config which allows for some required insecure packages
-    nixpkgs = { inherit pkgs; };
-  };
+      # Don't reinstantiate nixpkgs for every nixos eval.
+      # Also important to have nixpkgs config which allows for some required insecure packages
+      nixpkgs = {
+        inherit pkgs;
+      };
+    };
 in
 {
   # General
@@ -60,44 +64,38 @@ in
     modules = [
       dummy
       self.nixosModules.hardware-hetzner-cloud
-      {
-        systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
-      }
+      { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
     ];
   };
   example-hardware-hetzner-cloud-arm =
     if (system == "aarch64-linux") then
-      nixosSystem
-        {
-          modules = [
-            dummy
-            self.nixosModules.hardware-hetzner-cloud-arm
-            {
-              systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
-            }
-          ];
-        } else null;
+      nixosSystem {
+        modules = [
+          dummy
+          self.nixosModules.hardware-hetzner-cloud-arm
+          { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
+        ];
+      }
+    else
+      null;
   example-hardware-hetzner-online-amd = nixosSystem {
     modules = [
       dummy
       self.nixosModules.hardware-hetzner-online-amd
-      {
-        systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
-      }
+      { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
     ];
   };
   example-hardware-hetzner-online-intel =
     if (system == "x86_64-linux") then
-      nixosSystem
-        {
-          modules = [
-            dummy
-            self.nixosModules.hardware-hetzner-online-intel
-            {
-              systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef";
-            }
-          ];
-        } else null;
+      nixosSystem {
+        modules = [
+          dummy
+          self.nixosModules.hardware-hetzner-online-intel
+          { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
+        ];
+      }
+    else
+      null;
   example-hardware-vultr-bare-metal = nixosSystem {
     modules = [
       dummy

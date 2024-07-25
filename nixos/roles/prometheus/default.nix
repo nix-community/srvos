@@ -1,106 +1,114 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   filterEnabled = lib.filterAttrs (_: v: v.enable);
-  rules.groups = lib.mapAttrsToList
-    (name: group: {
-      inherit name;
-      rules =
-        (lib.mapAttrsToList
-          (name: rule: {
-            alert = rule.name;
-            expr = rule.expr;
-            for = rule.for;
-            labels = rule.labels;
-            annotations = rule.annotations;
-          })
-          (filterEnabled group.alertRules)) ++
-        (lib.mapAttrsToList
-          (name: rule: {
-            record = rule.name;
-            expr = rule.expr;
-            labels = rule.labels;
-            annotations = rule.annotations;
-          })
-          (filterEnabled group.recordingRules));
-    })
-    config.srvos.prometheus.ruleGroups;
+  rules.groups = lib.mapAttrsToList (name: group: {
+    inherit name;
+    rules =
+      (lib.mapAttrsToList (name: rule: {
+        alert = rule.name;
+        expr = rule.expr;
+        for = rule.for;
+        labels = rule.labels;
+        annotations = rule.annotations;
+      }) (filterEnabled group.alertRules))
+      ++ (lib.mapAttrsToList (name: rule: {
+        record = rule.name;
+        expr = rule.expr;
+        labels = rule.labels;
+        annotations = rule.annotations;
+      }) (filterEnabled group.recordingRules));
+  }) config.srvos.prometheus.ruleGroups;
 in
 {
-  imports = [
-    ./default-alerts.nix
-  ];
+  imports = [ ./default-alerts.nix ];
   options = {
     # XXX maybe we move this upstream eventually to nixpkgs. Expect this interface to be replaced with the upstream equivalent.
     srvos.prometheus.ruleGroups = lib.mkOption {
-      type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-        options = {
-          name = lib.mkOption {
-            type = lib.types.str;
-            default = name;
-          };
-          enable = lib.mkEnableOption (lib.mdDoc "Enable rule group") // {
-            default = true;
-          };
-          alertRules = lib.mkOption {
-            type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-              options = {
-                name = lib.mkOption {
-                  type = lib.types.str;
-                  default = name;
-                };
-                enable = lib.mkEnableOption (lib.mdDoc "Enable alert rule") // {
-                  default = true;
-                };
-                expr = lib.mkOption {
-                  type = lib.types.str;
-                };
-                for = lib.mkOption {
-                  type = lib.types.str;
-                  default = "2m";
-                };
-                labels = lib.mkOption {
-                  type = lib.types.attrsOf lib.types.str;
-                  default = { };
-                };
-                annotations = lib.mkOption {
-                  type = lib.types.attrsOf lib.types.str;
-                  default = { };
-                };
+      type = lib.types.attrsOf (
+        lib.types.submodule (
+          { name, ... }:
+          {
+            options = {
+              name = lib.mkOption {
+                type = lib.types.str;
+                default = name;
               };
-            }));
-            default = { };
-          };
-          recordingRules = lib.mkOption {
-            type = lib.types.attrsOf (lib.types.submodule ({ name, ... }: {
-              options = {
-                name = lib.mkOption {
-                  type = lib.types.str;
-                  default = name;
-                };
-                enable = lib.mkEnableOption (lib.mdDoc "Enable recording rule") // {
-                  default = true;
-                };
-                expr = lib.mkOption {
-                  type = lib.types.str;
-                };
-                for = lib.mkOption {
-                  type = lib.types.str;
-                  default = "2m";
-                };
-                labels = lib.mkOption {
-                  type = lib.types.attrsOf lib.types.str;
-                  default = { };
-                };
-                annotations = lib.mkOption {
-                  type = lib.types.attrsOf lib.types.str;
-                  default = { };
-                };
+              enable = lib.mkEnableOption (lib.mdDoc "Enable rule group") // {
+                default = true;
               };
-            }));
-            default = { };
-          };
-        };
-      }));
+              alertRules = lib.mkOption {
+                type = lib.types.attrsOf (
+                  lib.types.submodule (
+                    { name, ... }:
+                    {
+                      options = {
+                        name = lib.mkOption {
+                          type = lib.types.str;
+                          default = name;
+                        };
+                        enable = lib.mkEnableOption (lib.mdDoc "Enable alert rule") // {
+                          default = true;
+                        };
+                        expr = lib.mkOption { type = lib.types.str; };
+                        for = lib.mkOption {
+                          type = lib.types.str;
+                          default = "2m";
+                        };
+                        labels = lib.mkOption {
+                          type = lib.types.attrsOf lib.types.str;
+                          default = { };
+                        };
+                        annotations = lib.mkOption {
+                          type = lib.types.attrsOf lib.types.str;
+                          default = { };
+                        };
+                      };
+                    }
+                  )
+                );
+                default = { };
+              };
+              recordingRules = lib.mkOption {
+                type = lib.types.attrsOf (
+                  lib.types.submodule (
+                    { name, ... }:
+                    {
+                      options = {
+                        name = lib.mkOption {
+                          type = lib.types.str;
+                          default = name;
+                        };
+                        enable = lib.mkEnableOption (lib.mdDoc "Enable recording rule") // {
+                          default = true;
+                        };
+                        expr = lib.mkOption { type = lib.types.str; };
+                        for = lib.mkOption {
+                          type = lib.types.str;
+                          default = "2m";
+                        };
+                        labels = lib.mkOption {
+                          type = lib.types.attrsOf lib.types.str;
+                          default = { };
+                        };
+                        annotations = lib.mkOption {
+                          type = lib.types.attrsOf lib.types.str;
+                          default = { };
+                        };
+                      };
+                    }
+                  )
+                );
+                default = { };
+              };
+            };
+          }
+        )
+      );
       example = {
         prometheusAlerts = {
           alertRules = {

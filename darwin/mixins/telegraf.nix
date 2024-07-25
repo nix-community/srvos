@@ -1,4 +1,9 @@
-{ lib, inputs, pkgs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   services.telegraf = {
     enable = true;

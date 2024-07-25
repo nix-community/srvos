@@ -1,10 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 # To use this module you also need to allow port 9273 either on the internet or on a vpn interface
 # i.e. networking.firewall.interfaces."vpn0".allowedTCPPorts = [ 9273 ];
 # Example prometheus alert rules:
 # - https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix
 let
-  isVM = lib.any (mod: mod == "xen-blkfront" || mod == "virtio_console") config.boot.initrd.kernelModules;
+  isVM = lib.any (
+    mod: mod == "xen-blkfront" || mod == "virtio_console"
+  ) config.boot.initrd.kernelModules;
   # potentially wrong if the nvme is not used at boot...
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 
@@ -15,8 +22,8 @@ let
     ${pkgs.jq}/bin/jq -r 'map(.addr_info) | flatten(1) | map(select(.dadfailed == true)) | map(.local) | @text "ipv6_dad_failures count=\(length)i"'
   '';
 
-  zfsChecks = lib.optional (supportsFs "zfs")
-    (pkgs.writeScript "zpool-health" ''
+  zfsChecks = lib.optional (supportsFs "zfs") (
+    pkgs.writeScript "zpool-health" ''
       #!${pkgs.gawk}/bin/awk -f
       BEGIN {
         while ("${pkgs.zfs}/bin/zpool status" | getline) {
@@ -27,12 +34,19 @@ let
           }
         }
       }
-    '');
+    ''
+  );
 
   nfsChecks =
     let
-      collectHosts = shares: fs:
-        if builtins.elem fs.fsType [ "nfs" "nfs3" "nfs4" ]
+      collectHosts =
+        shares: fs:
+        if
+          builtins.elem fs.fsType [
+            "nfs"
+            "nfs3"
+            "nfs4"
+          ]
         then
           shares
           // (
@@ -46,33 +60,32 @@ let
               ${host} = (shares.${host} or [ ]) ++ [ path ];
             }
           )
-        else shares;
+        else
+          shares;
       nfsHosts = lib.foldl collectHosts { } (builtins.attrValues config.fileSystems);
     in
-    lib.mapAttrsToList
-      (
-        host: args:
-          (pkgs.writeScript "nfs-health" ''
-            #!${pkgs.gawk}/bin/awk -f
-            BEGIN {
-              for (i = 2; i < ARGC; i++) {
-                  mounts[ARGV[i]] = 1
-              }
-              while ("${pkgs.nfs-utils}/bin/showmount -e " ARGV[1] | getline) {
-                if (NR == 1) { continue }
-                if (mounts[$1] == 1) {
-                    printf "nfs_export,host=%s,path=%s present=1\n", ARGV[1], $1
-                }
-                delete mounts[$1]
-              }
-              for (mount in mounts) {
-                  printf "nfs_export,host=%s,path=%s present=0\n", ARGV[1], $1
-              }
+    lib.mapAttrsToList (
+      host: args:
+      (pkgs.writeScript "nfs-health" ''
+        #!${pkgs.gawk}/bin/awk -f
+        BEGIN {
+          for (i = 2; i < ARGC; i++) {
+              mounts[ARGV[i]] = 1
+          }
+          while ("${pkgs.nfs-utils}/bin/showmount -e " ARGV[1] | getline) {
+            if (NR == 1) { continue }
+            if (mounts[$1] == 1) {
+                printf "nfs_export,host=%s,path=%s present=1\n", ARGV[1], $1
             }
-          '')
-          + " ${host} ${builtins.concatStringsSep " " args}"
-      )
-      nfsHosts;
+            delete mounts[$1]
+          }
+          for (mount in mounts) {
+              printf "nfs_export,host=%s,path=%s present=0\n", ARGV[1], $1
+          }
+        }
+      '')
+      + " ${host} ${builtins.concatStringsSep " " args}"
+    ) nfsHosts;
 
 in
 {
@@ -84,17 +97,15 @@ in
     extraConfig = {
       agent.interval = "60s";
       inputs = {
-        prometheus = lib.mkIf config.services.promtail.enable [{
-          urls = [ "http://localhost:9080/metrics" ]; # default promtail port
-          metric_version = 2;
-        }];
-        kernel_vmstat = { };
-        nginx.urls = lib.mkIf config.services.nginx.statusPage [
-          "http://localhost/nginx_status"
+        prometheus = lib.mkIf config.services.promtail.enable [
+          {
+            urls = [ "http://localhost:9080/metrics" ]; # default promtail port
+            metric_version = 2;
+          }
         ];
-        smart = lib.mkIf (!isVM) {
-          path_smartctl = "/run/wrappers/bin/smartctl-telegraf";
-        };
+        kernel_vmstat = { };
+        nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
+        smart = lib.mkIf (!isVM) { path_smartctl = "/run/wrappers/bin/smartctl-telegraf"; };
         system = { };
         mem = { };
         file =
@@ -113,27 +124,37 @@ in
         exec = [
           {
             ## Commands array
-            commands =
-              [ ipv6DadCheck ]
-                ++ zfsChecks
-                ++ nfsChecks;
+            commands = [ ipv6DadCheck ] ++ zfsChecks ++ nfsChecks;
             data_format = "influx";
           }
         ];
         systemd_units = { };
         swap = { };
         disk.tagdrop = {
-          fstype = [ "tmpfs" "ramfs" "devtmpfs" "devfs" "iso9660" "overlay" "aufs" "squashfs" "efivarfs" ];
-          device = [ "rpc_pipefs" "lxcfs" "nsfs" "borgfs" ];
+          fstype = [
+            "tmpfs"
+            "ramfs"
+            "devtmpfs"
+            "devfs"
+            "iso9660"
+            "overlay"
+            "aufs"
+            "squashfs"
+            "efivarfs"
+          ];
+          device = [
+            "rpc_pipefs"
+            "lxcfs"
+            "nsfs"
+            "borgfs"
+          ];
         };
         diskio = { };
         internal = { };
         zfs = {
           poolMetrics = true;
         };
-      } // lib.optionalAttrs config.boot.swraid.enable {
-        mdstat = { };
-      };
+      } // lib.optionalAttrs config.boot.swraid.enable { mdstat = { }; };
       outputs.prometheus_client = {
         listen = ":9273";
         metric_version = 2;
@@ -148,7 +169,5 @@ in
   };
 
   # create dummy file to avoid telegraf errors
-  systemd.tmpfiles.rules = [
-    "f /var/log/telegraf/dummy 0444 root root - -"
-  ];
+  systemd.tmpfiles.rules = [ "f /var/log/telegraf/dummy 0444 root root - -" ];
 }

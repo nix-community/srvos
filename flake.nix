@@ -1,18 +1,18 @@
 {
   description = "Server-optimized NixOS configuration";
 
-  nixConfig.extra-substituters = [
-    "https://nix-community.cachix.org"
-  ];
+  nixConfig.extra-substituters = [ "https://nix-community.cachix.org" ];
   nixConfig.extra-trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
   ];
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  outputs = publicInputs @ { self, nixpkgs, ... }:
+  outputs =
+    publicInputs@{ self, nixpkgs, ... }:
     let
-      loadPrivateFlake = path:
+      loadPrivateFlake =
+        path:
         let
           flakeHash = nixpkgs.lib.fileContents "${toString path}.narHash";
           flakePath = "path:${toString path}?narHash=${flakeHash}";
@@ -36,7 +36,15 @@
         "x86_64-linux"
       ];
 
-      perSystem = { config, lib, pkgs, self', system, ... }:
+      perSystem =
+        {
+          config,
+          lib,
+          pkgs,
+          self',
+          system,
+          ...
+        }:
         let
           defaultPlatform = pkgs.stdenv.hostPlatform.system == "x86_64-linux";
           inherit (pkgs.stdenv.hostPlatform) isLinux;
@@ -47,37 +55,41 @@
               devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
               packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
             in
-            devShells // { inherit (self') formatter; } // packages //
-            (lib.optionalAttrs isLinux (import ./dev/checks.nix {
-              inherit self pkgs;
-              prefix = "nixos";
-            }))
-            // (lib.optionalAttrs isLinux (import ./dev/checks.nix {
-              inherit self;
-              pkgs = import inputs.nixos-stable {
-                inherit system;
-              };
-              prefix = "nixos-stable";
-            }));
+            devShells
+            // {
+              inherit (self') formatter;
+            }
+            // packages
+            // (lib.optionalAttrs isLinux (
+              import ./dev/checks.nix {
+                inherit self pkgs;
+                prefix = "nixos";
+              }
+            ))
+            // (lib.optionalAttrs isLinux (
+              import ./dev/checks.nix {
+                inherit self;
+                pkgs = import inputs.nixos-stable { inherit system; };
+                prefix = "nixos-stable";
+              }
+            ));
 
           devShells = lib.optionalAttrs defaultPlatform {
-            mkdocs = pkgs.mkShellNoCC {
-              packages = [
-                inputs.mkdocs-numtide.packages.${system}.default
-              ];
-            };
+            mkdocs = pkgs.mkShellNoCC { packages = [ inputs.mkdocs-numtide.packages.${system}.default ]; };
           };
-          packages = {
-            update-dev-private-narHash = pkgs.writeScriptBin "update-dev-private-narHash" ''
-              nix flake lock ./dev/private
-              nix hash path ./dev/private > ./dev/private.narHash
-            '';
-          } // lib.optionalAttrs defaultPlatform {
-            docs = inputs.mkdocs-numtide.lib.${system}.mkDocs {
-              name = "srvos";
-              src = self;
+          packages =
+            {
+              update-dev-private-narHash = pkgs.writeScriptBin "update-dev-private-narHash" ''
+                nix flake lock ./dev/private
+                nix hash path ./dev/private > ./dev/private.narHash
+              '';
+            }
+            // lib.optionalAttrs defaultPlatform {
+              docs = inputs.mkdocs-numtide.lib.${system}.mkDocs {
+                name = "srvos";
+                src = self;
+              };
             };
-          };
           pre-commit = {
             check.enable = defaultPlatform;
             settings.hooks.dev-private-narHash = {

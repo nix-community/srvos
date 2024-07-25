@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   # Based on https://unix.stackexchange.com/questions/16578/resizable-serial-console-window
   resize = pkgs.writeShellScriptBin "resize" ''
@@ -34,10 +39,10 @@ in
     srvos.boot.consoles = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default =
-        [ "ttyS0,115200" ] ++
-        (lib.optional (pkgs.stdenv.hostPlatform.isAarch) "ttyAMA0,115200") ++
-        (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200") ++
-        [ "tty0" ];
+        [ "ttyS0,115200" ]
+        ++ (lib.optional (pkgs.stdenv.hostPlatform.isAarch) "ttyAMA0,115200")
+        ++ (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200")
+        ++ [ "tty0" ];
       example = [ "ttyS2,115200" ];
       description = lib.mdDoc ''
         The Linux kernel console option allows you to configure various devices as

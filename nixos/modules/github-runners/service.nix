@@ -1,21 +1,22 @@
-{ config
-, lib
-, pkgs
+{
+  config,
+  lib,
+  pkgs,
 
-, cfg ? config.profiles.srvos-github-runner
-, svcName
+  cfg ? config.profiles.srvos-github-runner,
+  svcName,
 
-, systemdDir ? "${svcName}/${cfg.name}"
+  systemdDir ? "${svcName}/${cfg.name}",
   # %t: Runtime directory root (usually /run); see systemd.unit(5)
-, runtimeDir ? "%t/${systemdDir}"
+  runtimeDir ? "%t/${systemdDir}",
   # %S: State directory root (usually /var/lib); see systemd.unit(5)
-, stateDir ? "%S/${systemdDir}"
+  stateDir ? "%S/${systemdDir}",
   # %L: Log directory root (usually /var/log); see systemd.unit(5)
-, logsDir ? "%L/${systemdDir}"
+  logsDir ? "%L/${systemdDir}",
   # Name of file stored in service state directory
-, currentConfigTokenFilename ? ".current-token"
+  currentConfigTokenFilename ? ".current-token",
 
-, ...
+  ...
 }:
 
 with lib;
@@ -34,15 +35,16 @@ in
     RUNNER_ROOT = stateDir;
   } // cfg.extraEnvironment;
 
-  path = (with pkgs; [
-    bash
-    coreutils
-    git
-    gnutar
-    gzip
-  ]) ++ [
-    config.nix.package
-  ] ++ cfg.extraPackages;
+  path =
+    (with pkgs; [
+      bash
+      coreutils
+      git
+      gnutar
+      gzip
+    ])
+    ++ [ config.nix.package ]
+    ++ cfg.extraPackages;
 
   serviceConfig =
     let
@@ -54,15 +56,17 @@ in
       # to contain more than one directory. This causes systemd to set the respective
       # environment variables with the path of all of the given directories, separated
       # by a colon.
-      writeScript = name: lines: pkgs.writeShellScript "${svcName}-${name}.sh" ''
-        set -euo pipefail
+      writeScript =
+        name: lines:
+        pkgs.writeShellScript "${svcName}-${name}.sh" ''
+          set -euo pipefail
 
-        STATE_DIRECTORY="$1"
-        RUNTIME_DIRECTORY="$2"
-        LOGS_DIRECTORY="$3"
+          STATE_DIRECTORY="$1"
+          RUNTIME_DIRECTORY="$2"
+          LOGS_DIRECTORY="$3"
 
-        ${lines}
-      '';
+          ${lines}
+        '';
     in
     {
       ExecStart = "${package}/bin/Runner.Listener run --startuptype service";
@@ -76,7 +80,14 @@ in
       # - Set up the directory structure by creating the necessary symlinks.
       ExecStartPre =
         let
-          runnerRegistrationConfig = getAttrs [ "name" "tokenFile" "url" "runnerGroup" "extraLabels" "ephemeral" ] cfg;
+          runnerRegistrationConfig = getAttrs [
+            "name"
+            "tokenFile"
+            "url"
+            "runnerGroup"
+            "extraLabels"
+            "ephemeral"
+          ] cfg;
           newConfigPath = builtins.toFile "${svcName}-config.json" (builtins.toJSON runnerRegistrationConfig);
           currentConfigPath = "$STATE_DIRECTORY/.nixos-current-config.json";
           newConfigTokenPath = "$STATE_DIRECTORY/.new-token";
@@ -89,19 +100,29 @@ in
 
           app_token = pkgs.writeShellApplication {
             name = "fetch_access_token";
-            runtimeInputs = with pkgs;[ jq openssl curl ];
+            runtimeInputs = with pkgs; [
+              jq
+              openssl
+              curl
+            ];
             text = ./app_token.sh;
           };
 
           token = pkgs.writeShellApplication {
             name = "fetch_runner_token";
-            runtimeInputs = with pkgs;[ jq curl ];
+            runtimeInputs = with pkgs; [
+              jq
+              curl
+            ];
             text = ./token.sh;
           };
 
           remove_existing_runner = pkgs.writeShellApplication {
             name = "remove_existing_runner";
-            runtimeInputs = with pkgs;[ jq curl ];
+            runtimeInputs = with pkgs; [
+              jq
+              curl
+            ];
             text = ./remove_existing_runner.sh;
           };
 
@@ -213,12 +234,25 @@ in
             ln -s "$STATE_DIRECTORY"/{${lib.concatStringsSep "," runnerCredFiles}} "$RUNTIME_DIRECTORY/"
           '';
         in
-        map (x: "${x} ${escapeShellArgs [ stateDir runtimeDir logsDir ]}") (builtins.filter (x: x != "") [
-          (optionalString (!isNull cfg.githubApp) "+${unconfigureRunnerGitHubApp}") # runs as root
-          (optionalString (isNull cfg.githubApp) "+${unconfigureRunner}") # runs as root
-          configureRunner
-          setupRuntimeDir
-        ]);
+        map
+          (
+            x:
+            "${x} ${
+              escapeShellArgs [
+                stateDir
+                runtimeDir
+                logsDir
+              ]
+            }"
+          )
+          (
+            builtins.filter (x: x != "") [
+              (optionalString (!isNull cfg.githubApp) "+${unconfigureRunnerGitHubApp}") # runs as root
+              (optionalString (isNull cfg.githubApp) "+${unconfigureRunner}") # runs as root
+              configureRunner
+              setupRuntimeDir
+            ]
+          );
 
       ExecStopPost =
         let
@@ -226,10 +260,16 @@ in
             RUNNER_ALLOW_RUNASROOT=1 ${package}/bin/config.sh remove --token "$(cat ${currentConfigTokenPath})" || true
           '';
         in
-        map (x: "${x} ${escapeShellArgs [ stateDir runtimeDir logsDir ]}") [
-          (optionalString (!isNull cfg.githubApp) "-+${unregisterScript}")
-        ];
-
+        map (
+          x:
+          "${x} ${
+            escapeShellArgs [
+              stateDir
+              runtimeDir
+              logsDir
+            ]
+          }"
+        ) [ (optionalString (!isNull cfg.githubApp) "-+${unregisterScript}") ];
 
       # If running in ephemeral mode, restart the service on-exit (i.e., successful de-registration of the runner)
       # to trigger a fresh registration.
@@ -295,7 +335,12 @@ in
         "~setdomainname"
         "~sethostname"
       ];
-      RestrictAddressFamilies = [ "AF_INET" "AF_INET6" "AF_UNIX" "AF_NETLINK" ];
+      RestrictAddressFamilies = [
+        "AF_INET"
+        "AF_INET6"
+        "AF_UNIX"
+        "AF_NETLINK"
+      ];
 
       # Needs network access
       PrivateNetwork = false;
@@ -316,7 +361,7 @@ in
       # Note that this has some interactions with the User setting; so you may
       # want to consult the systemd docs if using both.
       DynamicUser = true;
-    } // (
-      lib.optionalAttrs (cfg.user != null) { User = cfg.user; }
-    ) // cfg.serviceOverrides;
+    }
+    // (lib.optionalAttrs (cfg.user != null) { User = cfg.user; })
+    // cfg.serviceOverrides;
 }

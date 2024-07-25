@@ -1,9 +1,13 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.roles.nix-remote-builder;
 in
 {
-
 
   options.roles.nix-remote-builder = {
     schedulerPublicKeys = lib.mkOption {
@@ -23,15 +27,18 @@ in
 
     # Allow more open files for non-root users to run NixOS VM tests.
     security.pam.loginLimits = [
-      { domain = "*"; item = "nofile"; type = "-"; value = "20480"; }
+      {
+        domain = "*";
+        item = "nofile";
+        type = "-";
+        value = "20480";
+      }
     ];
 
     # Give restricted SSH access to the build scheduler
-    users.users.nix-remote-builder.openssh.authorizedKeys.keys = map
-      (key:
-        ''restrict,command="nix-daemon --stdio" ${key}''
-      )
-      cfg.schedulerPublicKeys;
+    users.users.nix-remote-builder.openssh.authorizedKeys.keys = map (
+      key: ''restrict,command="nix-daemon --stdio" ${key}''
+    ) cfg.schedulerPublicKeys;
     users.users.nix-remote-builder.isNormalUser = true;
     users.users.nix-remote-builder.group = "nogroup";
     nix.settings.trusted-users = [ "nix-remote-builder" ];
