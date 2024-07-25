@@ -1,8 +1,8 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+{
 
   imports = [ ./. ];
 
   boot.kernelModules = [ "kvm-amd" ];
-  hardware.cpu.amd.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

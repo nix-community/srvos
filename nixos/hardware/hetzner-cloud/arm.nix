@@ -1,7 +1,5 @@
 {
-  imports = [
-    ./.
-  ];
+  imports = [ ./. ];
 
   config = {
     # arm uses EFI, so we need systemd-boot

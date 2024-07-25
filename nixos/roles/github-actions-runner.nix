@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.roles.github-actions-runner;
   queued-build-hook = builtins.fetchTarball {
@@ -44,30 +49,31 @@ in
       default = true;
     };
 
-
     githubApp = lib.mkOption {
       default = null;
       description = lib.mdDoc ''
         Authenticate runners using GitHub App
       '';
-      type = lib.types.nullOr (lib.types.submodule {
-        options = {
-          id = lib.mkOption {
-            type = lib.types.str;
-            description = lib.mdDoc "GitHub App ID";
+      type = lib.types.nullOr (
+        lib.types.submodule {
+          options = {
+            id = lib.mkOption {
+              type = lib.types.str;
+              description = lib.mdDoc "GitHub App ID";
+            };
+            login = lib.mkOption {
+              type = lib.types.str;
+              description = lib.mdDoc "GitHub login used to register the application";
+            };
+            privateKeyFile = lib.mkOption {
+              type = lib.types.path;
+              description = lib.mdDoc ''
+                The full path to a file containing the GitHub App private key.
+              '';
+            };
           };
-          login = lib.mkOption {
-            type = lib.types.str;
-            description = lib.mdDoc "GitHub login used to register the application";
-          };
-          privateKeyFile = lib.mkOption {
-            type = lib.types.path;
-            description = lib.mdDoc ''
-              The full path to a file containing the GitHub App private key.
-            '';
-          };
-        };
-      });
+        }
+      );
     };
 
     name = lib.mkOption {
@@ -155,7 +161,12 @@ in
     };
 
     nodeRuntimes = lib.mkOption {
-      type = with lib.types; nonEmptyListOf (enum [ "node16" "node20" ]);
+      type =
+        with lib.types;
+        nonEmptyListOf (enum [
+          "node16"
+          "node20"
+        ]);
       default = [ "node20" ];
       description = lib.mdDoc ''
         List of Node.js runtimes the runner should support.
@@ -165,8 +176,8 @@ in
 
   config = lib.mkIf (cfg.url != null) {
     users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
-    services.srvos-github-runners = builtins.listToAttrs (map
-      (n: rec {
+    services.srvos-github-runners = builtins.listToAttrs (
+      map (n: rec {
         name = "${cfg.name}-${toString n}";
         value = {
           inherit name;
@@ -177,13 +188,15 @@ in
           githubApp = cfg.githubApp;
           ephemeral = cfg.ephemeral;
           nodeRuntimes = cfg.nodeRuntimes;
-          serviceOverrides = {
-            DeviceAllow = [ "/dev/kvm" ];
-            PrivateDevices = false;
-          } // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
-            ReadWritePaths = cfg.extraReadWritePaths;
-            Group = [ "github-runner" ];
-          });
+          serviceOverrides =
+            {
+              DeviceAllow = [ "/dev/kvm" ];
+              PrivateDevices = false;
+            }
+            // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
+              ReadWritePaths = cfg.extraReadWritePaths;
+              Group = [ "github-runner" ];
+            });
           extraPackages = [
             pkgs.cachix
             pkgs.glibc.bin
@@ -194,8 +207,8 @@ in
           ] ++ cfg.extraPackages;
           extraLabels = cfg.extraLabels;
         };
-      })
-      (lib.range 1 cfg.count));
+      }) (lib.range 1 cfg.count)
+    );
 
     # Required to run unmodified binaries fetched via dotnet in a dev environment.
     programs.nix-ld.enable = true;
@@ -208,13 +221,15 @@ in
       jobs = 4;
     };
 
-    queued-build-hook = lib.mkIf (cfg.binary-cache.script != null)
-      ({
+    queued-build-hook = lib.mkIf (cfg.binary-cache.script != null) (
+      {
         enable = true;
         postBuildScriptContent = cfg.binary-cache.script;
         credentials = cfg.binary-cache.credentials;
-      } // (lib.optionalAttrs (cfg.binary-cache.enqueueScript != "") {
+      }
+      // (lib.optionalAttrs (cfg.binary-cache.enqueueScript != "") {
         enqueueScriptContent = cfg.binary-cache.enqueueScript;
-      }));
+      })
+    );
   };
 }

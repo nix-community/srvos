@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   imports = [
     ./flake.nix
     ./nix.nix

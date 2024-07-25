@@ -26,9 +26,7 @@
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
   # - For systemd in initrd we have now systemd-repart, but many images still set boot.growPartition
   boot.initrd.systemd.enable = lib.mkDefault (
-    !config.boot.swraid.enable &&
-    !config.boot.isContainer &&
-    !config.boot.growPartition
+    !config.boot.swraid.enable && !config.boot.isContainer && !config.boot.growPartition
   );
 
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
