@@ -15,7 +15,7 @@
   nix.settings.log-lines = lib.mkDefault 25;
 
   # De-duplicate store paths using hardlinks
-  nix.optimise.automatic = true;
+  nix.optimise.automatic = lib.mkDefault true;
 
   # Avoid disk full issues
   nix.settings.max-free = lib.mkDefault (3000 * 1024 * 1024);
