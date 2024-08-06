@@ -7,7 +7,6 @@
   inputs.nix-darwin.inputs.nixpkgs.follows = "";
 
   inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
-  inputs.mkdocs-numtide.inputs.nixpkgs.follows = "nixos-stable";
 
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.treefmt-nix.inputs.nixpkgs.follows = "";
