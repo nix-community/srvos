@@ -73,5 +73,6 @@ in
         )
       )
     );
+    systemd.services.nix-daemon.after = map (name: "${name}.service") (attrNames cfg);
   };
 }
