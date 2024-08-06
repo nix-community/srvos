@@ -22,7 +22,6 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             experimental-features = nix-command flakes
-            max-jobs = 0
 
       - name: Build
         id: build
