@@ -1163,7 +1163,7 @@
 
 <p>Those high-level modules are used to define the type of machine.</p>
 <p>We expect only one of those to be imported per Darwin configuration.</p>
-<h3 id="common-darwinmodulescommon">Common (<code>darwinModules.common</code>)</h3>
+<h3 id="common-darwinmodulescommon">Common (<a href="https://github.com/nix-community/srvos/blob/main/darwin/common/default.nix"><code>darwinModules.common</code></a>)</h3>
 <p>Use this module if you are unsure if your darwin module will be used on server or desktop.</p>
 <ul>
 <li>Better nix-daemon defaults</li>
@@ -1177,13 +1177,13 @@
 <li>Enable sudo for @wheel users.</li>
 <li>...</li>
 </ul>
-<h3 id="server-darwinmodulesserver">Server (<code>darwinModules.server</code>)</h3>
+<h3 id="server-darwinmodulesserver">Server (<a href="https://github.com/nix-community/srvos/blob/main/darwin/server/default.nix"><code>darwinModules.server</code></a>)</h3>
 <p>Use this for headless systems that are remotely managed via ssh.</p>
 <ul>
 <li>Includes everything from common</li>
 <li>So far nothing else, but this might change over time</li>
 </ul>
-<h3 id="desktop-darwinmodulesdesktop">Desktop (<code>darwinModules.desktop</code>)</h3>
+<h3 id="desktop-darwinmodulesdesktop">Desktop (<a href="https://github.com/nix-community/srvos/blob/main/darwin/desktop/default.nix"><code>darwinModules.desktop</code></a>)</h3>
 <p>Despite this project being about servers, we wanted to dogfood the common module.</p>
 <ul>
 <li>Includes everything from common</li>

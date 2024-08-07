@@ -1163,7 +1163,7 @@
 
 <p>Those high-level modules are used to define the type of machine.</p>
 <p>We expect only one of those to be imported per NixOS configuration.</p>
-<h3 id="common-nixosmodulescommon">Common (<code>nixosModules.common</code>)</h3>
+<h3 id="common-nixosmodulescommon">Common (<a href="https://github.com/nix-community/srvos/blob/main/nixos/common/default.nix"><code>nixosModules.common</code></a>)</h3>
 <p>Use this module if you are unsure if your nixos module will be used on server or desktop.</p>
 <ul>
 <li>Better nix-daemon defaults</li>
@@ -1177,7 +1177,7 @@
 <li>Enable sudo for @wheel users.</li>
 <li>...</li>
 </ul>
-<h3 id="server-nixosmodulesserver">Server (<code>nixosModules.server</code>)</h3>
+<h3 id="server-nixosmodulesserver">Server (<a href="https://github.com/nix-community/srvos/blob/main/nixos/server/default.nix"><code>nixosModules.server</code></a>)</h3>
 <p>Use this for headless systems that are remotely managed via ssh.</p>
 <ul>
 <li>Includes everything from common</li>
@@ -1188,7 +1188,7 @@
 <li>Sets up sudo without password</li>
 <li>...</li>
 </ul>
-<h3 id="desktop-nixosmodulesdesktop">Desktop (<code>nixosModules.desktop</code>)</h3>
+<h3 id="desktop-nixosmodulesdesktop">Desktop (<a href="https://github.com/nix-community/srvos/blob/main/nixos/desktop/default.nix"><code>nixosModules.desktop</code></a>)</h3>
 <p>Despite this project being about servers, we wanted to dogfood the common module.</p>
 <ul>
 <li>Includes everything from common</li>

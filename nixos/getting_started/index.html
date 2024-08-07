@@ -1169,10 +1169,10 @@
 <h2 id="finding-your-way-around">Finding your way around</h2>
 <p>This project exports four big categories of NixOS modules which are useful to define a server configuration:</p>
 <ul>
-<li>Machine type - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.</li>
-<li>Machine hardware - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).</li>
-<li>Machine role - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)</li>
-<li>Configuration mixins - these define addons to be added to the machine configuration. One or more can be added.</li>
+<li><a href="../type/">Machine type</a> - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.</li>
+<li><a href="../hardware/">Machine hardware</a> - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).</li>
+<li><a href="../role/">Machine role</a> - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)</li>
+<li><a href="../mixins/">Configuration mixins</a> - these define addons to be added to the machine configuration. One or more can be added.</li>
 </ul>
 <h2 id="example">Example</h2>
 <p>Combining all of those together, here is how your <code>flake.nix</code> might look like, to deploy a GitHub Actions runner on Hetzner:</p>

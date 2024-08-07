@@ -1236,27 +1236,27 @@
 <p>Hardware modules are used to configure NixOS for well known hardware.</p>
 <p>We expect only one hardware module to be imported per NixOS configuration.</p>
 <p>Here are some of the hardwares that are supported:</p>
-<h3 id="nixosmoduleshardware-amazon"><code>nixosModules.hardware-amazon</code></h3>
+<h3 id="nixosmoduleshardware-amazon"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/amazon/default.nix"><code>nixosModules.hardware-amazon</code></a></h3>
 <p>Hardware configuration for <a href="https://aws.amazon.com/ec2">https://aws.amazon.com/ec2</a> instances.</p>
 <p>The main difference here is that the default userdata service is replaced by cloud-init.</p>
-<h3 id="nixosmoduleshardware-digitalocean-droplet"><code>nixosModules.hardware-digitalocean-droplet</code></h3>
+<h3 id="nixosmoduleshardware-digitalocean-droplet"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/digitalocean/droplet.nix"><code>nixosModules.hardware-digitalocean-droplet</code></a></h3>
 <p>Hardware configuration for <a href="https://www.digitalocean.com/">https://www.digitalocean.com/</a> instances.</p>
 <p>Enables cloud-init but turns of non-working dhcp.</p>
-<h3 id="nixosmoduleshardware-hetzner-cloud"><code>nixosModules.hardware-hetzner-cloud</code></h3>
+<h3 id="nixosmoduleshardware-hetzner-cloud"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-cloud/default.nix"><code>nixosModules.hardware-hetzner-cloud</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/cloud">https://www.hetzner.com/cloud</a> instances.</p>
 <p>The main difference here is that:
 1. cloud-init is enabled.
 2. the qemu agent is running, to allow password reset to function.</p>
-<h3 id="nixosmoduleshardware-hetzner-cloud-arm"><code>nixosModules.hardware-hetzner-cloud-arm</code></h3>
+<h3 id="nixosmoduleshardware-hetzner-cloud-arm"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-cloud/arm.nix"><code>nixosModules.hardware-hetzner-cloud-arm</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/cloud">https://www.hetzner.com/cloud</a> arm instances.</p>
 <p>The main difference from <code>nixosModules.hardware-hetzner-cloud</code> is using systemd-boot by default.</p>
-<h3 id="nixosmoduleshardware-hetzner-online-amd"><code>nixosModules.hardware-hetzner-online-amd</code></h3>
+<h3 id="nixosmoduleshardware-hetzner-online-amd"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-online/amd.nix"><code>nixosModules.hardware-hetzner-online-amd</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/dedicated-rootserver">https://www.hetzner.com/dedicated-rootserver</a> bare-metal AMD servers.</p>
 <p>Introduces some workaround for the particular IPv6 configuration that Hetzner has.</p>
-<h3 id="nixosmoduleshardware-hetzner-online-intel"><code>nixosModules.hardware-hetzner-online-intel</code></h3>
+<h3 id="nixosmoduleshardware-hetzner-online-intel"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-online/intel.nix"><code>nixosModules.hardware-hetzner-online-intel</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/dedicated-rootserver">https://www.hetzner.com/dedicated-rootserver</a> bare-metal Intel servers.</p>
 <p>Introduces some workaround for the particular IPv6 configuration that Hetzner has.</p>
-<h3 id="nixosmoduleshardware-hetzner-online-ex101"><code>nixosModules.hardware-hetzner-online-ex101</code></h3>
+<h3 id="nixosmoduleshardware-hetzner-online-ex101"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-online/ex101.nix"><code>nixosModules.hardware-hetzner-online-ex101</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/de/dedicated-rootserver/ex101">https://www.hetzner.com/de/dedicated-rootserver/ex101</a> bare-metal Intel Core i9-13900 servers.</p>
 <p>Introduces some workaround for crashes under load.</p>
 

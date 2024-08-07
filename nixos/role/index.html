@@ -1146,9 +1146,9 @@
 <p>Roles are special types of NixOS modules that are designed to take over a machine configuration.</p>
 <p>We assume that only one role is assigned per machine.</p>
 <p>By making this assumption, we are able to make deeper change to the machine configuration, without having to worry about potential conflicts with other roles.</p>
-<h3 id="github-actions-runner-nixosconfigurationroles-github-actions-runner">GitHub Actions runner (<code>nixosConfiguration.roles-github-actions-runner</code>)</h3>
+<h3 id="github-actions-runner-nixosconfigurationroles-github-actions-runner">GitHub Actions runner (<a href="https://github.com/nix-community/srvos/blob/main/nixos/roles/github-actions-runner.nix"><code>nixosConfiguration.roles-github-actions-runner</code></a>)</h3>
 <p>Dedicates the machine to becoming a cluster of GitHub Actions runners. </p>
-<h3 id="nix-remote-builder-nixosconfigurationroles-nix-remote-builder">Nix Remote builder (<code>nixosConfiguration.roles-nix-remote-builder</code>)</h3>
+<h3 id="nix-remote-builder-nixosconfigurationroles-nix-remote-builder">Nix Remote builder (<a href="https://github.com/nix-community/srvos/blob/main/nixos/roles/nix-remote-builder.nix"><code>nixosConfiguration.roles-nix-remote-builder</code></a>)</h3>
 <p>Dedicates the machine to acting as a remote builder for Nix. The main use-case we have is to add more build capacity to the GitHub Actions runners, in a star fashion.</p>
 
 

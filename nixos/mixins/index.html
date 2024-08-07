@@ -1271,27 +1271,27 @@
 
 <p>Config extensions for a given machine.</p>
 <p>One or more can be included per NixOS configuration.</p>
-<h3 id="nixosmodulesmixins-cloud-init"><code>nixosModules.mixins-cloud-init</code></h3>
+<h3 id="nixosmodulesmixins-cloud-init"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/cloud-init.nix"><code>nixosModules.mixins-cloud-init</code></a></h3>
 <p>Enables <a href="https://cloud-init.io">cloud-init</a></p>
-<h3 id="nixosmodulesmixins-systemd-boot"><code>nixosModules.mixins-systemd-boot</code></h3>
+<h3 id="nixosmodulesmixins-systemd-boot"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/systemd-boot.nix"><code>nixosModules.mixins-systemd-boot</code></a></h3>
 <p>Configure systemd-boot as bootloader.</p>
-<h3 id="nixosmodulesmixins-telegraf"><code>nixosModules.mixins-telegraf</code></h3>
+<h3 id="nixosmodulesmixins-telegraf"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/telegraf.nix"><code>nixosModules.mixins-telegraf</code></a></h3>
 <p>Enables a generic telegraf configuration. <code>nixosModules.mixins-prometheus</code> for monitoring rules targeting this telegraf configuration.</p>
-<h3 id="nixosmodulesmixins-terminfo"><code>nixosModules.mixins-terminfo</code></h3>
+<h3 id="nixosmodulesmixins-terminfo"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/terminfo.nix"><code>nixosModules.mixins-terminfo</code></a></h3>
 <p>Extends the terminfo database with often used terminal emulators.
 Terminfo is used by terminal applications to interfere supported features in the terminal.
 This is useful when connecting to a server via SSH.</p>
-<h3 id="nixosmodulesmixins-prometheus"><code>nixosModules.mixins-prometheus</code></h3>
+<h3 id="nixosmodulesmixins-prometheus"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/prometheus.nix"><code>nixosModules.mixins-prometheus</code></a></h3>
 <p>Enables a Prometheus and configures it with a set of alert rules targeting our <code>nixosModules.mixins-prometheus</code> module.</p>
-<h3 id="nixosmodulesmixins-nginx"><code>nixosModules.mixins-nginx</code></h3>
+<h3 id="nixosmodulesmixins-nginx"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/nginx.nix"><code>nixosModules.mixins-nginx</code></a></h3>
 <p>Configure Nginx with recommended settings. Is quite useful when using nginx as a reverse-proxy on the machine to other services.</p>
-<h3 id="nixosmodulesmixins-nix-experimental"><code>nixosModules.mixins-nix-experimental</code></h3>
+<h3 id="nixosmodulesmixins-nix-experimental"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/nix-experimental.nix"><code>nixosModules.mixins-nix-experimental</code></a></h3>
 <p>Enables all experimental features in nix, that are known safe to use (i.e. are only used when explicitly requested in a build).
 This for example unlocks use of containers in the nix sandbox.</p>
-<h3 id="nixosmodulesmixins-trusted-nix-caches"><code>nixosModules.mixins-trusted-nix-caches</code></h3>
+<h3 id="nixosmodulesmixins-trusted-nix-caches"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/trusted-nix-caches.nix"><code>nixosModules.mixins-trusted-nix-caches</code></a></h3>
 <p>Add the common list of public nix binary caches that we trust.</p>
-<h3 id="nixosmodulesmixins-mdns"><code>nixosModules.mixins-mdns</code></h3>
-<p>Enables mDNS support in systemd-networkd. Becomes a no-op if avahi is enabled on the same machine</p>
+<h3 id="nixosmodulesmixins-mdns"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/mdns.nix"><code>nixosModules.mixins-mdns</code></a></h3>
+<p>Enables mDNS support in systemd-networkd. Becomes a no-op if avahi is enabled on the same machine.</p>
 
 
 
