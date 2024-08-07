@@ -4,10 +4,10 @@
 
 This project exports four big categories of NixOS modules which are useful to define a server configuration:
 
-* Machine type - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.
-* Machine hardware - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
-* Machine role - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)
-* Configuration mixins - these define addons to be added to the machine configuration. One or more can be added.
+* [Machine type](./type.md) - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.
+* [Machine hardware](./hardware.md) - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
+* [Machine role](./role.md) - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)
+* [Configuration mixins](./mixins.md) - these define addons to be added to the machine configuration. One or more can be added.
 
 ## Example
 
