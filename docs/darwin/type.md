@@ -2,7 +2,7 @@ Those high-level modules are used to define the type of machine.
 
 We expect only one of those to be imported per Darwin configuration.
 
-### Common (`darwinModules.common`)
+### Common ([`darwinModules.common`]({{ repo_url }}/blob/main/darwin/common/default.nix))
 
 Use this module if you are unsure if your darwin module will be used on server or desktop.
 
@@ -17,14 +17,14 @@ Use this module if you are unsure if your darwin module will be used on server o
 - Enable sudo for @wheel users.
 - ...
 
-### Server (`darwinModules.server`)
+### Server ([`darwinModules.server`]({{ repo_url }}/blob/main/darwin/server/default.nix))
 
 Use this for headless systems that are remotely managed via ssh.
 
 - Includes everything from common
 - So far nothing else, but this might change over time
 
-### Desktop (`darwinModules.desktop`)
+### Desktop ([`darwinModules.desktop`]({{ repo_url }}/blob/main/darwin/desktop/default.nix))
 
 Despite this project being about servers, we wanted to dogfood the common module.
 
