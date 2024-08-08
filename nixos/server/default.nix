@@ -73,6 +73,14 @@
   # No mutable users by default
   users.mutableUsers = false;
 
+  # Given that our systems are headless, emergency mode is useless.
+  # We prefer the system to attempt to continue booting so
+  # that we can hopefully still access it remotely.
+  boot.initrd.systemd.suppressedUnits = [
+    "emergency.service"
+    "emergency.target"
+  ];
+
   systemd = {
     # Given that our systems are headless, emergency mode is useless.
     # We prefer the system to attempt to continue booting so
