@@ -43,7 +43,7 @@
   networking.firewall.enable = true;
 
   # Delegate the hostname setting to dhcp/cloud-init by default
-  networking.hostName = lib.mkDefault "";
+  networking.hostName = lib.mkOverride 1337 "";
 
   # If the user is in @wheel they are trusted by default.
   nix.settings.trusted-users = [
