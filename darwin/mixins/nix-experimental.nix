@@ -29,7 +29,4 @@
     ++ lib.optional (lib.versionAtLeast (lib.versions.majorMinor config.nix.package.version) "2.19")
       # Allow the use of the impure-env setting.
       "configurable-impure-env";
-
-  # for container in builds support
-  nix.settings.system-features = lib.mkDefault [ "uid-range" ];
 }
