@@ -14,8 +14,9 @@
   # The default at 10 is rarely enough.
   nix.settings.log-lines = lib.mkDefault 25;
 
-  # De-duplicate store paths using hardlinks
-  nix.optimise.automatic = lib.mkDefault true;
+  # De-duplicate store paths using hardlinks except in containers
+  # where the store is host-managed.
+  nix.optimise.automatic = lib.mkDefault (!config.boot.isContainer);
 
   # Avoid disk full issues
   nix.settings.max-free = lib.mkDefault (3000 * 1024 * 1024);
