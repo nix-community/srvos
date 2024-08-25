@@ -13,7 +13,7 @@
 
   config = {
     boot.growPartition = true;
-    boot.loader.grub.device = "/dev/sda";
+    boot.loader.grub.devices = lib.mkDefault [ "/dev/sda" ];
 
     fileSystems."/" = lib.mkDefault {
       device = "/dev/sda1";
