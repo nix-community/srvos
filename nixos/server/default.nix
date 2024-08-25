@@ -1,6 +1,11 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  options,
+  ...
+}:
 {
 
   imports = [ ../common ];
@@ -35,7 +40,7 @@
     {
       defaultEditor = lib.mkDefault true;
     }
-    // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.11") {
+    // lib.optionalAttrs (options.programs.vim ? enable) {
       enable = lib.mkDefault true;
     };
 

@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ modulesPath, lib, ... }:
 {
   imports = [
     ./.
@@ -7,5 +7,5 @@
   ];
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.devices = [ "/dev/vda" ];
+  boot.loader.grub.devices = lib.mkDefault [ "/dev/vda" ];
 }
