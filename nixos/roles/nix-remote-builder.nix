@@ -42,5 +42,8 @@ in
     users.users.nix-remote-builder.isNormalUser = true;
     users.users.nix-remote-builder.group = "nogroup";
     nix.settings.trusted-users = [ "nix-remote-builder" ];
+
+    # Allow more nix-daemon sessions to connect at the same time.
+    services.openssh.settings.MaxStartups = 100;
   };
 }
