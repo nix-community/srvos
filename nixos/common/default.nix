@@ -5,7 +5,6 @@
 
   imports = [
     ./flake.nix
-    ./mdmonitor-fix.nix
     ./networking.nix
     ./nix.nix
     ./openssh.nix
