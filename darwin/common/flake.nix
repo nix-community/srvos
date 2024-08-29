@@ -14,7 +14,7 @@ in
       # FIXME what is the type of a flake?
       type = lib.types.nullOr lib.types.raw;
       default = null;
-      description = lib.mdDoc ''
+      description = ''
         Flake that contains the nixos configuration.
       '';
     };

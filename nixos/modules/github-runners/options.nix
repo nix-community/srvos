@@ -12,7 +12,7 @@ with lib;
   enable = mkOption {
     default = false;
     example = true;
-    description = lib.mdDoc ''
+    description = ''
       Whether to enable GitHub Actions runner.
 
       Note: GitHub recommends using self-hosted runners with private repositories only. Learn more here:
@@ -23,7 +23,7 @@ with lib;
 
   url = mkOption {
     type = types.str;
-    description = lib.mdDoc ''
+    description = ''
       Repository to add the runner to.
 
       Changing this option triggers a new runner registration.
@@ -42,7 +42,7 @@ with lib;
   tokenFile = mkOption {
     type = types.nullOr types.path;
     default = null;
-    description = lib.mdDoc ''
+    description = ''
       The full path to a file which contains either a runner registration token or a
       (fine-grained) personal access token (PAT).
       The file should contain exactly one line with the token without any newline.
@@ -60,7 +60,7 @@ with lib;
 
   githubApp = lib.mkOption {
     default = null;
-    description = lib.mdDoc ''
+    description = ''
       Authenticate runners using GitHub App
     '';
     type = lib.types.nullOr (
@@ -68,15 +68,15 @@ with lib;
         options = {
           id = mkOption {
             type = types.str;
-            description = lib.mdDoc "GitHub App ID";
+            description = "GitHub App ID";
           };
           login = mkOption {
             type = types.str;
-            description = lib.mdDoc "GitHub login used to register the application";
+            description = "GitHub login used to register the application";
           };
           privateKeyFile = mkOption {
             type = types.path;
-            description = lib.mdDoc ''
+            description = ''
               The full path to a file containing the GitHub App private key.
             '';
           };
@@ -92,7 +92,7 @@ with lib;
     in
     mkOption {
       type = if includeNameDefault then baseType else types.nullOr baseType;
-      description = lib.mdDoc ''
+      description = ''
         Name of the runner to configure. Defaults to the hostname.
 
         Changing this option triggers a new runner registration.
@@ -111,7 +111,7 @@ with lib;
 
   runnerGroup = mkOption {
     type = types.nullOr types.str;
-    description = lib.mdDoc ''
+    description = ''
       Name of the runner group to add this runner to (defaults to the default runner group).
 
       Changing this option triggers a new runner registration.
@@ -121,7 +121,7 @@ with lib;
 
   extraLabels = mkOption {
     type = types.listOf types.str;
-    description = lib.mdDoc ''
+    description = ''
       Extra labels in addition to the default (`["self-hosted", "Linux", "X64"]`).
 
       Changing this option triggers a new runner registration.
@@ -132,7 +132,7 @@ with lib;
 
   replace = mkOption {
     type = types.bool;
-    description = lib.mdDoc ''
+    description = ''
       Replace any existing runner with the same name.
 
       Without this flag, registering a new runner with the same name fails.
@@ -142,7 +142,7 @@ with lib;
 
   extraPackages = mkOption {
     type = types.listOf types.package;
-    description = lib.mdDoc ''
+    description = ''
       Extra packages to add to `PATH` of the service to make them available to workflows.
     '';
     default = [ ];
@@ -150,7 +150,7 @@ with lib;
 
   extraEnvironment = mkOption {
     type = types.attrs;
-    description = lib.mdDoc ''
+    description = ''
       Extra environment variables to set for the runner, as an attrset.
     '';
     example = {
@@ -161,7 +161,7 @@ with lib;
 
   serviceOverrides = mkOption {
     type = types.attrs;
-    description = lib.mdDoc ''
+    description = ''
       Overrides for the systemd service. Can be used to adjust the sandboxing options.
     '';
     example = {
@@ -172,7 +172,7 @@ with lib;
 
   package = mkOption {
     type = types.package;
-    description = lib.mdDoc ''
+    description = ''
       Which github-runner derivation to use.
     '';
     default = pkgs.github-runner;
@@ -181,7 +181,7 @@ with lib;
 
   ephemeral = mkOption {
     type = types.bool;
-    description = lib.mdDoc ''
+    description = ''
       If enabled, causes the following behavior:
 
       - Passes the `--ephemeral` flag to the runner configuration script
@@ -199,7 +199,7 @@ with lib;
 
   user = mkOption {
     type = types.nullOr types.str;
-    description = lib.mdDoc ''
+    description = ''
       User under which to run the service. If null, will use a systemd dynamic user.
     '';
     default = null;
@@ -214,7 +214,7 @@ with lib;
         "node20"
       ]);
     default = [ "node20" ];
-    description = mdDoc ''
+    description = ''
       List of Node.js runtimes the runner should support.
     '';
   };
