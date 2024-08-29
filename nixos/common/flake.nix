@@ -14,7 +14,7 @@ in
       # FIXME what is the type of a flake?
       type = lib.types.nullOr lib.types.raw;
       default = null;
-      description = lib.mdDoc ''
+      description = ''
         Flake that contains the nixos configuration.
       '';
     };
@@ -22,7 +22,7 @@ in
     symlinkFlake = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = lib.mdDoc ''
+      description = ''
         Symlinks the flake the system was built with to `/run/current-system`
         Having access to the flake the system was installed with can be useful for introspection.
 

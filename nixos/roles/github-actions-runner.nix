@@ -33,7 +33,7 @@ in
 
     ephemeral = lib.mkOption {
       type = lib.types.bool;
-      description = lib.mdDoc ''
+      description = ''
         If enabled, causes the following behavior:
 
         - Passes the `--ephemeral` flag to the runner configuration script
@@ -51,7 +51,7 @@ in
 
     githubApp = lib.mkOption {
       default = null;
-      description = lib.mdDoc ''
+      description = ''
         Authenticate runners using GitHub App
       '';
       type = lib.types.nullOr (
@@ -59,15 +59,15 @@ in
           options = {
             id = lib.mkOption {
               type = lib.types.str;
-              description = lib.mdDoc "GitHub App ID";
+              description = "GitHub App ID";
             };
             login = lib.mkOption {
               type = lib.types.str;
-              description = lib.mdDoc "GitHub login used to register the application";
+              description = "GitHub login used to register the application";
             };
             privateKeyFile = lib.mkOption {
               type = lib.types.path;
-              description = lib.mdDoc ''
+              description = ''
                 The full path to a file containing the GitHub App private key.
               '';
             };
@@ -90,7 +90,7 @@ in
 
     extraReadWritePaths = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      description = lib.mdDoc ''
+      description = ''
         The GitHub Runner service is configured to makes the entire system read-only by default.
         This option can be used to allow specific paths to remain writable for the service.
 
@@ -116,12 +116,12 @@ in
 
     binary-cache = {
       script = lib.mkOption {
-        description = lib.mdDoc "Script used by asynchronous process to upload Nix packages to the binary cache, without requiring the use of Cachix.";
+        description = "Script used by asynchronous process to upload Nix packages to the binary cache, without requiring the use of Cachix.";
         type = lib.types.nullOr lib.types.str;
         default = null;
       };
       enqueueScript = lib.mkOption {
-        description = lib.mdDoc ''
+        description = ''
           Script content responsible for enqueuing newly-built packages and passing them to the daemon.
 
           Although the default configuration should suffice, there may be situations that require customized handling of specific packages.
@@ -131,7 +131,7 @@ in
         default = "";
       };
       credentials = lib.mkOption {
-        description = lib.mdDoc ''
+        description = ''
           Credentials to load by startup. Keys that are UPPER_SNAKE will be loaded as env vars. Values are absolute paths to the credentials.
         '';
         type = lib.types.attrsOf lib.types.str;
@@ -146,7 +146,7 @@ in
 
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      description = lib.mdDoc ''
+      description = ''
         Extra packages to add to `PATH` of the service to make them available to workflows.
       '';
       default = [ ];
@@ -154,7 +154,7 @@ in
 
     extraLabels = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      description = lib.mdDoc ''
+      description = ''
         Extra labels to add to the runners to be able to target them.
       '';
       default = [ "nix" ];
@@ -168,7 +168,7 @@ in
           "node20"
         ]);
       default = [ "node20" ];
-      description = lib.mdDoc ''
+      description = ''
         List of Node.js runtimes the runner should support.
       '';
     };

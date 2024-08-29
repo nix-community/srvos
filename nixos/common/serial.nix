@@ -44,7 +44,7 @@ in
         ++ (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200")
         ++ [ "tty0" ];
       example = [ "ttyS2,115200" ];
-      description = lib.mdDoc ''
+      description = ''
         The Linux kernel console option allows you to configure various devices as
         consoles.
         The default setting will print kernel messages to graphical console (i.e. VGA/HDMI)

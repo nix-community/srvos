@@ -39,7 +39,7 @@ in
         tokenFile = "/secrets/token2";
       };
     };
-    description = lib.mdDoc ''
+    description = ''
       Multiple GitHub Runners.
     '';
   };

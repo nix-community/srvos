@@ -38,7 +38,7 @@ in
                 type = lib.types.str;
                 default = name;
               };
-              enable = lib.mkEnableOption (lib.mdDoc "Enable rule group") // {
+              enable = lib.mkEnableOption "Enable rule group" // {
                 default = true;
               };
               alertRules = lib.mkOption {
@@ -51,7 +51,7 @@ in
                           type = lib.types.str;
                           default = name;
                         };
-                        enable = lib.mkEnableOption (lib.mdDoc "Enable alert rule") // {
+                        enable = lib.mkEnableOption "Enable alert rule" // {
                           default = true;
                         };
                         expr = lib.mkOption { type = lib.types.str; };
@@ -83,7 +83,7 @@ in
                           type = lib.types.str;
                           default = name;
                         };
-                        enable = lib.mkEnableOption (lib.mdDoc "Enable recording rule") // {
+                        enable = lib.mkEnableOption "Enable recording rule" // {
                           default = true;
                         };
                         expr = lib.mkOption { type = lib.types.str; };
