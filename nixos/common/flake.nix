@@ -7,6 +7,21 @@
 
 let
   cfg = config.srvos;
+
+  flake-registry = pkgs.writers.writeJSON "flake-registry.json" {
+    version = 2;
+    flakes = pkgs.lib.mapAttrsToList (name: value: {
+      exact = true;
+      from = {
+        id = name;
+        type = "indirect";
+      };
+      to = {
+        path = toString value;
+        type = "path";
+      };
+    }) ({ self = cfg.flake; } // cfg.flake.inputs);
+  };
 in
 {
   options.srvos = {
@@ -42,6 +57,9 @@ in
     };
   };
   config = lib.mkIf (cfg.flake != null) {
+    nix.settings.nix-path = lib.mkIf (cfg.flake.inputs ? nixpkgs) "nixpkgs=${cfg.flake.inputs.nixpkgs}";
+    nix.settings.flake-registry = lib.mkDefault flake-registry;
+
     system.extraSystemBuilderCmds = lib.optionalString cfg.symlinkFlake ''
       ln -s ${cfg.flake} $out/flake
     '';
