@@ -7,21 +7,6 @@
 
 let
   cfg = config.srvos;
-
-  flake-registry = pkgs.writers.writeJSON "flake-registry.json" {
-    version = 2;
-    flakes = pkgs.lib.mapAttrsToList (name: value: {
-      exact = true;
-      from = {
-        id = name;
-        type = "indirect";
-      };
-      to = {
-        path = toString value;
-        type = "path";
-      };
-    }) ({ self = cfg.flake; } // cfg.flake.inputs);
-  };
 in
 {
   options.srvos = {
@@ -34,17 +19,17 @@ in
       '';
     };
 
-    symlinkFlake = lib.mkOption {
+    registerSelf = lib.mkOption {
       type = lib.types.bool;
       default = true;
       description = ''
-        Symlinks the flake the system was built with to `/run/current-system`
+        Add the flake the system was built with to `nix.registry` as `self`.
         Having access to the flake the system was installed with can be useful for introspection.
 
         i.e. Get a development environment for the currently running kernel
 
         ```
-        $ nix develop "$(realpath /run/booted-system/flake)#nixosConfigurations.turingmachine.config.boot.kernelPackages.kernel"
+        $ nix develop self#nixosConfigurations.turingmachine.config.boot.kernelPackages.kernel
         $ tar -xvf $src
         $ cd linux-*
         $ zcat /proc/config.gz  > .config
@@ -55,14 +40,20 @@ in
         Set this option to false if you want to avoid uploading your configuration to every machine (i.e. in large monorepos)
       '';
     };
+
   };
   config = lib.mkIf (cfg.flake != null) {
-    nix.settings.nix-path = lib.mkIf (cfg.flake.inputs ? nixpkgs) "nixpkgs=${cfg.flake.inputs.nixpkgs}";
-    nix.settings.flake-registry = lib.mkDefault flake-registry;
 
-    system.extraSystemBuilderCmds = lib.optionalString cfg.symlinkFlake ''
-      ln -s ${cfg.flake} $out/flake
-    '';
+    nixpkgs.flake = {
+      source = lib.mkDefault (cfg.flake.inputs.nixpkgs or null);
+    };
+
+    nix.registry = lib.optionalAttrs cfg.registerSelf {
+      self.to = lib.mkDefault {
+        type = "path";
+        path = cfg.flake;
+      };
+    };
 
     services.telegraf.extraConfig.inputs.file =
       let
