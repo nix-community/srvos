@@ -43,6 +43,14 @@
   # No need for fonts on a server
   fonts.fontconfig.enable = lib.mkDefault false;
 
+  programs.command-not-found.enable = lib.mkDefault false;
+
+  # freedesktop xdg files
+  xdg.autostart.enable = lib.mkDefault false;
+  xdg.icons.enable = lib.mkDefault false;
+  xdg.mime.enable = lib.mkDefault false;
+  xdg.sounds.enable = lib.mkDefault false;
+
   programs.vim =
     {
       defaultEditor = lib.mkDefault true;
