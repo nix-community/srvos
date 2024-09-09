@@ -78,13 +78,17 @@ in
       }
     else
       null;
-  example-hardware-hetzner-online-amd = nixosSystem {
-    modules = [
-      dummy
-      self.nixosModules.hardware-hetzner-online-amd
-      { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
-    ];
-  };
+  example-hardware-hetzner-online-amd =
+    if (system == "x86_64-linux") then
+      nixosSystem {
+        modules = [
+          dummy
+          self.nixosModules.hardware-hetzner-online-amd
+          { systemd.network.networks."10-uplink".networkConfig.Address = "::cafe:babe:feed:face:dead:beef"; }
+        ];
+      }
+    else
+      null;
   example-hardware-hetzner-online-intel =
     if (system == "x86_64-linux") then
       nixosSystem {
