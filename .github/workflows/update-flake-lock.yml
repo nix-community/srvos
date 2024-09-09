@@ -35,7 +35,7 @@ jobs:
           popd
           nix run .#update-dev-private-narHash
           git commit --amend --no-edit dev/private.narHash
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           title: Update flake.lock files
           branch: update-flake-lock
