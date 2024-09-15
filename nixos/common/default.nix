@@ -20,13 +20,10 @@
     enableNg = lib.mkDefault true;
   };
 
-  # Use systemd during boot as well on systems except:
-  # - systems with raids as this currently require manual configuration (https://github.com/NixOS/nixpkgs/issues/210210)
+  # Use systemd during boot as well except:
+  # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
-  # - For systemd in initrd we have now systemd-repart, but many images still set boot.growPartition
-  boot.initrd.systemd.enable = lib.mkDefault (
-    !config.boot.swraid.enable && !config.boot.isContainer && !config.boot.growPartition
-  );
+  boot.initrd.systemd.enable = lib.mkDefault (!config.boot.swraid.enable && !config.boot.isContainer);
 
   # Work around for https://github.com/NixOS/nixpkgs/issues/124215
   documentation.info.enable = false;
