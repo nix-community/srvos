@@ -11,9 +11,9 @@
   networking.hostId = lib.mkDefault "8425e349";
 
   services.zfs = lib.mkIf (config.boot.zfs.enabled) {
-    autoSnapshot.enable = true;
+    autoSnapshot.enable = lib.mkDefault true;
     # defaults to 12, which is a bit much given how much data is written
     autoSnapshot.monthly = lib.mkDefault 1;
-    autoScrub.enable = true;
+    autoScrub.enable = lib.mkDefault true;
   };
 }
