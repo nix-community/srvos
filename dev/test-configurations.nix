@@ -150,6 +150,12 @@ in
       self.nixosModules.mixins-nginx
     ];
   };
+  examples-mixin-latest-zfs-kernel = nixosSystem {
+    modules = [
+      dummy
+      self.nixosModules.mixins-latest-zfs-kernel
+    ];
+  };
 
   # Roles
   example-roles-github-actions-runner = nixosSystem {
