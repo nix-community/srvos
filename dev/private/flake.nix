@@ -15,10 +15,10 @@
   inputs.treefmt-nix.url = "github:numtide/treefmt-nix";
   inputs.treefmt-nix.inputs.nixpkgs.follows = "";
 
-  inputs.pre-commit-hooks-nix.url = "github:cachix/pre-commit-hooks.nix";
-  inputs.pre-commit-hooks-nix.inputs.flake-compat.follows = "flake-compat";
-  inputs.pre-commit-hooks-nix.inputs.nixpkgs.follows = "";
-  inputs.pre-commit-hooks-nix.inputs.nixpkgs-stable.follows = "";
+  inputs.git-hooks-nix.url = "github:cachix/git-hooks.nix";
+  inputs.git-hooks-nix.inputs.flake-compat.follows = "flake-compat";
+  inputs.git-hooks-nix.inputs.nixpkgs.follows = "";
+  inputs.git-hooks-nix.inputs.nixpkgs-stable.follows = "";
 
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-dev";
