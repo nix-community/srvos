@@ -26,7 +26,7 @@ let
     pkgs.writeScript "zpool-health" ''
       #!${pkgs.gawk}/bin/awk -f
       BEGIN {
-        while ("${pkgs.zfs}/bin/zpool status" | getline) {
+        while ("${config.boot.zfs.package}/bin/zpool status" | getline) {
           if ($1 ~ /pool:/) { printf "zpool_status,name=%s ", $2 }
           if ($1 ~ /state:/) { printf " state=\"%s\",", $2 }
           if ($1 ~ /errors:/) {
