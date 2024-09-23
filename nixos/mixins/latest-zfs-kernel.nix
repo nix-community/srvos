@@ -1,19 +1,28 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+
 let
-  latestZfsCompatibleLinuxPackages = lib.pipe pkgs.linuxKernel.packages [
-    builtins.attrValues
-    (builtins.filter (
-      kPkgs:
-      (builtins.tryEval kPkgs).success
-      && kPkgs ? kernel
-      && kPkgs.kernel.pname == "linux"
-      && !kPkgs.zfs.meta.broken
-    ))
-    (builtins.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)))
-    lib.last
-  ];
+  isUnstable = config.boot.zfs.package == pkgs.zfsUnstable;
+  zfsCompatibleKernelPackages = lib.filterAttrs (
+    name: kernelPackages:
+    (builtins.match "linux_[0-9]+_[0-9]+" name) != null
+    && (builtins.tryEval kernelPackages).success
+    && (
+      (!isUnstable && !kernelPackages.zfs.meta.broken)
+      || (isUnstable && !kernelPackages.zfs_unstable.meta.broken)
+    )
+  ) pkgs.linuxKernel.packages;
+  latestKernelPackage = lib.last (
+    lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
+      builtins.attrValues zfsCompatibleKernelPackages
+    )
+  );
 in
 {
   # Note this might jump back and worth as kernel get added or removed.
-  boot.kernelPackages = latestZfsCompatibleLinuxPackages;
+  boot.kernelPackages = latestKernelPackage;
 }
