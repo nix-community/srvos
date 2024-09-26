@@ -100,10 +100,10 @@
     #   https://0pointer.de/blog/projects/watchdog.html
     watchdog = {
       # systemd will send a signal to the hardware watchdog at half
-      # the interval defined here, so every 10s.
-      # If the hardware watchdog does not get a signal for 20s,
+      # the interval defined here, so every 7.5s.
+      # If the hardware watchdog does not get a signal for 15s,
       # it will forcefully reboot the system.
-      runtimeTime = "20s";
+      runtimeTime = "15s";
       # Forcefully reboot if the final stage of the reboot
       # hangs without progress for more than 30s.
       # For more info, see:
