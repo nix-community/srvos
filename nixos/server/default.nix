@@ -109,6 +109,9 @@
       # For more info, see:
       #   https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdShutdownWatchdog
       rebootTime = "30s";
+      # Forcefully reboot when a host hangs after kexec.
+      # This may be the case when the firmware does not support kexec.
+      kexecTime = "1m";
     };
 
     sleep.extraConfig = ''
