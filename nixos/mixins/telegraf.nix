@@ -89,13 +89,14 @@ let
 
 in
 {
+  imports = [
+    ../../shared/mixins/telegraf.nix
+  ];
 
   systemd.services.telegraf.path = lib.optional (!isVM && hasNvme) pkgs.nvme-cli;
 
   services.telegraf = {
-    enable = true;
     extraConfig = {
-      agent.interval = "60s";
       inputs = {
         prometheus = lib.mkIf config.services.promtail.enable [
           {
@@ -106,8 +107,6 @@ in
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
         smart = lib.mkIf (!isVM) { path_smartctl = "/run/wrappers/bin/smartctl-telegraf"; };
-        system = { };
-        mem = { };
         file =
           [
             {
@@ -129,36 +128,10 @@ in
           }
         ];
         systemd_units = { };
-        swap = { };
-        disk.tagdrop = {
-          fstype = [
-            "tmpfs"
-            "ramfs"
-            "devtmpfs"
-            "devfs"
-            "iso9660"
-            "overlay"
-            "aufs"
-            "squashfs"
-            "efivarfs"
-          ];
-          device = [
-            "rpc_pipefs"
-            "lxcfs"
-            "nsfs"
-            "borgfs"
-          ];
-        };
-        diskio = { };
-        internal = { };
         zfs = {
           poolMetrics = true;
         };
       } // lib.optionalAttrs config.boot.swraid.enable { mdstat = { }; };
-      outputs.prometheus_client = {
-        listen = ":9273";
-        metric_version = 2;
-      };
     };
   };
   security.wrappers.smartctl-telegraf = lib.mkIf (!isVM) {
