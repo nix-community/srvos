@@ -101,7 +101,9 @@
     },
     "nix-darwin": {
       "inputs": {
-        "nixpkgs": []
+        "nixpkgs": [
+          "nixpkgs-dev"
+        ]
       },
       "locked": {
         "lastModified": 1727003835,
