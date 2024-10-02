@@ -16,7 +16,7 @@
     systemPackages = map lib.lowPrio [
       pkgs.curl
       pkgs.dnsutils
-      pkgs.gitMinimal
+      config.programs.git.package
       pkgs.htop
       pkgs.jq
       pkgs.tmux
