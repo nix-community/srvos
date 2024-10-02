@@ -60,6 +60,12 @@
               inherit (self') formatter;
             }
             // packages
+            // (lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") (
+              import ./dev/darwin-checks.nix {
+                inherit inputs self pkgs;
+                prefix = "darwin";
+              }
+            ))
             // (lib.optionalAttrs isLinux (
               import ./dev/checks.nix {
                 inherit self pkgs;
