@@ -9,17 +9,14 @@
 }:
 {
 
-  imports = [ ../common ];
+  imports = [
+    ../common
+    ../../shared/server.nix
+  ];
 
   environment = {
-    # List packages installed in system profile.
     systemPackages = map lib.lowPrio [
-      pkgs.curl
-      pkgs.dnsutils
       config.programs.git.package
-      pkgs.htop
-      pkgs.jq
-      pkgs.tmux
     ];
     # Print the URL instead on servers
     variables.BROWSER = "echo";
@@ -34,11 +31,6 @@
   boot.loader.grub.configurationLimit = lib.mkDefault 5;
   boot.loader.systemd-boot.configurationLimit = lib.mkDefault 5;
 
-  # Notice this also disables --help for some commands such es nixos-rebuild
-  documentation.enable = lib.mkDefault false;
-  documentation.doc.enable = lib.mkDefault false;
-  documentation.info.enable = lib.mkDefault false;
-  documentation.man.enable = lib.mkDefault false;
   documentation.nixos.enable = lib.mkDefault false;
 
   # No need for fonts on a server
