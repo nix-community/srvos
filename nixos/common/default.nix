@@ -10,7 +10,7 @@
     ./openssh.nix
     ./serial.nix
     ./sudo.nix
-    ./upgrade-diff.nix
+    ./update-diff.nix
     ./well-known-hosts.nix
     ./zfs.nix
   ];

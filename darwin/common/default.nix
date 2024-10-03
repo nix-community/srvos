@@ -4,6 +4,7 @@
     ./flake.nix
     ./nix.nix
     ./openssh.nix
+    ./update-diff.nix
   ];
 
   # It's the default login shell, and if not enabled, a lot of important configuration is not applied correctly
