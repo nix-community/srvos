@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   imports = [
-    ./flake.nix
+    ../../shared/common/flake.nix
     ./nix.nix
     ./openssh.nix
   ];
