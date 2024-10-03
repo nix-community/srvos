@@ -11,7 +11,7 @@
     ./serial.nix
     ./sudo.nix
     ./update-diff.nix
-    ./well-known-hosts.nix
+    ../../shared/common/well-known-hosts.nix
     ./zfs.nix
   ];
 
