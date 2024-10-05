@@ -4,7 +4,7 @@
 {
 
   imports = [
-    ./flake.nix
+    ../../shared/common/flake.nix
     ./networking.nix
     ./nix.nix
     ./openssh.nix

@@ -1,5 +1,8 @@
 { lib, config, ... }:
 {
+  # Disable nix channels. Use flakes instead.
+  nix.channel.enable = lib.mkDefault false;
+
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = lib.mkDefault 5;
 
