@@ -13,6 +13,4 @@
       Minute = 45;
     }
   ];
-
-  nix.daemonIOLowPriority = lib.mkDefault true;
 }
