@@ -7,13 +7,15 @@
 }:
 {
   options.srvos.update-diff = {
-    enable = lib.mkEnableOption "show package diff when updating nixos" // {
+    enable = lib.mkEnableOption "show package diff when updating" // {
       default = true;
     };
+    text = lib.mkOption {
+      type = lib.types.str;
+    };
   };
-  config = lib.mkIf config.srvos.update-diff.enable {
-    system.activationScripts.update-diff = {
-      supportsDryActivation = true;
+  config = {
+    srvos.update-diff = {
       text = ''
         if [[ -e /run/current-system ]]; then
           echo "--- diff to current-system"
