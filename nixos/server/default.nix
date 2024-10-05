@@ -15,9 +15,6 @@
   ];
 
   environment = {
-    systemPackages = map lib.lowPrio [
-      config.programs.git.package
-    ];
     # Print the URL instead on servers
     variables.BROWSER = "echo";
     # Don't install the /lib/ld-linux.so.2 and /lib64/ld-linux-x86-64.so.2
