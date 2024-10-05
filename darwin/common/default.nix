@@ -5,6 +5,7 @@
     ./nix.nix
     ./openssh.nix
     ./update-diff.nix
+    ../../shared/common/well-known-hosts.nix
   ];
 
   # It's the default login shell, and if not enabled, a lot of important configuration is not applied correctly
