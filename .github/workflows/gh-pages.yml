@@ -17,7 +17,7 @@ jobs:
       group: ${{ github.workflow }}
     steps:
       - uses: actions/checkout@v4
-      - uses: cachix/install-nix-action@v29
+      - uses: cachix/install-nix-action@v30
         with:
           extra_nix_config: |
             accept-flake-config = true
