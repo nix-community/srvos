@@ -42,6 +42,11 @@ example to deploy a GitHub Action runner on Hetzner:
 }
 ```
 
+## Non-flake usage
+
+1. Pull the repo with your preferred tool (eg: [niv](https://github.com/nmattia/niv)
+2. import the top-level `default.nix` in your code. You'll have access to the same modules as in the flake.
+
 ## Documentation
 
 The [Documentation](https://nix-community.github.io/srvos/) website shows more general usage, how to install SrvOS, etc...
