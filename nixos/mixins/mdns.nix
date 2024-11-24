@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
-  mapInterfaceEnabled = i: lib.nameValuePair "40-${i.name}" i.useDHCP;
+  # The default value of useDHCP for individual interfaces is null!
+  mapInterfaceEnabled = i: lib.nameValuePair "40-${i.name}" i.useDHCP == true;
   mapMDNSConfig = enableMDNS: {
     networkConfig.MulticastDNS = lib.mkDefault enableMDNS;
   };
