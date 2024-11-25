@@ -7,8 +7,8 @@
 let
   cfg = config.roles.github-actions-runner;
   queued-build-hook = builtins.fetchTarball {
-    url = "https://github.com/nix-community/queued-build-hook/archive/dcbc8cdf915370abb789b108088d42e241008c2f.tar.gz";
-    sha256 = "0y02741kpk57h54jnm8y6qa60fr0wklajy13sk4r02hq7m4vz6rr";
+    url = "https://github.com/nix-community/queued-build-hook/archive/cd0fcdcef049b3351cfa1c5e051e5527ebd1ae18.tar.gz";
+    sha256 = "000dmcdp44bndr9vd782js8s4s9j61mp1wv7qpi8ycvvc2036q5y";
   };
 in
 {
