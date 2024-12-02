@@ -1,11 +1,8 @@
 { config, lib, ... }:
 {
-  # You may also find this setting useful to automatically set the latest compatible kernel:
-  #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
   # Use the same default hostID as the NixOS install ISO and nixos-anywhere.
   # This allows us to import zfs pool without using a force import.
-  # ZFS has this as a safety mechanism for networked block storage (ISCSI), but 
+  # ZFS has this as a safety mechanism for networked block storage (ISCSI), but
   # in practice we found it causes more breakages like unbootable machines,
   # while people using ZFS on ISCSI is quite rare.
   networking.hostId = lib.mkDefault "8425e349";
