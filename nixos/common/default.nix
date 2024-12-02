@@ -1,6 +1,11 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ config, lib, options, ... }:
+{
+  config,
+  lib,
+  options,
+  ...
+}:
 {
 
   imports = [
