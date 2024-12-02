@@ -57,7 +57,9 @@ in
 
     services.telegraf.extraConfig.inputs.file =
       let
-        inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) cfg.flake.inputs;
+        inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) (
+          cfg.flake.inputs // { inherit (cfg) flake; }
+        );
         flakeAttrs =
           input:
           (lib.mapAttrsToList (n: v: ''${n}="${v}"'') (
