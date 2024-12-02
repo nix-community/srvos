@@ -60,7 +60,7 @@
       };
       packages =
         {
-          update-dev-private-narHash = pkgs.writeScriptBin "update-dev-private-narHash" ''
+          update-dev-private-narHash = pkgs.writeShellScriptBin "update-dev-private-narHash" ''
             nix flake lock ./dev/private
             nix hash path ./dev/private > ./dev/private.narHash
           '';
