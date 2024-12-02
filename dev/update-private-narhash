@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Used to update the private dev flake hash reference.
+set -euo pipefail
+
+cd "$(dirname "$0")"
+
+echo "Updating $PWD/private.narHash" >&2
+
+nix flake lock ./private
+nix hash path ./private > ./private.narHash
+
+echo OK
