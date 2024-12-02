@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 
 echo "Updating $PWD/private.narHash" >&2
 
-nix flake lock ./private
-nix hash path ./private > ./private.narHash
+nix --extra-experimental-flags 'flakes nix-command' flake lock ./private
+nix --extra-experimental-flags 'flakes nix-command' hash path ./private > ./private.narHash
 
 echo OK
