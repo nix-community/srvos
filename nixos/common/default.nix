@@ -15,10 +15,6 @@
     ./zfs.nix
   ];
 
-  # The majority of storage used for root filesystem is based on Sata SSD/NVMe,
-  # which benefits from enabling the periodic filesystem TRIM operation.
-  services.fstrim.enable = lib.mkDefault true;
-
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
