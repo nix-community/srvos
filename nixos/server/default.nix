@@ -111,12 +111,6 @@
     '';
   };
 
-  # use TCP BBR has significantly increased throughput and reduced latency for connections
-  boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "fq";
-    "net.ipv4.tcp_congestion_control" = "bbr";
-  };
-
   # Make sure the serial console is visible in qemu when testing the server configuration
   # with nixos-rebuild build-vm
   virtualisation.vmVariant.virtualisation.graphics = lib.mkDefault false;
