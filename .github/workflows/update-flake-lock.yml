@@ -33,7 +33,7 @@ jobs:
           pushd dev/private
           nix flake update --commit-lock-file
           popd
-          nix run .#update-dev-private-narHash
+          ./dev/update-private-narhash
           git commit --amend --no-edit dev/private.narHash
       - uses: peter-evans/create-pull-request@v7
         with:

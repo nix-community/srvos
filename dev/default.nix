@@ -58,19 +58,12 @@
       devShells = lib.optionalAttrs defaultPlatform {
         mkdocs = pkgs.mkShellNoCC { packages = [ inputs.mkdocs-numtide.packages.${system}.default ]; };
       };
-      packages =
-        {
-          update-dev-private-narHash = pkgs.writeShellScriptBin "update-dev-private-narHash" ''
-            nix flake lock ./dev/private
-            nix hash path ./dev/private > ./dev/private.narHash
-          '';
-        }
-        // lib.optionalAttrs defaultPlatform {
-          docs = inputs.mkdocs-numtide.lib.${system}.mkDocs {
-            name = "srvos";
-            src = self;
-          };
+      packages = lib.optionalAttrs defaultPlatform {
+        docs = inputs.mkdocs-numtide.lib.${system}.mkDocs {
+          name = "srvos";
+          src = self;
         };
+      };
       pre-commit = {
         check.enable = defaultPlatform;
         settings.hooks.dev-private-narHash = {
