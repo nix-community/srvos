@@ -15,11 +15,6 @@
     ./zfs.nix
   ];
 
-  system.switch = {
-    enable = lib.mkDefault false;
-    enableNg = lib.mkDefault true;
-  };
-
   # The majority of storage used for root filesystem is based on Sata SSD/NVMe,
   # which benefits from enabling the periodic filesystem TRIM operation.
   services.fstrim.enable = lib.mkDefault true;
