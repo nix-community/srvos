@@ -22,7 +22,7 @@
 
   # Create users with https://github.com/nikstur/userborn rather than our perl script.
   # Don't enable if we detect impermanence, which is not compatible with it: https://github.com/nix-community/impermanence/pull/223
-  services.userborn.enable = lib.mkIf (options.environment ? persistence) (lib.mkDefault true);
+  services.userborn.enable = lib.mkIf (!options.environment ? persistence) (lib.mkDefault true);
 
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
