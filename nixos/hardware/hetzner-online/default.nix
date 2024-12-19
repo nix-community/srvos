@@ -40,6 +40,11 @@
         networkConfig.IPv6AcceptRA = "no";
       };
 
+      # This option defaults to `networking.useDHCP` which we don't enable
+      # however we do use DHCPv4 as part of `10-uplink`, so we want to
+      # enable this for legacy stage1 users.
+      boot.initrd.network.udhcpc.enable = lib.mkIf (!config.boot.initrd.systemd.enable) true;
+
       # Network configuration i.e. when we unlock machines with openssh in the initrd
       boot.initrd.systemd.network.networks."10-uplink" = config.systemd.network.networks."10-uplink";
 
