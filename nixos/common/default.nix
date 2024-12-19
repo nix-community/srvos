@@ -1,6 +1,11 @@
 # A default configuration that applies to all servers.
 # Common configuration across *all* the machines
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  options,
+  ...
+}:
 {
 
   imports = [
@@ -14,6 +19,13 @@
     ../../shared/common/well-known-hosts.nix
     ./zfs.nix
   ];
+
+  # Create users with https://github.com/nikstur/userborn rather than our perl script.
+  # Don't enable if we detect impermanence, which is not compatible with it: https://github.com/nix-community/impermanence/pull/223
+  # as well as agenix: https://github.com/ryantm/agenix/pull/255
+  services.userborn.enable = lib.mkIf (
+    !((options.environment ? persistence && options.environment.persistence.enable) || options ? age)
+  ) (lib.mkDefault true);
 
   # Use systemd during boot as well except:
   # - systems with raids as this currently require manual configuration: https://github.com/NixOS/nixpkgs/issues/210210
