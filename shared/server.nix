@@ -9,7 +9,7 @@
   # List packages installed in system profile.
   environment.systemPackages = map lib.lowPrio [
     # no config.programs.git.package option on darwin
-    (config.programs.git.package or pkgs.git)
+    (config.programs.git.package or pkgs.gitMinimal)
     pkgs.curl
     pkgs.dnsutils
     pkgs.htop
