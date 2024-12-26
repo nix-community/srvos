@@ -15,7 +15,7 @@
   ];
 
   # used in shared/server.nix
-  config.programs.git.package = lib.mkDefault pkgs.gitMinimal;
+  programs.git.package = lib.mkDefault pkgs.gitMinimal;
 
   environment = {
     # Print the URL instead on servers
