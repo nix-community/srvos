@@ -31,6 +31,11 @@
 
       networking.useNetworkd = true;
       networking.useDHCP = false;
+      networking.timeServers = [
+        "ntp1.hetzner.de"
+        "ntp2.hetzner.com"
+        "ntp3.hetzner.de"
+      ];
 
       systemd.network.networks."10-uplink" = {
         matchConfig.Name = lib.mkDefault "en* eth0";
