@@ -43,11 +43,6 @@ in
 
   };
   config = lib.mkIf (cfg.flake != null) {
-
-    nixpkgs.flake = {
-      source = lib.mkDefault (cfg.flake.inputs.nixpkgs or null);
-    };
-
     nix.registry = lib.optionalAttrs cfg.registerSelf {
       self.to = lib.mkDefault {
         type = "path";
