@@ -2,9 +2,9 @@
 # Common configuration across *all* the machines
 {
   config,
-  pkgs,
   lib,
   options,
+  pkgs,
   ...
 }:
 {
@@ -13,6 +13,9 @@
     ../common
     ../../shared/server.nix
   ];
+
+  # used in shared/server.nix
+  programs.git.package = lib.mkDefault pkgs.gitMinimal;
 
   environment = {
     # Print the URL instead on servers
