@@ -31,7 +31,7 @@
   boot.loader.grub.configurationLimit = lib.mkDefault 5;
   boot.loader.systemd-boot.configurationLimit = lib.mkDefault 5;
 
-  documentation.nixos.enable = lib.mkDefault false;
+  documentation.nixos.enable = lib.mkDefault config.srvos.server.docs.enable;
 
   # No need for fonts on a server
   fonts.fontconfig.enable = lib.mkDefault false;
