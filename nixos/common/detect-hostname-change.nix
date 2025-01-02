@@ -25,7 +25,7 @@
       fi
 
       # Useful for automation
-      if [[ "''${EXPECTED_HOSTNAME:-}" = "$desired" ]];
+      if [[ "''${EXPECTED_HOSTNAME:-}" = "$desired" ]]; then
         exit
       fi
 
