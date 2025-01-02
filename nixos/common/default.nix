@@ -5,6 +5,7 @@
 
   imports = [
     ../../shared/common/flake.nix
+    ./detect-hostname-change.nix
     ./networking.nix
     ./nix.nix
     ./openssh.nix
