@@ -24,6 +24,11 @@
         exit
       fi
 
+      # Useful for automation
+      if [[ "''${EXPECTED_HOSTNAME:-}" = "$desired" ]];
+        exit
+      fi
+
       log() {
         echo "$*" >&2
       }
