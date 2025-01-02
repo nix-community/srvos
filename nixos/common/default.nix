@@ -20,9 +20,6 @@
   # - for containers we currently rely on the `stage-2` init script that sets up our /etc
   boot.initrd.systemd.enable = lib.mkDefault (!config.boot.swraid.enable && !config.boot.isContainer);
 
-  # Work around for https://github.com/NixOS/nixpkgs/issues/124215
-  documentation.info.enable = false;
-
   # Don't install the /lib/ld-linux.so.2 stub. This saves one instance of nixpkgs.
   environment.ldso32 = null;
 
