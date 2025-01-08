@@ -5,12 +5,9 @@
   ];
 
   config = lib.mkIf config.srvos.update-diff.enable {
-    system.activationScripts.update-diff = {
-      supportsDryActivation = true;
-      text = ''
-        incoming="''${systemConfig-}"
-        ${config.srvos.update-diff.text}
-      '';
-    };
+    system.preSwitchChecks.update-diff = ''
+      incoming="''${1-}"
+      ${config.srvos.update-diff.text}
+    '';
   };
 }
