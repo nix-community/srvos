@@ -17,9 +17,9 @@
   config = {
     srvos.update-diff = {
       text = ''
-        if [[ -e /run/current-system ]]; then
+        if [[ -e /run/current-system && -e "''${incoming-}" ]]; then
           echo "--- diff to current-system"
-          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
+          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "''${incoming-}"
           echo "---"
         fi
       '';

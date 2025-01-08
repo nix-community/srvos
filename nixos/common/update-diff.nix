@@ -7,7 +7,10 @@
   config = lib.mkIf config.srvos.update-diff.enable {
     system.activationScripts.update-diff = {
       supportsDryActivation = true;
-      inherit (config.srvos.update-diff) text;
+      text = ''
+        incoming="''${systemConfig-}"
+        ${config.srvos.update-diff.text}
+      '';
     };
   };
 }

@@ -5,8 +5,9 @@
   ];
 
   config = lib.mkIf config.srvos.update-diff.enable {
-    system.activationScripts.preActivation = {
-      inherit (config.srvos.update-diff) text;
-    };
+    system.activationScripts.preActivation.text = ''
+      incoming="''${systemConfig-}"
+      ${config.srvos.update-diff.text}
+    '';
   };
 }
