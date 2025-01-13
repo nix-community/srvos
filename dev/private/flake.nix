@@ -17,7 +17,6 @@
 
   inputs.git-hooks-nix.url = "github:cachix/git-hooks.nix";
   inputs.git-hooks-nix.inputs.nixpkgs.follows = "";
-  inputs.git-hooks-nix.inputs.nixpkgs-stable.follows = "";
 
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-dev";
