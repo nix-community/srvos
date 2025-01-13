@@ -60,10 +60,7 @@
   networking.hostName = lib.mkOverride 1337 ""; # lower prio than lib.mkDefault
 
   # If the user is in @wheel they are trusted by default.
-  nix.settings.trusted-users = [
-    "root"
-    "@wheel"
-  ];
+  nix.settings.trusted-users = [ "@wheel" ];
 
   security.sudo.wheelNeedsPassword = false;
 
