@@ -212,7 +212,7 @@
       };
 
       HostMemoryUnderMemoryPressure = {
-        expr = "rate(node_vmstat_pgmajfault[1m]) > 1000";
+        expr = "rate(kernel_vmstat_pgmajfault[1m]) > 1000";
         annotations.description = "{{$labels.instance}}: The node is under heavy memory pressure. High rate of major page faults: {{$value}}";
       };
 
