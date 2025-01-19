@@ -13,13 +13,16 @@
 
   config = lib.mkIf (config.srvos.detect-hostname-change.enable && config.networking.hostName != "") {
     system.preSwitchChecks.detectHostnameChange = ''
+      actual=$(< /proc/sys/kernel/hostname)
+
       # Ignore if the system is getting installed
-      if [[ ! -e /run/current-system ]]; then
+      # https://github.com/nix-community/nixos-images/blob/2fc023e024c0a5e8e98ae94363dbf2962da10886/nix/installer.nix#L12-L13
+      if [[ ! -e /run/booted-system || "$actual" == "nixos-installer" ]]; then
         exit
       fi
 
-      actual=$(< /proc/sys/kernel/hostname)
       desired=${config.networking.hostName}
+
       if [[ "$actual" = "$desired" ]]; then
         exit
       fi
