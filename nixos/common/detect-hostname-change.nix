@@ -41,7 +41,7 @@
       log "Are you deploying on the right host?"
       log
       log "Type YES to continue:"
-      read reply
+      read -r reply
       if [[ $reply != YES ]]; then
         echo "aborting"
         exit 1
