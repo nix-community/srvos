@@ -15,7 +15,6 @@
     recommendedOptimisation = lib.mkDefault true;
     recommendedProxySettings = lib.mkDefault true;
     recommendedTlsSettings = lib.mkDefault true;
-    recommendedZstdSettings = lib.mkDefault true;
 
     # Nginx sends all the access logs to /var/log/nginx/access.log by default.
     # instead of going to the journal!
