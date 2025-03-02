@@ -28,5 +28,5 @@
   nix.settings.auto-allocate-uids = true;
 
   # for container in builds support
-  nix.settings.system-features = lib.mkDefault [ "uid-range" ];
+  nix.settings.system-features = lib.mkOptionDefault [ "uid-range" ];
 }
