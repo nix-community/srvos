@@ -15,7 +15,7 @@
   programs.man.enable = lib.mkDefault config.srvos.server.docs.enable;
 
   # remove uninstaller, use 'nix run github:LnL7/nix-darwin#darwin-uninstaller'
-  system.includeUninstaller = lib.mkDefault false;
+  system.tools.darwin-uninstaller.enable = lib.mkDefault false;
 
   # If the user is in @admin they are trusted by default.
   nix.settings.trusted-users = [ "@admin" ];
