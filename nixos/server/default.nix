@@ -94,15 +94,15 @@
       # the interval defined here, so every 7.5s.
       # If the hardware watchdog does not get a signal for 15s,
       # it will forcefully reboot the system.
-      runtimeTime = "15s";
+      runtimeTime = lib.mkDefault "15s";
       # Forcefully reboot if the final stage of the reboot
       # hangs without progress for more than 30s.
       # For more info, see:
       #   https://utcc.utoronto.ca/~cks/space/blog/linux/SystemdShutdownWatchdog
-      rebootTime = "30s";
+      rebootTime = lib.mkDefault "30s";
       # Forcefully reboot when a host hangs after kexec.
       # This may be the case when the firmware does not support kexec.
-      kexecTime = "1m";
+      kexecTime = lib.mkDefault "1m";
     };
 
     sleep.extraConfig = ''
