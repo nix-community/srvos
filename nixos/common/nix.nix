@@ -8,6 +8,9 @@
   # where the store is host-managed.
   nix.optimise.automatic = lib.mkDefault (!config.boot.isContainer);
 
+  # If the user is in @wheel they are trusted by default.
+  nix.settings.trusted-users = [ "@wheel" ];
+
   # TODO: cargo culted.
   nix.daemonCPUSchedPolicy = lib.mkDefault "batch";
   nix.daemonIOSchedClass = lib.mkDefault "idle";

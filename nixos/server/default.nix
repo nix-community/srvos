@@ -59,9 +59,6 @@
   # Delegate the hostname setting to dhcp/cloud-init by default
   networking.hostName = lib.mkOverride 1337 ""; # lower prio than lib.mkDefault
 
-  # If the user is in @wheel they are trusted by default.
-  nix.settings.trusted-users = [ "@wheel" ];
-
   security.sudo.wheelNeedsPassword = false;
 
   # Enable SSH everywhere

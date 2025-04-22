@@ -11,4 +11,7 @@
       Minute = 45;
     }
   ];
+
+  # If the user is in @admin they are trusted by default.
+  nix.settings.trusted-users = [ "@admin" ];
 }
