@@ -9,34 +9,6 @@ repo_name: 'nix-community/srvos'
 repo_url: &repo_url https://github.com/nix-community/srvos
 edit_uri: edit/main/docs
 
-### Navigation ###
-
-nav:
-  - Home: index.md
-
-  - Getting started:
-     - Intro: getting_started.md
-     - NixOS: nixos/getting_started.md
-     - Darwin: darwin/getting_started.md
-  - User guide:
-    - Intro: user_guide.md
-    - NixOS:
-      - Modules:
-        - Machine type: nixos/type.md
-        - Machine hardware: nixos/hardware.md
-        - Machine role: nixos/role.md
-        - Configuration mixins: nixos/mixins.md
-      - Roles:
-        - GitHub Action Runner: github_actions_runner.md
-      - Installation:
-          - Hetzner Cloud: installation/hetzner_cloud.md
-    - Nix-darwin:
-      - Modules:
-        - Machine type: darwin/type.md
-        - Configuration mixins: darwin/mixins.md
-    - FAQ: faq.md
-  - Getting help: help.md
-
 ### Extra variables
 
 extra:
