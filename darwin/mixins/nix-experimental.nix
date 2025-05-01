@@ -29,5 +29,8 @@
       # derivation attribute to true. An impure derivation can have differing
       # outputs each time it is built.
       "impure-derivations"
+    ]
+    ++ lib.optionals (lib.versionAtLeast (lib.versions.majorMinor config.nix.package.version) "2.29") [
+      "blake3-hashes"
     ];
 }
