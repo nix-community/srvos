@@ -39,8 +39,9 @@
     ];
 
   # no longer need to pre-allocate build users for everything
-  nix.settings.auto-allocate-uids = true;
-  nix.settings.use-cgroups = true;
+  nix.settings.auto-allocate-uids = lib.mkDefault true;
+  # Needs a patch in Nix to work properly: https://github.com/NixOS/nix/pull/13135
+  # nix.settings.use-cgroups = true;
 
   # for container in builds support
   nix.settings.system-features =
