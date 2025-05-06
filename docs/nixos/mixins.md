@@ -22,7 +22,7 @@ This is useful when connecting to a server via SSH.
 
 ### [`nixosModules.mixins-prometheus`]({{ repo_url }}/blob/main/nixos/mixins/prometheus.nix)
 
-Enables a Prometheus and configures it with a set of alert rules targeting our `nixosModules.mixins-prometheus` module.
+Enables a Prometheus and configures it with a set of alert rules targeting our `nixosModules.mixins-telegraf` module.
 
 ### [`nixosModules.mixins-nginx`]({{ repo_url }}/blob/main/nixos/mixins/nginx.nix)
 
