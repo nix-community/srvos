@@ -12,7 +12,7 @@ Configure systemd-boot as bootloader.
 
 ### [`nixosModules.mixins-telegraf`]({{ repo_url }}/blob/main/nixos/mixins/telegraf.nix)
 
-Enables a generic telegraf configuration. `nixosModules.mixins-prometheus` for monitoring rules targeting this telegraf configuration.
+Enables a generic telegraf configuration. `nixosModules.mixins-prometheus` adds monitoring rules targeting this telegraf configuration.
 
 ### [`nixosModules.mixins-terminfo`]({{ repo_url }}/blob/main/nixos/mixins/terminfo.nix)
 
