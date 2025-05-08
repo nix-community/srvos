@@ -1301,13 +1301,13 @@
 <h3 id="nixosmodulesmixins-systemd-boot"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/systemd-boot.nix"><code>nixosModules.mixins-systemd-boot</code></a></h3>
 <p>Configure systemd-boot as bootloader.</p>
 <h3 id="nixosmodulesmixins-telegraf"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/telegraf.nix"><code>nixosModules.mixins-telegraf</code></a></h3>
-<p>Enables a generic telegraf configuration. <code>nixosModules.mixins-prometheus</code> for monitoring rules targeting this telegraf configuration.</p>
+<p>Enables a generic telegraf configuration. <code>nixosModules.mixins-prometheus</code> adds monitoring rules targeting this telegraf configuration.</p>
 <h3 id="nixosmodulesmixins-terminfo"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/terminfo.nix"><code>nixosModules.mixins-terminfo</code></a></h3>
 <p>Extends the terminfo database with often used terminal emulators.
 Terminfo is used by terminal applications to interfere supported features in the terminal.
 This is useful when connecting to a server via SSH.</p>
 <h3 id="nixosmodulesmixins-prometheus"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/prometheus.nix"><code>nixosModules.mixins-prometheus</code></a></h3>
-<p>Enables a Prometheus and configures it with a set of alert rules targeting our <code>nixosModules.mixins-prometheus</code> module.</p>
+<p>Enables a Prometheus and configures it with a set of alert rules targeting our <code>nixosModules.mixins-telegraf</code> module.</p>
 <h3 id="nixosmodulesmixins-nginx"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/nginx.nix"><code>nixosModules.mixins-nginx</code></a></h3>
 <p>Configure Nginx with recommended settings. Is quite useful when using nginx as a reverse-proxy on the machine to other services.</p>
 <h3 id="nixosmodulesmixins-nix-experimental"><a href="https://github.com/nix-community/srvos/blob/main/nixos/mixins/nix-experimental.nix"><code>nixosModules.mixins-nix-experimental</code></a></h3>
