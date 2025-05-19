@@ -17,7 +17,8 @@ let
     { config, ... }:
     {
       networking.hostName = "example-common";
-      system.stateVersion = 5;
+      system.checks.verifyNixPath = false;
+      system.stateVersion = 6;
 
       # Don't reinstantiate nixpkgs for every eval.
       # Also important to have nixpkgs config which allows for some required insecure packages
