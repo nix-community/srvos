@@ -1,6 +1,9 @@
-{ pkgs, lib, ... }:
 {
-
+  pkgs,
+  lib,
+  ...
+}:
+{
   # various terminfo packages
   environment.systemPackages =
     [
@@ -12,5 +15,6 @@
       # Too unstable
       # pkgs.kitty.terminfo
       pkgs.foot.terminfo
+      pkgs.ghostty.terminfo
     ];
 }
