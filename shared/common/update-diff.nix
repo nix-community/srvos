@@ -10,6 +10,11 @@
     enable = lib.mkEnableOption "show package diff when updating" // {
       default = true;
     };
+    command = lib.mkOption {
+      type = lib.types.singleLineStr;
+      default = "${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff";
+      description = "diff command";
+    };
     text = lib.mkOption {
       type = lib.types.str;
       description = "diff script snippet";
@@ -20,7 +25,7 @@
       text = ''
         if [[ -e /run/current-system && -e "''${incoming-}" ]]; then
           echo "--- diff to current-system"
-          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "''${incoming-}"
+          ${config.srvos.update-diff.command} /run/current-system "''${incoming-}"
           echo "---"
         fi
       '';
