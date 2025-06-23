@@ -12,6 +12,7 @@
     };
     text = lib.mkOption {
       type = lib.types.str;
+      description = "diff script snippet";
     };
   };
   config = {
