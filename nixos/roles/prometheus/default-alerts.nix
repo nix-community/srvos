@@ -115,7 +115,7 @@
       };
 
       TelegrafDown = {
-        expr = ''min(up{job=~"telegraf",type!='mobile'}) by (source, job, instance, org) == 0'';
+        expr = ''label_replace(label_replace(min(up{job=~"telegraf",type!='mobile'}) by (source, job, instance, org), "host", "$1", "instance", "^\\[([^\\]]+)\\]:[0-9]+$"), "host", "$1", "instance", "^([^.:]+).*") == 0'';
         for = "3m";
         annotations.description = "{{$labels.instance}}: telegraf exporter from {{$labels.instance}} is down";
       };
