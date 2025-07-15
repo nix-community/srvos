@@ -10,6 +10,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@v2
+        id: app-token
+        with:
+          app-id: ${{ vars.CI_APP_ID }}
+          private-key: ${{ secrets.CI_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
       - name: Install Nix
         uses: cachix/install-nix-action@v31
         with:
@@ -34,8 +42,11 @@ jobs:
           ./dev/update-private-narhash
           git commit --amend --no-edit dev/private.narHash
       - uses: peter-evans/create-pull-request@v7
+        id: pr
         with:
           title: Update flake.lock files
           branch: update-flake-lock
-          labels: |
-            merge-queue
+      - name: Enable Automerge
+        run: gh pr merge --auto ${{ steps.pr.outputs.pull-request-number }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
