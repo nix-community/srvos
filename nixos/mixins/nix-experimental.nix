@@ -44,9 +44,5 @@
   # nix.settings.use-cgroups = true;
 
   # for container in builds support
-  nix.settings.system-features =
-    if lib.versionAtLeast lib.version "25.05pre" then
-      [ "uid-range" ]
-    else
-      lib.mkDefault [ "uid-range" ];
+  nix.settings.system-features = [ "uid-range" ];
 }
