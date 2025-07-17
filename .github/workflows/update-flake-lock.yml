@@ -47,6 +47,6 @@ jobs:
           title: Update flake.lock files
           branch: update-flake-lock
       - name: Enable Automerge
-        run: gh pr merge --auto ${{ steps.pr.outputs.pull-request-number }}
+        run: gh pr merge --auto --rebase ${{ steps.pr.outputs.pull-request-number }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
