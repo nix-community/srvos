@@ -7,12 +7,11 @@
   nix.settings.connect-timeout = lib.mkDefault 5;
 
   # Enable flakes
-  nix.settings.experimental-features =
-    [
-      "nix-command"
-      "flakes"
-    ]
-    ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.22") "repl-flake";
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ]
+  ++ lib.optional (lib.versionOlder (lib.versions.majorMinor config.nix.package.version) "2.22") "repl-flake";
 
   # The default at 10 is rarely enough.
   nix.settings.log-lines = lib.mkDefault 25;

@@ -107,19 +107,18 @@ in
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
         smart = lib.mkIf (!isVM) { path_smartctl = "/run/wrappers/bin/smartctl-telegraf"; };
-        file =
-          [
-            {
-              data_format = "influx";
-              file_tag = "name";
-              files = [ "/var/log/telegraf/*" ];
-            }
-          ]
-          ++ lib.optional (supportsFs "ext4") {
-            name_override = "ext4_errors";
-            files = [ "/sys/fs/ext4/*/errors_count" ];
-            data_format = "value";
-          };
+        file = [
+          {
+            data_format = "influx";
+            file_tag = "name";
+            files = [ "/var/log/telegraf/*" ];
+          }
+        ]
+        ++ lib.optional (supportsFs "ext4") {
+          name_override = "ext4_errors";
+          files = [ "/sys/fs/ext4/*/errors_count" ];
+          data_format = "value";
+        };
         exec = [
           {
             ## Commands array
@@ -131,7 +130,8 @@ in
         zfs = {
           poolMetrics = true;
         };
-      } // lib.optionalAttrs config.boot.swraid.enable { mdstat = { }; };
+      }
+      // lib.optionalAttrs config.boot.swraid.enable { mdstat = { }; };
     };
   };
   security.wrappers.smartctl-telegraf = lib.mkIf (!isVM) {

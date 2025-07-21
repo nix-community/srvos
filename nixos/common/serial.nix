@@ -38,11 +38,12 @@ in
     # ubuntu and alpine linux are doing.
     srvos.boot.consoles = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default =
-        [ "ttyS0,115200" ]
-        ++ (lib.optional (pkgs.stdenv.hostPlatform.isAarch) "ttyAMA0,115200")
-        ++ (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200")
-        ++ [ "tty0" ];
+      default = [
+        "ttyS0,115200"
+      ]
+      ++ (lib.optional (pkgs.stdenv.hostPlatform.isAarch) "ttyAMA0,115200")
+      ++ (lib.optional (pkgs.stdenv.hostPlatform.isRiscV64) "ttySIF0,115200")
+      ++ [ "tty0" ];
       example = [ "ttyS2,115200" ];
       description = ''
         The Linux kernel console option allows you to configure various devices as

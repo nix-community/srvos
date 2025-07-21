@@ -188,15 +188,14 @@ in
           githubApp = cfg.githubApp;
           ephemeral = cfg.ephemeral;
           nodeRuntimes = cfg.nodeRuntimes;
-          serviceOverrides =
-            {
-              DeviceAllow = [ "/dev/kvm" ];
-              PrivateDevices = false;
-            }
-            // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
-              ReadWritePaths = cfg.extraReadWritePaths;
-              Group = [ "github-runner" ];
-            });
+          serviceOverrides = {
+            DeviceAllow = [ "/dev/kvm" ];
+            PrivateDevices = false;
+          }
+          // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
+            ReadWritePaths = cfg.extraReadWritePaths;
+            Group = [ "github-runner" ];
+          });
           extraPackages = [
             pkgs.cachix
             pkgs.glibc.bin
@@ -204,7 +203,8 @@ in
             config.nix.package
             pkgs.nix-eval-jobs
             pkgs.openssh
-          ] ++ cfg.extraPackages;
+          ]
+          ++ cfg.extraPackages;
           extraLabels = cfg.extraLabels;
         };
       }) (lib.range 1 cfg.count)
