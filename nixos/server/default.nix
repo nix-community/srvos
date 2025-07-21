@@ -45,13 +45,12 @@
   xdg.mime.enable = lib.mkDefault false;
   xdg.sounds.enable = lib.mkDefault false;
 
-  programs.vim =
-    {
-      defaultEditor = lib.mkDefault true;
-    }
-    // lib.optionalAttrs (options.programs.vim ? enable) {
-      enable = lib.mkDefault true;
-    };
+  programs.vim = {
+    defaultEditor = lib.mkDefault true;
+  }
+  // lib.optionalAttrs (options.programs.vim ? enable) {
+    enable = lib.mkDefault true;
+  };
 
   # Make sure firewall is enabled
   networking.firewall.enable = true;

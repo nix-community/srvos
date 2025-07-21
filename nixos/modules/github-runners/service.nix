@@ -33,7 +33,8 @@ in
   environment = {
     HOME = runtimeDir;
     RUNNER_ROOT = stateDir;
-  } // cfg.extraEnvironment;
+  }
+  // cfg.extraEnvironment;
 
   path =
     (with pkgs; [
