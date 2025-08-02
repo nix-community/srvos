@@ -5,6 +5,7 @@
 
   # Fallback quickly if substituters are not available.
   nix.settings.connect-timeout = lib.mkDefault 5;
+  nix.settings.fallback = true;
 
   # Enable flakes
   nix.settings.experimental-features = [
