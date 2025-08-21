@@ -8,7 +8,7 @@
   networking.firewall.logRefusedConnections = lib.mkDefault false;
 
   # Use networkd instead of the pile of shell scripts
-  networking.useNetworkd = lib.mkDefault true;
+  networking.useNetworkd = lib.mkOverride 1337 true;
 
   # The notion of "online" is a broken concept
   # https://github.com/systemd/systemd/blob/e1b45a756f71deac8c1aa9a008bd0dab47f64777/NEWS#L13
