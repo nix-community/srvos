@@ -12,8 +12,14 @@ let
     (builtins.match "linux_[0-9]+_[0-9]+" name) != null
     && (builtins.tryEval kernelPackages).success
     && (
-      (!isUnstable && !kernelPackages.zfs.meta.broken)
-      || (isUnstable && !kernelPackages.zfs_unstable.meta.broken)
+      let
+        zfsPackage =
+          if isUnstable then
+            kernelPackages.zfs_unstable
+          else
+            kernelPackages.${pkgs.zfs.kernelModuleAttribute};
+      in
+      !(zfsPackage.meta.broken or false)
     )
   ) pkgs.linuxKernel.packages;
   latestKernelPackage = lib.last (
