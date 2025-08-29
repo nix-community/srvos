@@ -1,6 +1,6 @@
 { config, lib, ... }:
 let
-  dhcpInterfaces = lib.filterAttrs (i: i.useDHCP == true) config.networking.interfaces;
+  dhcpInterfaces = lib.filterAttrs (_n: i: i.useDHCP == true) config.networking.interfaces;
 in
 {
   # Avahi is an alternative implementation. If it's enabled, than we don't need the code below.
@@ -13,6 +13,6 @@ in
         "99-ethernet-default-dhcp".networkConfig.MulticastDNS = lib.mkDefault true;
         "99-wireless-client-dhcp".networkConfig.MulticastDNS = lib.mkDefault true;
       }
-      // builtins.mapAttrs (_: { networkConfig.MulticastDNS = lib.mkDefault true; }) dhcpInterfaces;
+      // builtins.mapAttrs (_: _: { networkConfig.MulticastDNS = lib.mkDefault true; }) dhcpInterfaces;
   };
 }
