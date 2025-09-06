@@ -13,7 +13,17 @@
   inputs.srvos.url = "github:nix-community/srvos"; 
   inputs.disko.url = "github:nix-community/disko";
 
-  outputs = { self, nixos-remote, srvos, disko, nixpkgs }: {
+  outputs = { self, nixos-remote, srvos, disko, nixpkgs }@ inputs: let
+    inherit (self) outputs;
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+    in {
     nixosConfigurations.my-host = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [{ 
@@ -21,22 +31,24 @@
           srvos.nixosModules.hardware-hetzner-cloud
           srvos.nixosModules.server
 
-          # Are those together?
           disko.nixosModules.disko
-          srvos.diskoModules.disk-layout-single-v1
+          ./myHost.nix
         ];
         networking.hostName = "my-host";
         # FIXME: Hetzner Cloud doesn't provide us with that configuration
         systemd.network.networks."10-uplink".networkConfig.Address = "2a01:4f9:c010:52fd::1/128";
       }];
     };
-    # TODO other $systems
-    devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux; mkShellNoCC {
-      packages = [
-        # TODO: add nixos-rebuild as a package
-        nixos-anywhere.packages.x86_64-linux.default
-      ];
-    };
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      default = pkgs.mkShellNoCC {
+        packages = [
+          pkgs.nixos-rebuild
+          nixos-anywhere.packages.${system}.default
+        ];
+      };
+    });
   };
 }
 ```
@@ -46,7 +58,7 @@
 4. Bootstrap the NixOS deployment:
    ```console
    $ nix develop
-   $ nixos-anywhere --flake .#my-host --target <ip>
+   $ nixos-anywhere --flake .#my-host --target-host root@<ip_address>
    ```
 
 🎉
@@ -54,5 +66,5 @@
 5. Pick a nixos deployment tool of your choice! Eg:
 
    ```
-   $ nixos-rebuild --flake .#my-host --target <ip> switch
+   $ nixos-rebuild --flake .#my-host --target-host root@<ip_address> switch
    ```
