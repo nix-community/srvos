@@ -63,6 +63,9 @@
   # Enable SSH everywhere
   services.openssh.enable = true;
 
+  # Prevent LLMNR poisoning attacks
+  services.resolved.llmnr = lib.mkDefault "false";
+
   # UTC everywhere!
   time.timeZone = lib.mkDefault "UTC";
 
