@@ -34,3 +34,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: "${{ steps.build.outputs.result }}/"
+          cname: srvos.org
