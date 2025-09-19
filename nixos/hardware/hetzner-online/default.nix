@@ -44,6 +44,18 @@
       networkConfig.IPv6AcceptRA = "no";
     };
 
+    # Disable the usb0 link because it has an alias beginning with `en...`
+    # which will cause it to also be assigned on the default IPv6 route. This
+    # will confuse Kubernetes CNIs configured to use DualStack networking.
+    systemd.network.networks."01-disable-usb0" = {
+      matchConfig = {
+        Name = "usb0";
+      };
+      linkConfig = {
+        Unmanaged = true;
+      };
+    };
+
     # This option defaults to `networking.useDHCP` which we don't enable
     # however we do use DHCPv4 as part of `10-uplink`, so we want to
     # enable this for legacy stage1 users.
