@@ -11,4 +11,6 @@
 
   # improve desktop responsiveness when updating the system
   nix.daemonCPUSchedPolicy = "idle";
+
+  boot.kernel.sysctl."vm.swappiness" = lib.mkDefault 10; # Default is 60, lower is less eager to swap
 }
