@@ -6,8 +6,9 @@
 }:
 {
   options.srvos.detect-hostname-change = {
-    enable = lib.mkEnableOption "warn if the hostname changes between deploys" // {
+    enable = lib.mkEnableOption "" // {
       default = true;
+      description = "Whether to warn if the hostname changes between deploys";
     };
   };
 
