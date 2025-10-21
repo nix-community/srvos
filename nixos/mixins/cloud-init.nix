@@ -22,7 +22,6 @@
   );
 
   networking.useNetworkd = lib.mkDefault true;
-  networking.useDHCP = lib.mkDefault false;
 
   # Delegate the hostname setting to cloud-init by default
   networking.hostName = lib.mkOverride 1337 ""; # lower prio than lib.mkDefault
