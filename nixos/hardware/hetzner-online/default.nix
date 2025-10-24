@@ -45,15 +45,13 @@
     };
 
     # Disable the usb0 link because it has an alias beginning with `en...`
-    # which will cause it to also be assigned on the default IPv6 route. This
-    # will confuse Kubernetes CNIs configured to use DualStack networking.
+    # which it will also learn a (broken) IPv6 default route from.
+    # This will confuse Kubernetes CNIs configured to use DualStack networking.
     systemd.network.networks."01-disable-usb0" = {
-      matchConfig = {
-        Name = "usb0";
-      };
-      linkConfig = {
-        Unmanaged = true;
-      };
+      matchConfig.Driver = "cdc_ether";
+      linkConfig.RequiredForOnline = false;
+      networkConfig.IPv6AcceptRA = false;
+      networkConfig.DHCP = false;
     };
 
     # This option defaults to `networking.useDHCP` which we don't enable
