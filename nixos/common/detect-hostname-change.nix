@@ -15,6 +15,7 @@
   config = lib.mkIf (config.srvos.detect-hostname-change.enable && config.networking.hostName != "") {
     system.preSwitchChecks.detectHostnameChange = ''
       detectHostnameChange() {
+        local actual
         actual=$(< /proc/sys/kernel/hostname)
 
         # Ignore if the system is getting installed
