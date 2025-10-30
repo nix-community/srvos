@@ -4,7 +4,7 @@
 { self, pkgs }:
 let
   lib = pkgs.lib;
-  system = pkgs.system;
+  system = pkgs.stdenv.hostPlatform.system;
 
   nixosSystem =
     args: import "${toString pkgs.path}/nixos/lib/eval-config.nix" ({ inherit lib system; } // args);

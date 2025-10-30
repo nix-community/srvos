@@ -30,5 +30,5 @@ let
 in
 {
   # Note this might jump back and worth as kernel get added or removed.
-  boot.kernelPackages = lib.mkIf (lib.meta.availableOn pkgs.hostPlatform pkgs.zfs) latestKernelPackage;
+  boot.kernelPackages = lib.mkIf (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.zfs) latestKernelPackage;
 }

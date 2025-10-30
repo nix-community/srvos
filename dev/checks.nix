@@ -5,7 +5,7 @@
 }:
 let
   lib = pkgs.lib;
-  system = pkgs.system;
+  system = pkgs.stdnv.hostPlatform.system;
 
   nixosTest = import "${pkgs.path}/nixos/lib/testing-python.nix" { inherit pkgs system; };
 
