@@ -14,7 +14,7 @@ The main difference here is that the default userdata service is replaced by clo
 
 Hardware configuration for <https://www.digitalocean.com/> instances.
 
-Enables cloud-init but turns of non-working dhcp.
+Enables cloud-init but turns off non-working dhcp.
 
 ### [`nixosModules.hardware-hetzner-cloud`]({{ repo_url }}/blob/main/nixos/hardware/hetzner-cloud/default.nix)
 
