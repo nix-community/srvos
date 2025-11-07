@@ -210,8 +210,8 @@ with lib;
     type =
       with types;
       nonEmptyListOf (enum [
-        "node16"
         "node20"
+        "node24"
       ]);
     default = [ "node20" ];
     description = ''
