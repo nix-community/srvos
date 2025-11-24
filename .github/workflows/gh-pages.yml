@@ -16,7 +16,7 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
         with:
           extra_nix_config: |
