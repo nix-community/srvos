@@ -4,7 +4,7 @@
   # follows the same channel as nixpkgs in the main flake
   inputs.nixpkgs-dev.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
-  inputs.nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+  inputs.nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   inputs.nix-darwin.url = "github:nix-darwin/nix-darwin";
   inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs-dev";
