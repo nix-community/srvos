@@ -6,7 +6,7 @@
 
   inputs.nixos-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
-  inputs.nix-darwin.url = "github:LnL7/nix-darwin";
+  inputs.nix-darwin.url = "github:nix-darwin/nix-darwin";
   inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs-dev";
 
   inputs.mkdocs-numtide.url = "github:numtide/mkdocs-numtide";
