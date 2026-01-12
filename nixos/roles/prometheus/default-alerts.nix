@@ -46,7 +46,7 @@
       };
 
       FilesystemInodesFull = {
-        expr = ''disk_inodes_free / disk_inodes_total < 0.10'';
+        expr = "disk_inodes_free / disk_inodes_total < 0.10";
         for = "10m";
         annotations.description = "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 10% inodes left on its filesystem";
       };
@@ -75,7 +75,7 @@
       };
 
       SwapUsing30Percent = {
-        expr = ''mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.3'';
+        expr = "mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.3";
         for = "30m";
         annotations.description = "{{$labels.host}} is using 30% of its swap space for at least 30 minutes";
       };
@@ -99,7 +99,7 @@
       };
 
       Load15 = {
-        expr = ''system_load15 / system_n_cpus >= 2.0'';
+        expr = "system_load15 / system_n_cpus >= 2.0";
         for = "10m";
         annotations.description = "{{$labels.host}} is running with load15 > 1 for at least 5 minutes: {{$value}}";
       };
