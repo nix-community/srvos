@@ -64,7 +64,17 @@
   services.openssh.enable = true;
 
   # Prevent LLMNR poisoning attacks
-  services.resolved.llmnr = lib.mkDefault "false";
+  services.resolved = (
+    # TODO: remove when 25.11 is deprecated
+    if options.services.resolved ? settings then
+      {
+        settings.Resolve.LLMNR = lib.mkDefault "false";
+      }
+    else
+      {
+        llmnr = lib.mkDefault "false";
+      }
+  );
 
   # UTC everywhere!
   time.timeZone = lib.mkDefault "UTC";
