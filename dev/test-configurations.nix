@@ -19,6 +19,8 @@ let
       boot.loader.grub.devices = lib.mkForce [ "/dev/sda" ];
       fileSystems."/".device = lib.mkDefault "/dev/sda";
 
+      systemd.enableStrictShellChecks = true;
+
       # Don't reinstantiate nixpkgs for every nixos eval.
       # Also important to have nixpkgs config which allows for some required insecure packages
       nixpkgs = {
@@ -58,6 +60,10 @@ in
     modules = [
       dummy
       self.nixosModules.hardware-digitalocean-droplet
+      {
+        systemd.services.digitalocean-entropy-seed.enableStrictShellChecks = false;
+        systemd.services.digitalocean-metadata.enableStrictShellChecks = false;
+      }
     ];
   };
   example-hardware-hetzner-cloud = nixosSystem {
@@ -163,6 +169,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner.cachix.cacheName = "cache-name";
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
         roles.github-actions-runner.tokenFile = "/run/gha-token-file";
@@ -175,6 +182,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner.cachix.cacheName = "cache-name";
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
         roles.github-actions-runner.githubApp = {
@@ -191,6 +199,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner = {
           githubApp = {
             id = "1234";
