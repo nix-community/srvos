@@ -50,6 +50,10 @@ in
       };
     };
 
+    system.systemBuilderCommands = lib.mkAfter ''
+      echo "${config.srvos.flake.rev or config.srvos.flake.dirtyRev}" > $out/flake-revision
+    '';
+
     services.telegraf.extraConfig.inputs.file =
       let
         inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) (
