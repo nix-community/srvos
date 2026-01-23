@@ -54,7 +54,7 @@ in
       echo "${config.srvos.flake.rev or config.srvos.flake.dirtyRev}" > $out/flake-revision
     '';
 
-    services.telegraf.extraConfig.inputs.file =
+    services.telegraf.extraConfig.inputs =
       let
         inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) (
           cfg.flake.inputs // { inherit (cfg) flake; }
@@ -74,12 +74,27 @@ in
           # TYPE flake_input_last_modified gauge
           ${lib.concatStringsSep "\n" (lib.mapAttrsToList lastModified inputsWithDate)}
         '';
+
+        trackFlakeRevision = pkgs.writeShellScript "track-flake-revision" ''
+          while read -r; do
+            echo "flake,revision=$(cat /run/current-system/flake-revision) revision=1"
+          done
+        '';
       in
-      [
-        {
-          data_format = "prometheus";
-          files = [ (pkgs.writeText "flake-inputs.prom" promText) ];
-        }
-      ];
+      {
+        file = [
+          {
+            data_format = "prometheus";
+            files = [ (pkgs.writeText "flake-inputs.prom" promText) ];
+          }
+        ];
+        execd = [
+          {
+            command = [ trackFlakeRevision ];
+            signal = "STDIN";
+            data_format = "influx";
+          }
+        ];
+      };
   };
 }
