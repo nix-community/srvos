@@ -55,11 +55,24 @@ in
         inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) (
           cfg.flake.inputs // { inherit (cfg) flake; }
         );
+
+        normalizeRevision =
+          input:
+          if (!input ? rev) && (input ? dirtyRev) then
+            input
+            // {
+              rev = input.dirtyRev;
+              shortRev = input.dirtyShortRev;
+            }
+          else
+            input;
+
         flakeAttrs =
           input:
           (lib.mapAttrsToList (n: v: ''${n}="${v}"'') (
-            lib.filterAttrs (_: v: (builtins.typeOf v) == "string") input
+            lib.filterAttrs (_: v: (builtins.typeOf v) == "string") (normalizeRevision input)
           ));
+
         lastModified =
           name: input:
           ''flake_input_last_modified{input="${name}",${lib.concatStringsSep "," (flakeAttrs input)}} ${toString input.lastModified}'';
