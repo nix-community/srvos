@@ -12,8 +12,8 @@
     };
     command = lib.mkOption {
       type = lib.types.singleLineStr;
-      default = lib.getExe pkgs.dix;
-      defaultText = lib.literalExpression "lib.getExe pkgs.dix";
+      default = "${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff";
+      defaultText = lib.literalExpression ''"''${pkgs.nvd}/bin/nvd --nix-bin-dir=''${config.nix.package}/bin diff"'';
       description = "diff command";
     };
     text = lib.mkOption {
