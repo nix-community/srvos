@@ -23,9 +23,8 @@
 
   # Create users with https://github.com/nikstur/userborn rather than our perl script.
   # Don't enable if we detect impermanence, which is not compatible with it: https://github.com/nix-community/impermanence/pull/223
-  # as well as agenix: https://github.com/ryantm/agenix/pull/255
   services.userborn.enable = lib.mkIf (
-    !((options.environment ? persistence && options.environment.persistence.enable) || options ? age)
+    !(options.environment ? persistence && options.environment.persistence.enable)
   ) (lib.mkDefault true);
 
   # Use systemd during boot as well except:
