@@ -26,7 +26,7 @@
   # or if subuids/subgids are defined for any user: https://github.com/nikstur/userborn/issues/7
   services.userborn.enable = lib.mkIf (
     !(
-      (options.environment ? persistence && options.environment.persistence.enable)
+      (options.environment ? persistence && config.environment.persistence == { })
       || (lib.any (u: u.subUidRanges != [ ] || u.autoSubUidGidRange) (lib.attrValues config.users.users))
     )
   ) (lib.mkDefault true);
