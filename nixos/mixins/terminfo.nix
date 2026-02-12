@@ -15,7 +15,7 @@
       ''
         7zz -snld x ${pkgs.ghostty-bin.src}
         mkdir -p $out/share/terminfo
-        cp -r Ghostty.app/Contents/Resources/terminfo/* $out/share/terminfo/
+        cp -r Ghostty.app/Contents/Resources/terminfo $out/share/terminfo
       ''
     )
   ]
