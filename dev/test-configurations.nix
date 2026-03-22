@@ -21,6 +21,8 @@ let
 
       systemd.enableStrictShellChecks = true;
 
+      documentation.nixos.includeAllModules = true;
+
       # Don't reinstantiate nixpkgs for every nixos eval.
       # Also important to have nixpkgs config which allows for some required insecure packages
       nixpkgs = {
@@ -40,6 +42,16 @@ in
     modules = [
       dummy
       self.nixosModules.server
+    ];
+  };
+  example-server-docs = nixosSystem {
+    modules = [
+      dummy
+      self.nixosModules.server
+      {
+        # docs disabled by default for server
+        srvos.server.docs.enable = true;
+      }
     ];
   };
   example-desktop = nixosSystem {
@@ -169,6 +181,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        documentation.nixos.includeAllModules = lib.mkForce false;
         systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner.cachix.cacheName = "cache-name";
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
@@ -182,6 +195,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        documentation.nixos.includeAllModules = lib.mkForce false;
         systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner.cachix.cacheName = "cache-name";
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
@@ -199,6 +213,7 @@ in
       self.nixosModules.roles-github-actions-runner
       dummy
       {
+        documentation.nixos.includeAllModules = lib.mkForce false;
         systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
         roles.github-actions-runner = {
           githubApp = {
