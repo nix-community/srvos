@@ -12,7 +12,12 @@
     };
     command = lib.mkOption {
       type = lib.types.singleLineStr;
-      default = "${lib.getExe pkgs.dix} --force-correctness";
+      # --force-correctness was added in dix 1.4.2
+      default =
+        if lib.versionAtLeast (pkgs.dix.version or "0") "1.4.2" then
+          "${lib.getExe pkgs.dix} --force-correctness"
+        else
+          "${lib.getExe pkgs.dix}";
       defaultText = lib.literalExpression ''"''${lib.getExe pkgs.dix} --force-correctness"'';
       description = "diff command";
     };
