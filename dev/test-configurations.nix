@@ -66,6 +66,7 @@ in
     modules = [
       dummy
       self.nixosModules.hardware-amazon
+      { systemd.services.fetch-ec2-metadata.enableStrictShellChecks = false; }
     ];
   };
   example-hardware-digitalocean-droplet = nixosSystem {
