@@ -98,12 +98,17 @@ in
   services.telegraf = {
     extraConfig = {
       inputs = {
-        prometheus = lib.mkIf config.services.promtail.enable [
-          {
-            urls = [ "http://localhost:9080/metrics" ]; # default promtail port
-            metric_version = 2;
-          }
-        ];
+        prometheus =
+          lib.mkIf
+            (
+              (lib.versionOlder (lib.versions.majorMinor lib.version) "26.05") && config.services.promtail.enable
+            )
+            [
+              {
+                urls = [ "http://localhost:9080/metrics" ]; # default promtail port
+                metric_version = 2;
+              }
+            ];
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
         smart = lib.mkIf (!isVM) { path_smartctl = "/run/wrappers/bin/smartctl-telegraf"; };
