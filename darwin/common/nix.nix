@@ -15,4 +15,20 @@
 
   # If the user is in @admin they are trusted by default.
   nix.settings.trusted-users = [ "@admin" ];
+
+  # Deprioritize store maintenance I/O so it doesn't starve interactive use.
+  # Both services run as root and use LocalStore directly (not via nix-daemon),
+  # so throttling must be on the launchd service itself.
+  # This mirrors the NixOS side which uses IOSchedulingClass = "idle".
+  launchd.daemons.nix-optimise.serviceConfig = {
+    ProcessType = "Background";
+    LowPriorityIO = true;
+    Nice = 15;
+  };
+
+  launchd.daemons.nix-gc.serviceConfig = {
+    ProcessType = "Background";
+    LowPriorityIO = true;
+    Nice = 15;
+  };
 }
