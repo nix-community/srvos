@@ -13,8 +13,6 @@
     ''
   );
 
-  # Don't quarantine apps installed by homebrew with gatekeeper
-  homebrew.caskArgs.no_quarantine = lib.mkDefault true;
   # Declarative package management by removing all homebrew packages,
   # not declared in darwin-nix configuration
   homebrew.onActivation.cleanup = lib.mkDefault "uninstall";
