@@ -17,8 +17,12 @@
       loadPrivateFlake =
         path:
         let
+          stablePath = builtins.path {
+            inherit path;
+            name = "srvos-dev-private";
+          };
           flakeHash = nixpkgs.lib.fileContents "${toString path}.narHash";
-          flakePath = "path:${toString path}?narHash=${flakeHash}";
+          flakePath = "path:${builtins.unsafeDiscardStringContext (toString stablePath)}?narHash=${flakeHash}";
         in
         builtins.getFlake (builtins.unsafeDiscardStringContext flakePath);
 
