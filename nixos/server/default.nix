@@ -75,22 +75,10 @@
     # that we can hopefully still access it remotely.
     enableEmergencyMode = false;
 
-    sleep =
-      # TODO: remove when 25.11 is deprecated
-      if options.systemd.sleep ? settings then
-        {
-          settings.Sleep = {
-            AllowSuspend = "no";
-            AllowHibernation = "no";
-          };
-        }
-      else
-        {
-          extraConfig = ''
-            AllowSuspend=no
-            AllowHibernation=no
-          '';
-        };
+    sleep.settings.Sleep = {
+      AllowSuspend = "no";
+      AllowHibernation = "no";
+    };
 
     # For more detail, see:
     #   https://0pointer.de/blog/projects/watchdog.html
