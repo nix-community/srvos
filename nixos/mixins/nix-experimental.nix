@@ -42,6 +42,10 @@
   # Needs a patch in Nix to work properly: https://github.com/NixOS/nix/pull/13135
   # nix.settings.use-cgroups = true;
 
-  # for container in builds support
-  nix.settings.system-features = [ "uid-range" ];
+  # uid-range: container-in-builds. recursive-nix: so drvs that require
+  # it are not scheduled on builders without it.
+  nix.settings.system-features = [
+    "uid-range"
+    "recursive-nix"
+  ];
 }
