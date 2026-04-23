@@ -14,19 +14,9 @@
       # Just the NixOS and Darwin modules
       modules = import ./.;
 
-      loadPrivateFlake =
-        path:
-        let
-          stablePath = builtins.path {
-            inherit path;
-            name = "srvos-dev-private";
-          };
-          flakeHash = nixpkgs.lib.fileContents "${toString path}.narHash";
-          flakePath = "path:${builtins.unsafeDiscardStringContext (toString stablePath)}?narHash=${flakeHash}";
-        in
-        builtins.getFlake (builtins.unsafeDiscardStringContext flakePath);
-
-      privateFlake = loadPrivateFlake ./dev/private;
+      # Evaluate the private dev flake via vendored flake-compat so
+      # its inputs don't leak into the public flake.
+      privateFlake = (import ./dev/private/flake-compat.nix { src = ./dev/private; }).defaultNix;
 
       inputs = privateFlake.inputs // publicInputs;
 
