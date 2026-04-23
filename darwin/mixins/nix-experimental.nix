@@ -32,4 +32,8 @@
   ++ lib.optionals (lib.versionAtLeast (lib.versions.majorMinor config.nix.package.version) "2.29") [
     "blake3-hashes"
   ];
+
+  # Advertise recursive-nix so drvs that require it are only scheduled
+  # on builders that support it.
+  nix.settings.system-features = [ "recursive-nix" ];
 }
