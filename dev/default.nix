@@ -1,7 +1,6 @@
 { self, inputs, ... }:
 {
   imports = [
-    inputs.git-hooks-nix.flakeModule
     inputs.treefmt-nix.flakeModule
   ];
 
@@ -63,9 +62,6 @@
           name = "srvos";
           src = self;
         };
-      };
-      pre-commit = {
-        check.enable = defaultPlatform;
       };
       treefmt = {
         flakeCheck = defaultPlatform;
