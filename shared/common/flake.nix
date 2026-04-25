@@ -7,6 +7,46 @@
 
 let
   cfg = config.srvos;
+
+  # Safely extract source metadata from a flake input.
+  # Some inputs (e.g. mics-skills) use `throw` for removed attributes,
+  # so we must not iterate over all attributes or call `builtins.typeOf`
+  # on the full input. Only extract known-safe attributes, and only those
+  # that actually exist on the input.
+  safeInputs = inputs:
+    lib.mapAttrs
+      (name: input:
+        let
+          safeAttrs = [
+            "lastModified"
+            "lastModifiedDate"
+            "narHash"
+            "outPath"
+            "rev"
+            "shortRev"
+            "dirtyRev"
+            "dirtyShortRev"
+            "sourceInfo"
+          ];
+        in
+        lib.listToAttrs (
+          builtins.filter
+            (a: lib.hasAttr a.name input)
+            (builtins.map (a: { name = a; value = input.${a}; }) safeAttrs)
+        )
+      )
+      inputs;
+
+  normalizeRevision = input:
+    if (!input ? rev) && (input ? dirtyRev) then
+      input
+      // {
+        rev = input.dirtyRev;
+        shortRev = input.dirtyShortRev;
+      }
+    else
+      input;
+
 in
 {
   options.srvos = {
@@ -52,20 +92,11 @@ in
 
     services.telegraf.extraConfig.inputs.file =
       let
-        inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) (
-          cfg.flake.inputs // { inherit (cfg) flake; }
-        );
+        # Use safeInputs to avoid calling builtins.typeOf on inputs that
+        # may throw for certain attributes (e.g. mics-skills.homeManagerModules).
+        safeFlakeInputs = safeInputs (cfg.flake.inputs // { inherit (cfg) flake; });
 
-        normalizeRevision =
-          input:
-          if (!input ? rev) && (input ? dirtyRev) then
-            input
-            // {
-              rev = input.dirtyRev;
-              shortRev = input.dirtyShortRev;
-            }
-          else
-            input;
+        inputsWithDate = lib.filterAttrs (_: input: input ? lastModified) safeFlakeInputs;
 
         flakeAttrs =
           input:
