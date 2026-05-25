@@ -13,7 +13,7 @@ let
     "${prefix}-server" = nixosTest.makeTest {
       name = "${prefix}-server";
 
-      nodes.machine =
+      containers.machine =
         { ... }:
         {
           imports = [ self.nixosModules.server ];
