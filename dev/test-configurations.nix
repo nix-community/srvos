@@ -189,7 +189,6 @@ in
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
         roles.github-actions-runner.tokenFile = "/run/gha-token-file";
         roles.github-actions-runner.url = "https://fixup";
-        roles.github-actions-runner.nodeRuntimes = [ "node24" ];
       }
     ];
   };
@@ -208,7 +207,6 @@ in
           privateKeyFile = "/run/gha-token-file";
         };
         roles.github-actions-runner.url = "https://fixup";
-        roles.github-actions-runner.nodeRuntimes = [ "node24" ];
       }
     ];
   };
@@ -230,7 +228,6 @@ in
             exec nix copy --experimental-features nix-command --to "file:///var/nix-cache" $OUT_PATHS
           '';
         };
-        roles.github-actions-runner.nodeRuntimes = [ "node24" ];
       }
     ];
   };
