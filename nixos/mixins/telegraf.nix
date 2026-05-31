@@ -52,7 +52,7 @@ let
           // (
             let
               # also match ipv6 addresses
-              group = builtins.match "\\[?([^\]]+)]?:([^:]+)$" fs.device;
+              group = builtins.match "\\[?([^]]+)]?:([^:]+)$" fs.device;
               host = builtins.head group;
               path = builtins.elemAt group 1;
             in
