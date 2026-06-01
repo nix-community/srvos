@@ -63,19 +63,6 @@
   # Enable SSH everywhere
   services.openssh.enable = true;
 
-  # Prevent LLMNR poisoning attacks
-  services.resolved = (
-    # TODO: remove when 25.11 is deprecated
-    if options.services.resolved ? settings then
-      {
-        settings.Resolve.LLMNR = lib.mkDefault "false";
-      }
-    else
-      {
-        llmnr = lib.mkDefault "false";
-      }
-  );
-
   # UTC everywhere!
   time.timeZone = lib.mkDefault "UTC";
 
@@ -88,22 +75,10 @@
     # that we can hopefully still access it remotely.
     enableEmergencyMode = false;
 
-    sleep =
-      # TODO: remove when 25.11 is deprecated
-      if options.systemd.sleep ? settings then
-        {
-          settings.Sleep = {
-            AllowSuspend = "no";
-            AllowHibernation = "no";
-          };
-        }
-      else
-        {
-          extraConfig = ''
-            AllowSuspend=no
-            AllowHibernation=no
-          '';
-        };
+    sleep.settings.Sleep = {
+      AllowSuspend = "no";
+      AllowHibernation = "no";
+    };
 
     # For more detail, see:
     #   https://0pointer.de/blog/projects/watchdog.html
