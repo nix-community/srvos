@@ -188,7 +188,10 @@ in
         roles.github-actions-runner.cachix.cacheName = "cache-name";
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
         roles.github-actions-runner.tokenFile = "/run/gha-token-file";
-        roles.github-actions-runner.url = "https://fixup";
+        roles.github-actions-runner.orgs.fixup = {
+          url = "https://fixup";
+          count = 1;
+        };
       }
     ];
   };
@@ -203,10 +206,17 @@ in
         roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
         roles.github-actions-runner.githubApp = {
           id = "1234";
-          login = "foo";
           privateKeyFile = "/run/gha-token-file";
         };
-        roles.github-actions-runner.url = "https://fixup";
+        # Same GitHub App installed across multiple orgs.
+        roles.github-actions-runner.orgs.foo = {
+          url = "https://fixup";
+        };
+        roles.github-actions-runner.orgs.bar = {
+          url = "https://fixup";
+          count = 2;
+          extraLabels = [ "bar" ];
+        };
       }
     ];
   };
@@ -220,10 +230,11 @@ in
         roles.github-actions-runner = {
           githubApp = {
             id = "1234";
-            login = "foo";
             privateKeyFile = "/run/gha-token-file";
           };
-          url = "https://fixup";
+          orgs.foo = {
+            url = "https://fixup";
+          };
           binary-cache.script = ''
             exec nix copy --experimental-features nix-command --to "file:///var/nix-cache" $OUT_PATHS
           '';

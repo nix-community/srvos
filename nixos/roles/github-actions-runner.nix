@@ -19,14 +19,76 @@ in
   ];
 
   options.roles.github-actions-runner = {
-    url = lib.mkOption {
-      description = "URL of the repo or organization to connect to";
-      type = lib.types.nullOr lib.types.str;
-      default = null;
+    orgs = lib.mkOption {
+      default = { };
+      description = ''
+        Organizations (or repositories) the runners should serve.
+
+        Each entry generates its own set of runners. When a `githubApp` is
+        configured globally, the same GitHub App is used for every org and only
+        the `login` (defaulting to the attribute name) changes. Install the App
+        on each org and list them here.
+
+        The attribute name is used both as the runner name infix
+        (`<name>-<org>-<n>`) and, by default, as the org `login` and `url`.
+      '';
+      example = lib.literalExpression ''
+        {
+          org-a = { };
+          org-b = {
+            count = 2;
+            extraLabels = [ "org-b" ];
+          };
+        }
+      '';
+      type = lib.types.attrsOf (
+        lib.types.submodule (
+          { name, ... }:
+          {
+            options = {
+              url = lib.mkOption {
+                description = "URL of the repo or organization to connect to. Defaults to the GitHub URL derived from the attribute name.";
+                type = lib.types.str;
+                default = "https://github.com/${name}";
+                defaultText = lib.literalExpression "https://github.com/\${name}";
+              };
+
+              login = lib.mkOption {
+                description = "GitHub login (org/user) where the shared GitHub App is installed. Defaults to the attribute name.";
+                type = lib.types.str;
+                default = name;
+                defaultText = lib.literalExpression "\${name}";
+              };
+
+              count = lib.mkOption {
+                description = "Number of GitHub Actions runners to deploy for this org.";
+                type = lib.types.int;
+                default = 4;
+              };
+
+              extraLabels = lib.mkOption {
+                description = "Extra labels added (on top of the global `extraLabels`) only to this org's runners.";
+                type = lib.types.listOf lib.types.str;
+                default = [ ];
+              };
+
+              tokenFile = lib.mkOption {
+                description = ''
+                  Path to a token file for this org. Used only when no global
+                  `githubApp` is configured. Defaults to the global `tokenFile`.
+                '';
+                type = lib.types.nullOr lib.types.path;
+                default = cfg.tokenFile;
+                defaultText = lib.literalExpression "config.roles.github-actions-runner.tokenFile";
+              };
+            };
+          }
+        )
+      );
     };
 
     tokenFile = lib.mkOption {
-      description = "Path to the token";
+      description = "Path to the token. Used as the default for `orgs.<name>.tokenFile` when no `githubApp` is configured.";
       type = lib.types.nullOr lib.types.path;
       default = null;
     };
@@ -61,10 +123,6 @@ in
               type = lib.types.str;
               description = "GitHub App ID";
             };
-            login = lib.mkOption {
-              type = lib.types.str;
-              description = "GitHub login used to register the application";
-            };
             privateKeyFile = lib.mkOption {
               type = lib.types.path;
               description = ''
@@ -80,12 +138,6 @@ in
       description = "Prefix name of the runners";
       type = lib.types.str;
       default = "github-runner";
-    };
-
-    count = lib.mkOption {
-      description = "Number of github actions runner to deploy";
-      default = 4;
-      type = lib.types.int;
     };
 
     extraReadWritePaths = lib.mkOption {
@@ -174,40 +226,52 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.url != null) {
+  config = lib.mkIf (cfg.orgs != { }) {
     users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
     services.srvos-github-runners = builtins.listToAttrs (
-      map (n: rec {
-        name = "${cfg.name}-${toString n}";
-        value = {
-          inherit name;
-          user = name;
-          enable = true;
-          url = cfg.url;
-          tokenFile = cfg.tokenFile;
-          githubApp = cfg.githubApp;
-          ephemeral = cfg.ephemeral;
-          nodeRuntimes = cfg.nodeRuntimes;
-          serviceOverrides = {
-            DeviceAllow = [ "/dev/kvm" ];
-            PrivateDevices = false;
-          }
-          // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
-            ReadWritePaths = cfg.extraReadWritePaths;
-            Group = [ "github-runner" ];
-          });
-          extraPackages = [
-            pkgs.cachix
-            pkgs.glibc.bin
-            pkgs.jq
-            config.nix.package
-            pkgs.nix-eval-jobs
-            pkgs.openssh
-          ]
-          ++ cfg.extraPackages;
-          extraLabels = cfg.extraLabels;
-        };
-      }) (lib.range 1 cfg.count)
+      lib.flatten (
+        lib.mapAttrsToList (
+          orgName: org:
+          map (n: rec {
+            name = "${cfg.name}-${orgName}-${toString n}";
+            value = {
+              inherit name;
+              user = name;
+              enable = true;
+              url = org.url;
+              tokenFile = if cfg.githubApp != null then null else org.tokenFile;
+              githubApp =
+                if cfg.githubApp != null then
+                  {
+                    inherit (cfg.githubApp) id privateKeyFile;
+                    login = org.login;
+                  }
+                else
+                  null;
+              ephemeral = cfg.ephemeral;
+              nodeRuntimes = cfg.nodeRuntimes;
+              serviceOverrides = {
+                DeviceAllow = [ "/dev/kvm" ];
+                PrivateDevices = false;
+              }
+              // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
+                ReadWritePaths = cfg.extraReadWritePaths;
+                Group = [ "github-runner" ];
+              });
+              extraPackages = [
+                pkgs.cachix
+                pkgs.glibc.bin
+                pkgs.jq
+                config.nix.package
+                pkgs.nix-eval-jobs
+                pkgs.openssh
+              ]
+              ++ cfg.extraPackages;
+              extraLabels = cfg.extraLabels ++ org.extraLabels;
+            };
+          }) (lib.range 1 org.count)
+        ) cfg.orgs
+      )
     );
 
     # Required to run unmodified binaries fetched via dotnet in a dev environment.

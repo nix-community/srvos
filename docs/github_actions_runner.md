@@ -53,13 +53,17 @@ The module has been created as a role. Roles are used to define the specific pur
 
 The following options must be configured
 
-`url` the full URI to your organization or your repository. This URI has to match with the location where you installed the GitHub App.
+`orgs` an attribute set of the organizations (or repositories) to serve. Each entry generates its own set of runners. The attribute name is used as the runner name infix (`<name>-<org>-<n>`) and, by default, as both the org `login` and the `url`. The same `githubApp` is shared across every org, so you only need to install your GitHub App on each org and list them here.
 
-`count` the number of runners you want to start on the host.
+`orgs.<name>.url` the full URI to your organization or your repository. This URI has to match with the location where you installed the GitHub App. Defaults to `https://github.com/<name>`.
+
+`orgs.<name>.login` the name of your organization / user where the GitHub App was registered. Defaults to `<name>`.
+
+`orgs.<name>.count` the number of runners you want to start on the host for this org (defaults to `4`).
+
+`orgs.<name>.extraLabels` extra labels added (on top of the global `extraLabels`) only to this org's runners.
 
 `githubApp.id` the Id of the GitHub App that was created.
-
-`githubApp.login` the name of your organization / user where the GitHub App was registered.
 
 `githubApp.privateKeyFile` the path to the file containing the GitHub App generated PEM encoded private key. This file should be present on the host and deployed as a secret (using [sops-nix](https://github.com/Mic92/sops-nix) or [agenix](https://github.com/ryantm/agenix)).
 
@@ -67,17 +71,18 @@ The following options must be configured
 
 `cachix.tokenFile` the path to the file containing your cachix token. This file should also be present on the host and deployed as a secret (using [sops-nix](https://github.com/Mic92/sops-nix) or [agenix](https://github.com/ryantm/agenix)).
 
-Example of a module to configure 12 Github runners:
+Example of a module that configures 12 runners on one organization and 4 more on a second one, all using the same GitHub App:
 
 ```
 roles.github-actions-runner = {
-  url = "https://github.com/<YOUR ORGANIZATION>";
-  count = 12;
   name = "github-runner";
   githubApp = {
     id = "<YOUR GENERATED APP ID>";
-    login = "<YOUR ORGANIZATION>";
     privateKeyFile = config.age.secrets.github-app-runner-private-key.path;
+  };
+  orgs = {
+    "<YOUR ORGANIZATION>".count = 12;
+    "<YOUR OTHER ORGANIZATION>" = { }; # url/login derived from the name, defaults to 4 runners
   };
   cachix.cacheName = "<YOUR CACHIX ORGANIZATION>";
   cachix.tokenFile = config.age.secrets.cachixToken.path;
