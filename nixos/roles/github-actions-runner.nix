@@ -16,6 +16,22 @@ in
   imports = [
     ../modules/github-runners
     "${queued-build-hook}/module.nix"
+    (lib.mkRemovedOptionModule
+      [
+        "roles"
+        "github-actions-runner"
+        "url"
+      ]
+      "Configure `roles.github-actions-runner.orgs.<name>.url` instead. Each org is now declared under `orgs`."
+    )
+    (lib.mkRemovedOptionModule
+      [
+        "roles"
+        "github-actions-runner"
+        "count"
+      ]
+      "Configure `roles.github-actions-runner.orgs.<name>.count` instead. Each org is now declared under `orgs`."
+    )
   ];
 
   options.roles.github-actions-runner = {
@@ -123,6 +139,12 @@ in
               type = lib.types.str;
               description = "GitHub App ID";
             };
+            login = lib.mkOption {
+              type = lib.types.nullOr lib.types.str;
+              default = null;
+              visible = false;
+              description = "Removed. Configure `roles.github-actions-runner.orgs.<name>.login` instead.";
+            };
             privateKeyFile = lib.mkOption {
               type = lib.types.path;
               description = ''
@@ -226,74 +248,84 @@ in
     };
   };
 
-  config = lib.mkIf (cfg.orgs != { }) {
-    users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
-    services.srvos-github-runners = builtins.listToAttrs (
-      lib.flatten (
-        lib.mapAttrsToList (
-          orgName: org:
-          map (n: rec {
-            name = "${cfg.name}-${orgName}-${toString n}";
-            value = {
-              inherit name;
-              user = name;
-              enable = true;
-              url = org.url;
-              tokenFile = if cfg.githubApp != null then null else org.tokenFile;
-              githubApp =
-                if cfg.githubApp != null then
-                  {
-                    inherit (cfg.githubApp) id privateKeyFile;
-                    login = org.login;
-                  }
-                else
-                  null;
-              ephemeral = cfg.ephemeral;
-              nodeRuntimes = cfg.nodeRuntimes;
-              serviceOverrides = {
-                DeviceAllow = [ "/dev/kvm" ];
-                PrivateDevices = false;
-              }
-              // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
-                ReadWritePaths = cfg.extraReadWritePaths;
-                Group = [ "github-runner" ];
-              });
-              extraPackages = [
-                pkgs.cachix
-                pkgs.glibc.bin
-                pkgs.jq
-                config.nix.package
-                pkgs.nix-eval-jobs
-                pkgs.openssh
-              ]
-              ++ cfg.extraPackages;
-              extraLabels = cfg.extraLabels ++ org.extraLabels;
-            };
-          }) (lib.range 1 org.count)
-        ) cfg.orgs
-      )
-    );
+  config = lib.mkMerge [
+    {
+      assertions = [
+        {
+          assertion = cfg.githubApp == null || cfg.githubApp.login == null;
+          message = "`roles.github-actions-runner.githubApp.login` has been removed. The login is now derived per org from `roles.github-actions-runner.orgs.<name>.login` (defaulting to the attribute name).";
+        }
+      ];
+    }
+    (lib.mkIf (cfg.orgs != { }) {
+      users.groups.github-runner = lib.mkIf (cfg.extraReadWritePaths != [ ]) { };
+      services.srvos-github-runners = builtins.listToAttrs (
+        lib.flatten (
+          lib.mapAttrsToList (
+            orgName: org:
+            map (n: rec {
+              name = "${cfg.name}-${orgName}-${toString n}";
+              value = {
+                inherit name;
+                user = name;
+                enable = true;
+                url = org.url;
+                tokenFile = if cfg.githubApp != null then null else org.tokenFile;
+                githubApp =
+                  if cfg.githubApp != null then
+                    {
+                      inherit (cfg.githubApp) id privateKeyFile;
+                      login = org.login;
+                    }
+                  else
+                    null;
+                ephemeral = cfg.ephemeral;
+                nodeRuntimes = cfg.nodeRuntimes;
+                serviceOverrides = {
+                  DeviceAllow = [ "/dev/kvm" ];
+                  PrivateDevices = false;
+                }
+                // (lib.optionalAttrs (cfg.extraReadWritePaths != [ ]) {
+                  ReadWritePaths = cfg.extraReadWritePaths;
+                  Group = [ "github-runner" ];
+                });
+                extraPackages = [
+                  pkgs.cachix
+                  pkgs.glibc.bin
+                  pkgs.jq
+                  config.nix.package
+                  pkgs.nix-eval-jobs
+                  pkgs.openssh
+                ]
+                ++ cfg.extraPackages;
+                extraLabels = cfg.extraLabels ++ org.extraLabels;
+              };
+            }) (lib.range 1 org.count)
+          ) cfg.orgs
+        )
+      );
 
-    # Required to run unmodified binaries fetched via dotnet in a dev environment.
-    programs.nix-ld.enable = true;
+      # Required to run unmodified binaries fetched via dotnet in a dev environment.
+      programs.nix-ld.enable = true;
 
-    # Automatically sync all the locally built artifacts to cachix.
-    services.cachix-watch-store = lib.mkIf (cfg.cachix.cacheName != null) {
-      enable = true;
-      cacheName = cfg.cachix.cacheName;
-      cachixTokenFile = cfg.cachix.tokenFile;
-      jobs = 4;
-    };
-
-    queued-build-hook = lib.mkIf (cfg.binary-cache.script != null) (
-      {
+      # Automatically sync all the locally built artifacts to cachix.
+      services.cachix-watch-store = lib.mkIf (cfg.cachix.cacheName != null) {
         enable = true;
-        postBuildScriptContent = cfg.binary-cache.script;
-        credentials = cfg.binary-cache.credentials;
-      }
-      // (lib.optionalAttrs (cfg.binary-cache.enqueueScript != "") {
-        enqueueScriptContent = cfg.binary-cache.enqueueScript;
-      })
-    );
-  };
+        cacheName = cfg.cachix.cacheName;
+        cachixTokenFile = cfg.cachix.tokenFile;
+        jobs = 4;
+      };
+
+      queued-build-hook = lib.mkIf (cfg.binary-cache.script != null) (
+        {
+          enable = true;
+          postBuildScriptContent = cfg.binary-cache.script;
+          credentials = cfg.binary-cache.credentials;
+        }
+        // (lib.optionalAttrs (cfg.binary-cache.enqueueScript != "") {
+          enqueueScriptContent = cfg.binary-cache.enqueueScript;
+        })
+      );
+    })
+  ];
 }
