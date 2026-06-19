@@ -178,60 +178,6 @@ in
   };
 
   # Roles
-  example-roles-github-actions-runner = nixosSystem {
-    modules = [
-      self.nixosModules.roles-github-actions-runner
-      dummy
-      {
-        documentation.nixos.includeAllModules = lib.mkForce false;
-        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
-        roles.github-actions-runner.cachix.cacheName = "cache-name";
-        roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
-        roles.github-actions-runner.tokenFile = "/run/gha-token-file";
-        roles.github-actions-runner.url = "https://fixup";
-      }
-    ];
-  };
-  example-roles-github-actions-runner-github-app = nixosSystem {
-    modules = [
-      self.nixosModules.roles-github-actions-runner
-      dummy
-      {
-        documentation.nixos.includeAllModules = lib.mkForce false;
-        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
-        roles.github-actions-runner.cachix.cacheName = "cache-name";
-        roles.github-actions-runner.cachix.tokenFile = "/run/cachix-token-file";
-        roles.github-actions-runner.githubApp = {
-          id = "1234";
-          login = "foo";
-          privateKeyFile = "/run/gha-token-file";
-        };
-        roles.github-actions-runner.url = "https://fixup";
-      }
-    ];
-  };
-  example-roles-github-actions-runner-github-app-queued-build-hook = nixosSystem {
-    modules = [
-      self.nixosModules.roles-github-actions-runner
-      dummy
-      {
-        documentation.nixos.includeAllModules = lib.mkForce false;
-        systemd.services.cachix-watch-store-agent.enableStrictShellChecks = false;
-        roles.github-actions-runner = {
-          githubApp = {
-            id = "1234";
-            login = "foo";
-            privateKeyFile = "/run/gha-token-file";
-          };
-          url = "https://fixup";
-          binary-cache.script = ''
-            exec nix copy --experimental-features nix-command --to "file:///var/nix-cache" $OUT_PATHS
-          '';
-        };
-      }
-    ];
-  };
-
   example-roles-nix-remote-builder = nixosSystem {
     modules = [
       self.nixosModules.roles-nix-remote-builder
