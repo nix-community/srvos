@@ -20,6 +20,29 @@
         "type": "github"
       }
     },
+    "hercules-ci-effects": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs-dev"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781499420,
+        "narHash": "sha256-vy0EiuiLRKWbXYOqdEKoy5ImlbHcdMC52x9BcC/MwQ8=",
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
+        "rev": "86c7c78a840b44b1a0a5cbc7e9baa0154c0d0f3f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
+        "type": "github"
+      }
+    },
     "mkdocs-numtide": {
       "inputs": {
         "nixpkgs": [
@@ -95,6 +118,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "hercules-ci-effects": "hercules-ci-effects",
         "mkdocs-numtide": "mkdocs-numtide",
         "nix-darwin": "nix-darwin",
         "nixos-stable": "nixos-stable",

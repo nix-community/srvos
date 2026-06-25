@@ -18,5 +18,9 @@
   inputs.flake-parts.url = "github:hercules-ci/flake-parts";
   inputs.flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs-dev";
 
+  inputs.hercules-ci-effects.url = "github:hercules-ci/hercules-ci-effects";
+  inputs.hercules-ci-effects.inputs.flake-parts.follows = "flake-parts";
+  inputs.hercules-ci-effects.inputs.nixpkgs.follows = "nixpkgs-dev";
+
   outputs = _: { };
 }
