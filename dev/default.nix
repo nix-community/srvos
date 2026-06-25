@@ -30,8 +30,11 @@
     };
   };
 
+  hercules-ci.github-pages.branch = "main";
+
   perSystem =
     {
+      config,
       lib,
       pkgs,
       self',
@@ -43,6 +46,10 @@
       inherit (pkgs.stdenv.hostPlatform) isLinux;
     in
     {
+      hercules-ci.github-pages.settings = {
+        contents = config.packages.docs;
+      };
+
       checks =
         let
           devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
