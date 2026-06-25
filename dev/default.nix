@@ -2,6 +2,7 @@
 {
   imports = [
     inputs.treefmt-nix.flakeModule
+    inputs.hercules-ci-effects.flakeModule
   ];
 
   systems = [
@@ -9,6 +10,25 @@
     "aarch64-linux"
     "x86_64-linux"
   ];
+
+  hercules-ci.flake-update = {
+    enable = true;
+    createPullRequest = true;
+    autoMergeMethod = "rebase";
+    baseMerge.enable = true;
+    baseMerge.method = "fast-forward";
+    when = {
+      hour = [ 2 ];
+      dayOfWeek = [
+        "Mon"
+        "Thu"
+      ];
+    };
+    flakes = {
+      "." = { };
+      "dev/private" = { };
+    };
+  };
 
   perSystem =
     {

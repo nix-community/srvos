@@ -41,5 +41,6 @@
         packages = devFlake.packages or { };
         formatter = devFlake.formatter or { };
         checks = devFlake.checks or { };
+        herculesCI = devFlake.herculesCI or { };
       };
 }
