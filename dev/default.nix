@@ -16,7 +16,7 @@
     createPullRequest = true;
     autoMergeMethod = "rebase";
     baseMerge.enable = true;
-    baseMerge.method = "fast-forward";
+    baseMerge.method = "reset";
     when = {
       hour = [ 2 ];
       dayOfWeek = [
