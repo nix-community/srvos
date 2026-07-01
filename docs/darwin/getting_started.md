@@ -9,17 +9,17 @@ This project exports four big categories of NixOS modules which are useful to de
 
 ## Example
 
-Combining all of those together, here is how your `flake.nix` might look like, to deploy a GitHub Actions runner on Hetzner:
+Combining all of those together, here is how your `flake.nix` might look like, to deploy a darwin system:
 
 ```nix
 {
   description = "My machines flakes";
   inputs = {
-    srvos.url = "github:nix-community/srvos/darwin-support";
+    srvos.url = "github:nix-community/srvos";
     # Use the version of nixpkgs that has been tested to work with SrvOS
     # Alternatively we also support the latest nixos release and unstable
     nixpkgs.follows = "srvos/nixpkgs";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.url = "github:nix-darwin/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "srvos/nixpkgs";
   };
   outputs = { srvos, nix-darwin, ... }: {
