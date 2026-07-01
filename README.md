@@ -32,8 +32,6 @@ example to deploy a GitHub Action runner on Hetzner:
         srvos.nixosModules.hardware-hetzner-amd
         # Configured with extra terminfos
         srvos.nixosModules.mixins-terminfo
-        # And designed to run the GitHub Actions runners
-        srvos.nixosModules.roles-github-actions-runner
         # Finally add your configuration here
         ./myHost.nix
       ];
