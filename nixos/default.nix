@@ -24,6 +24,7 @@ exposeModules ./. [
   ./mixins/terminfo.nix
   ./mixins/tracing.nix
   ./mixins/trusted-nix-caches.nix
+  ./modules/google-cloud-ops-agent
   ./roles/github-actions-runner.nix
   ./roles/nix-remote-builder.nix
   ./roles/prometheus
