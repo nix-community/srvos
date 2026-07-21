@@ -16,7 +16,7 @@
     system.preSwitchChecks.detectHostnameChange = ''
       detectHostnameChange() {
         local actual
-        actual=$(< /proc/sys/kernel/hostname)
+        actual="$(< /proc/sys/kernel/hostname)"
 
         # Ignore if the system is getting installed
         # https://github.com/nix-community/nixos-images/blob/2fc023e024c0a5e8e98ae94363dbf2962da10886/nix/installer.nix#L12-L13
@@ -24,7 +24,7 @@
           return
         fi
 
-        desired=${config.networking.hostName}
+        desired="${config.networking.hostName}"
 
         if [[ "$actual" = "$desired" ]]; then
           return
