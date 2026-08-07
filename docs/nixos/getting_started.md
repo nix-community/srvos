@@ -6,12 +6,12 @@ This project exports four big categories of NixOS modules which are useful to de
 
 * [Machine type](./type.md) - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.
 * [Machine hardware](./hardware.md) - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).
-* [Machine role](./role.md) - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)
+* [Machine role](./role.md) - theses take over a machine for a specific role. Only one of those would be included.
 * [Configuration mixins](./mixins.md) - these define addons to be added to the machine configuration. One or more can be added.
 
 ## Example
 
-Combining all of those together, here is how your `flake.nix` might look like, to deploy a GitHub Actions runner on Hetzner:
+Combining all of those together, here is how your `flake.nix` might look like, to deploy a server on Hetzner:
 
 ```nix
 {
@@ -32,8 +32,6 @@ Combining all of those together, here is how your `flake.nix` might look like, t
         srvos.nixosModules.hardware-hetzner-amd
         # Configured with extra terminfos
         srvos.nixosModules.mixins-terminfo
-        # And designed to run the GitHub Actions runners
-        srvos.nixosModules.roles-github-actions-runner
         # Finally add your configuration here
         ./myHost.nix
       ];
