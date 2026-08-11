@@ -982,7 +982,7 @@
   <span class="md-ellipsis">
     
   
-    Roles
+    Installation
   
 
     
@@ -995,94 +995,6 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Roles
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../github_actions_runner/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GitHub Action Runner
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1459,11 +1371,11 @@
 <ul>
 <li><a href="../type/">Machine type</a> - these are high-level settings that define the machine type (Eg: common, server or desktop). Only one of those would be included.</li>
 <li><a href="../hardware/">Machine hardware</a> - these define hardware-related settings for well known hardware. Only one of those would be included. (eg: AWS EC2 instances).</li>
-<li><a href="../role/">Machine role</a> - theses take over a machine for a specific role. Only one of those would be included. (eg: GitHub Actions runner)</li>
+<li><a href="../role/">Machine role</a> - theses take over a machine for a specific role. Only one of those would be included.</li>
 <li><a href="../mixins/">Configuration mixins</a> - these define addons to be added to the machine configuration. One or more can be added.</li>
 </ul>
 <h2 id="example">Example</h2>
-<p>Combining all of those together, here is how your <code>flake.nix</code> might look like, to deploy a GitHub Actions runner on Hetzner:</p>
+<p>Combining all of those together, here is how your <code>flake.nix</code> might look like, to deploy a server on Hetzner:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="ss">description</span> <span class="o">=</span> <span class="s2">&quot;My machines flakes&quot;</span><span class="p">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="ss">inputs</span> <span class="o">=</span> <span class="p">{</span>
@@ -1482,14 +1394,12 @@
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>hardware-hetzner-amd
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="c1"># Configured with extra terminfos</span>
 <a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>mixins-terminfo
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="c1"># And designed to run the GitHub Actions runners</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        srvos<span class="o">.</span>nixosModules<span class="o">.</span>roles-github-actions-runner
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="c1"># Finally add your configuration here</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="l">./myHost.nix</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>      <span class="p">];</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="p">};</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>  <span class="p">};</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="p">}</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="c1"># Finally add your configuration here</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="l">./myHost.nix</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>      <span class="p">];</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="p">};</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  <span class="p">};</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="p">}</span>
 </code></pre></div>
 <h2 id="continue">Continue</h2>
 <p>Now that we have gone over the high-level details, you should have an idea of how to use this project.</p>

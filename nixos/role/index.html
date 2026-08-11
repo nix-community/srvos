@@ -133,7 +133,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#github-actions-runner-nixosconfigurationroles-github-actions-runner" class="md-skip">
+        <a href="#nix-remote-builder-nixosconfigurationroles-nix-remote-builder" class="md-skip">
           Skip to content
         </a>
       
@@ -871,17 +871,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#github-actions-runner-nixosconfigurationroles-github-actions-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Actions runner (nixosConfiguration.roles-github-actions-runner)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#nix-remote-builder-nixosconfigurationroles-nix-remote-builder" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -967,7 +956,7 @@
   <span class="md-ellipsis">
     
   
-    Roles
+    Installation
   
 
     
@@ -980,94 +969,6 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Roles
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../github_actions_runner/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GitHub Action Runner
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Installation
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1384,17 +1285,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#github-actions-runner-nixosconfigurationroles-github-actions-runner" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GitHub Actions runner (nixosConfiguration.roles-github-actions-runner)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#nix-remote-builder-nixosconfigurationroles-nix-remote-builder" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1430,10 +1320,8 @@
 <p>Roles are special types of NixOS modules that are designed to take over a machine configuration.</p>
 <p>We assume that only one role is assigned per machine.</p>
 <p>By making this assumption, we are able to make deeper change to the machine configuration, without having to worry about potential conflicts with other roles.</p>
-<h3 id="github-actions-runner-nixosconfigurationroles-github-actions-runner">GitHub Actions runner (<a href="https://github.com/nix-community/srvos/blob/main/nixos/roles/github-actions-runner.nix"><code>nixosConfiguration.roles-github-actions-runner</code></a>)</h3>
-<p>Dedicates the machine to becoming a cluster of GitHub Actions runners. </p>
 <h3 id="nix-remote-builder-nixosconfigurationroles-nix-remote-builder">Nix Remote builder (<a href="https://github.com/nix-community/srvos/blob/main/nixos/roles/nix-remote-builder.nix"><code>nixosConfiguration.roles-nix-remote-builder</code></a>)</h3>
-<p>Dedicates the machine to acting as a remote builder for Nix. The main use-case we have is to add more build capacity to the GitHub Actions runners, in a star fashion.</p>
+<p>Dedicates the machine to acting as a remote builder for Nix. The main use-case we have is to add more build capacity, in a star fashion.</p>
 
 
 
