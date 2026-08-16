@@ -50,7 +50,16 @@
       };
 
       checks =
-        (lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") (
+        let
+          devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
+          packages = lib.mapAttrs' (n: lib.nameValuePair "package-${n}") self'.packages;
+        in
+        devShells
+        // {
+          inherit (self') formatter;
+        }
+        // packages
+        // (lib.optionalAttrs (pkgs.stdenv.hostPlatform.system == "aarch64-darwin") (
           import ./darwin-checks.nix {
             inherit inputs self pkgs;
             prefix = "darwin";
