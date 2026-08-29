@@ -16,6 +16,14 @@ Hardware configuration for <https://www.digitalocean.com/> instances.
 
 Enables cloud-init but turns off non-working dhcp.
 
+### [`nixosModules.hardware-vultr-vm`]({{ repo_url }}/blob/main/nixos/hardware/vultr/vm.nix)
+
+Hardware configuration for Vultr Cloud Compute instances.
+
+Enables cloud-init with the Vultr datasource and configures QEMU, GRUB, and
+VirtIO support. ZFS root pools are discovered through partition UUIDs because
+Vultr disks do not expose stable `by-id` links.
+
 ### [`nixosModules.hardware-hetzner-cloud`]({{ repo_url }}/blob/main/nixos/hardware/hetzner-cloud/default.nix)
 
 Hardware configuration for <https://www.hetzner.com/cloud> instances.
