@@ -56,26 +56,23 @@ in
           cfg.flake.inputs // { inherit (cfg) flake; }
         );
 
-        normalizeRevision =
-          input:
-          if (!input ? rev) && (input ? dirtyRev) then
-            input
-            // {
-              rev = input.dirtyRev;
-              shortRev = input.dirtyShortRev;
-            }
-          else
-            input;
-
-        flakeAttrs =
-          input:
-          (lib.mapAttrsToList (n: v: ''${n}="${v}"'') (
-            lib.filterAttrs (_: v: (builtins.typeOf v) == "string") (normalizeRevision input)
-          ));
+        # Explicit labels so we don't force every output of each flake input.
+        labels =
+          name: input:
+          lib.filterAttrs (_: v: v != null) {
+            input = name;
+            lastModifiedDate = input.lastModifiedDate or null;
+            narHash = input.narHash or null;
+            outPath = input.outPath or null;
+            rev = input.rev or input.dirtyRev or null;
+            shortRev = input.shortRev or input.dirtyShortRev or null;
+          };
 
         lastModified =
           name: input:
-          ''flake_input_last_modified{input="${name}",${lib.concatStringsSep "," (flakeAttrs input)}} ${toString input.lastModified}'';
+          "flake_input_last_modified{${
+            lib.concatStringsSep "," (lib.mapAttrsToList (n: v: ''${n}="${v}"'') (labels name input))
+          }} ${toString input.lastModified}";
 
         # avoid adding store path references on flakes which me not need at runtime.
         promText = builtins.unsafeDiscardStringContext ''
