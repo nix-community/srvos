@@ -865,6 +865,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nixosmoduleshardware-vultr-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nixosModules.hardware-vultr-vm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nixosmoduleshardware-hetzner-cloud" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1373,6 +1384,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#nixosmoduleshardware-vultr-vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        nixosModules.hardware-vultr-vm
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#nixosmoduleshardware-hetzner-cloud" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1458,6 +1480,11 @@
 <h3 id="nixosmoduleshardware-digitalocean-droplet"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/digitalocean/droplet.nix"><code>nixosModules.hardware-digitalocean-droplet</code></a></h3>
 <p>Hardware configuration for <a href="https://www.digitalocean.com/">https://www.digitalocean.com/</a> instances.</p>
 <p>Enables cloud-init but turns off non-working dhcp.</p>
+<h3 id="nixosmoduleshardware-vultr-vm"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/vultr/vm.nix"><code>nixosModules.hardware-vultr-vm</code></a></h3>
+<p>Hardware configuration for Vultr Cloud Compute instances.</p>
+<p>Enables cloud-init with the Vultr datasource and configures QEMU, GRUB, and
+VirtIO support. ZFS root pools are discovered through partition UUIDs because
+Vultr disks do not expose stable <code>by-id</code> links.</p>
 <h3 id="nixosmoduleshardware-hetzner-cloud"><a href="https://github.com/nix-community/srvos/blob/main/nixos/hardware/hetzner-cloud/default.nix"><code>nixosModules.hardware-hetzner-cloud</code></a></h3>
 <p>Hardware configuration for <a href="https://www.hetzner.com/cloud">https://www.hetzner.com/cloud</a> instances.</p>
 <p>The main difference here is that:
