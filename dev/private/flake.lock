@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1789448436,
-        "narHash": "sha256-fknJsE4XnFjUfo87T9jyZ15ivJZB/varWvsJMYk0BNY=",
+        "lastModified": 1792325769,
+        "narHash": "sha256-KFxHbC1136pwBOxdqRQzVSdY7rw+8clqcWysMLHqq88=",
         "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
-        "rev": "6c58de7236d1cd634deea07bd15d52c7ce470bd3",
+        "rev": "9eecf40bc88648c7b5474b476a7b325fa78b5606",
         "type": "github"
       },
       "original": {
@@ -70,11 +70,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1786845137,
-        "narHash": "sha256-oQFip+v0luP8NIxJzmiW4Wu8bILsbFWom5l0zonl8hQ=",
+        "lastModified": 1792366139,
+        "narHash": "sha256-jto4pdsl0bgErQ5vaMc3gOyj//PILLRJuqX3I7fUk6s=",
         "owner": "nix-darwin",
         "repo": "nix-darwin",
-        "rev": "4cff07de74b50e64bdd68cd4e722ab5b6b35ee48",
+        "rev": "f0ec2b3fae4df92ea7788359aef9e07bb88d720f",
         "type": "github"
       },
       "original": {
@@ -85,11 +85,11 @@
     },
     "nixos-stable": {
       "locked": {
-        "lastModified": 1791883866,
-        "narHash": "sha256-yvkDdToRZ4IgPc9tSBzzCYJvTLf8n5eE3rgUkpCuD5A=",
+        "lastModified": 1792150307,
+        "narHash": "sha256-uFRCFzCN3OPC/cQMmzdIYiFKhakVVx2ZkXO9fOuYkGk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
+        "rev": "ed583b5bcfb5f3b7bf6164b24a62fa133682cffe",
         "type": "github"
       },
       "original": {
@@ -101,11 +101,11 @@
     },
     "nixpkgs-dev": {
       "locked": {
-        "lastModified": 1791943594,
-        "narHash": "sha256-tSfyQRHv3tnjRNLcaz9hYbmWRW/HivOUjWPmlDG2Oxc=",
+        "lastModified": 1792350434,
+        "narHash": "sha256-qsaDcAoHOVmZLsGkNWOcPcsg2+yFXUkcV4ZmluiPDos=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "218414d9075dc7d1bdf7f840e11869319b50e0df",
+        "rev": "fa60a5b07193de65811d4f041b5c7c8ea9593afc",
         "type": "github"
       },
       "original": {
