@@ -197,13 +197,13 @@
       };
 
       UnusualDiskReadLatency = {
-        expr = "rate(diskio_read_time[5m]) / rate(diskio_reads[5m]) > 0.1 and rate(diskio_reads[5m]) > 0";
+        expr = "rate(diskio_read_time[5m]) / rate(diskio_reads[5m]) > 100 and rate(diskio_reads[5m]) > 0";
         for = "15m";
         annotations.description = "{{$labels.instance}}: Disk latency is growing (read operations > 100ms)";
       };
 
       UnusualDiskWriteLatency = {
-        expr = "rate(diskio_write_time[5m]) / rate(diskio_writes[5m]) > 0.1 and rate(diskio_writes[5m]) > 0";
+        expr = "rate(diskio_write_time[5m]) / rate(diskio_writes[5m]) > 100 and rate(diskio_writes[5m]) > 0";
         for = "15m";
         annotations.description = "{{$labels.instance}}: Disk latency is growing (write operations > 100ms)";
       };
