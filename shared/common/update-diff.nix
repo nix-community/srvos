@@ -16,11 +16,13 @@
       # reading the Nix sqlite DB as non-root (faukah/dix#47), which broke
       # activation. Fall back to nvd on older nixpkgs that ship those versions.
       default =
-        if lib.versionAtLeast (pkgs.dix.version or "0") "1.4.2" then
+        if lib.versionAtLeast (pkgs.dix.version or "0") "3.0.0" then
+          "${lib.getExe pkgs.dix} diff"
+        else if lib.versionAtLeast (pkgs.dix.version or "0") "1.4.2" then
           "${lib.getExe pkgs.dix} --force-correctness"
         else
           "${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff";
-      defaultText = lib.literalExpression ''"''${lib.getExe pkgs.dix} --force-correctness"'';
+      defaultText = lib.literalExpression ''"''${lib.getExe pkgs.dix} diff"'';
       description = "diff command";
     };
     text = lib.mkOption {
