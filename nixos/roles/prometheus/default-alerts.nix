@@ -1,30 +1,32 @@
+{ config, lib, ... }:
 {
   srvos.prometheus.ruleGroups.srvosAlerts = {
     alertRules = {
-      MonitoringTooManyRestarts = {
-        expr = ''changes(process_start_time_seconds{job=~"prometheus|pushgateway|alertmanager|telegraf"}[15m]) > 2'';
-        annotations.description = "Service has restarted more than twice in the last 15 minutes. It might be crashlooping";
-      };
+      MonitoringTooManyRestarts =
+        let
+          jobs = lib.concatStringsSep "|" (
+            lib.optionals config.services.prometheus.enable [
+              "prometheus"
+              "pushgateway"
+            ]
+            ++ lib.optionals config.services.victoriametrics.enable [
+              "victoria-metrics"
+              "vmalert.*"
+            ]
+            ++ [
+              "alertmanager"
+              "telegraf"
+            ]
+          );
+        in
+        {
+          expr = ''changes(process_start_time_seconds{job=~"${jobs}"}[15m]) > 2'';
+          annotations.description = "Service has restarted more than twice in the last 15 minutes. It might be crashlooping";
+        };
 
       AlertManagerConfigNotSynced = {
         expr = ''count(count_values("config_hash", alertmanager_config_hash)) > 1'';
         annotations.description = "Configurations of AlertManager cluster instances are out of sync";
-      };
-
-      PrometheusNotConnectedToAlertmanager = {
-        expr = "prometheus_notifications_alertmanagers_discovered < 1";
-        annotations.description = "Prometheus cannot connect the alertmanager\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
-      };
-
-      PrometheusRuleEvaluationFailures = {
-        expr = "increase(prometheus_rule_evaluation_failures_total[3m]) > 0";
-        annotations.description = "Prometheus encountered {{ $value }} rule evaluation failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
-      };
-
-      PrometheusTemplateExpansionFailures = {
-        expr = "increase(prometheus_template_text_expansion_failures_total[3m]) > 0";
-        for = "0m";
-        annotations.description = "Prometheus encountered {{ $value }} template text expansion failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
       };
 
       PromtailRequestsErrors = {
@@ -226,6 +228,34 @@
       AlertmanagerSilencesChanged = {
         expr = ''abs(delta(alertmanager_silences{state="active"}[1h])) >= 1'';
         annotations.description = "alertmanager: number of active silences has changed: {{$value}}";
+      };
+    }
+    // lib.optionalAttrs config.services.prometheus.enable {
+      PrometheusNotConnectedToAlertmanager = {
+        expr = "prometheus_notifications_alertmanagers_discovered < 1";
+        annotations.description = "Prometheus cannot connect the alertmanager\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
+      };
+
+      PrometheusRuleEvaluationFailures = {
+        expr = "increase(prometheus_rule_evaluation_failures_total[3m]) > 0";
+        annotations.description = "Prometheus encountered {{ $value }} rule evaluation failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
+      };
+
+      PrometheusTemplateExpansionFailures = {
+        expr = "increase(prometheus_template_text_expansion_failures_total[3m]) > 0";
+        for = "0m";
+        annotations.description = "Prometheus encountered {{ $value }} template text expansion failures\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}";
+      };
+    }
+    // lib.optionalAttrs config.services.victoriametrics.enable {
+      VmalertRuleErrors = {
+        expr = "increase(vmalert_execution_errors_total[5m]) > 0";
+        annotations.description = "vmalert rule {{$labels.alertname}}{{$labels.recording}} in group {{$labels.group}} fails to evaluate";
+      };
+
+      VmalertAlertmanagerErrors = {
+        expr = "increase(vmalert_alerts_send_errors_total[5m]) > 0";
+        annotations.description = "vmalert cannot deliver alerts to {{$labels.addr}}";
       };
     };
   };
