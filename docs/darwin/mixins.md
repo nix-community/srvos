@@ -19,3 +19,7 @@ Enables all experimental features in nix, that are known safe to use (i.e. are o
 ### [`darwinModules.mixins-trusted-nix-caches`]({{ repo_url }}/blob/main/darwin/mixins/trusted-nix-caches.nix)
 
 Add the common list of public nix binary caches that we trust.
+
+### [`darwinModules.mixins-software-update`]({{ repo_url }}/blob/main/darwin/mixins/software-update.nix)
+
+Installs security responses and data files automatically. With `srvos.softwareUpdate.user` and `passwordFile` set, also installs and restarts into updates of the running macOS release on a schedule; Apple Silicon requires a volume owner's password for that.

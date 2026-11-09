@@ -65,4 +65,14 @@ in
       self.darwinModules.mixins-trusted-nix-caches
     ];
   };
+  example-mixins-software-update = darwinSystem {
+    modules = [
+      dummy
+      self.darwinModules.mixins-software-update
+      {
+        srvos.softwareUpdate.user = "admin";
+        srvos.softwareUpdate.passwordFile = "/run/secrets/admin-password";
+      }
+    ];
+  };
 }
