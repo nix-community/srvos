@@ -6,6 +6,7 @@ exposeModules ./. [
   ./server
   ./desktop
   ./mixins/nix-experimental.nix
+  ./mixins/software-update.nix
   ./mixins/telegraf.nix
   ./mixins/terminfo.nix
   ./mixins/trusted-nix-caches.nix
