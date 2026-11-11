@@ -1206,6 +1206,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#darwinmodulesmixins-software-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        darwinModules.mixins-software-update
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1361,6 +1372,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#darwinmodulesmixins-software-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        darwinModules.mixins-software-update
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1395,6 +1417,8 @@ This is useful when connecting to a server via SSH.</p>
 <p>Enables all experimental features in nix, that are known safe to use (i.e. are only used when explicitly requested in a build).</p>
 <h3 id="darwinmodulesmixins-trusted-nix-caches"><a href="https://github.com/nix-community/srvos/blob/main/darwin/mixins/trusted-nix-caches.nix"><code>darwinModules.mixins-trusted-nix-caches</code></a></h3>
 <p>Add the common list of public nix binary caches that we trust.</p>
+<h3 id="darwinmodulesmixins-software-update"><a href="https://github.com/nix-community/srvos/blob/main/darwin/mixins/software-update.nix"><code>darwinModules.mixins-software-update</code></a></h3>
+<p>Installs security responses and data files automatically. With <code>srvos.softwareUpdate.user</code> and <code>passwordFile</code> set, also installs and restarts into updates of the running macOS release on a schedule; Apple Silicon requires a volume owner's password for that.</p>
 
 
 
